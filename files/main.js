@@ -21,30 +21,12 @@ scrollBtn.onclick = function(e) {
 	e.preventDefault();
 	scrollToTop();
 }
-            
-/* 
-// header background
-function getTotalHeight(elementName) {
-// check if 'elementName' is string, if not return 0
-if(typeof elementName !== 'string') return 0;
 
-// get the height of the header element
-    var box = document.querySelector(elementName);
-    var offsetHeight = box.offsetHeight;
-    var marginTop = parseInt(getComputedStyle(box).marginTop);
-    var marginBottom = parseInt(getComputedStyle(box).marginBottom);
-    return offsetHeight + marginTop + marginBottom;
-    console.log(height);
+function scrollEnterKey() {
+	document.addEventListener("keyup", function(event) {
+		if (event.keyCode === 13)  scrollToTop();
+	});
 }
-var prevHeight = 0;
-function resizeBackground() {
-    // get the height of the header element
-    var height = getTotalHeight('header') + getTotalHeight('nav');
-    if(prevHeight !== height) {document.getElementById("bg").style.height = height-31;}
-    prevHeight = height;
-}
-window.addEventListener('load', (event) => { resizeBackground() });
-*/
 
 // copy link
 function copyjs(id = window.location.href) {
