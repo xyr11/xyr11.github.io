@@ -20,12 +20,21 @@ a:hover, a:active, a:focus {
 
 * {
 	box-sizing: border-box;
-	scroll-margin-top: 12px;
+	scroll-margin-top: 2em;
+}
+:target {
+	animation: targetFade 2.5s;
+}
+@keyframes targetFade {
+	0% {background-color: yellow}
+	20% {background-color: yellow}
+	100% {background-color: none}
 }
 
 /* background */
 #bg {
-	background: url(../images/background.png);
+	background: #0B161D;
+	background: url(/images/background.png);
 	background-repeat: no-repeat;
     position: absolute;
     top: 0;
@@ -117,7 +126,6 @@ nav .current {
 }
 section, aside {
 	float: left;
-    transition: width .6s, height .6s;
 }
 section, aside div {
 	padding: 1.4em;
@@ -143,6 +151,9 @@ section a {
 section a:hover, section a:focus, section a:active {
 	color: #777777;
 	border: none;
+}
+section a.inline:hover, section a.inline:focus, section a.inline:active {
+	text-decoration: underline;
 }
 
 /* sidebar */
@@ -220,7 +231,6 @@ article.post {
 .more:hover, .more:active, .more:focus {
 	color: #555555;
 	text-decoration: underline;
-	outline: none;
 }
 
 /* image */
@@ -271,7 +281,7 @@ section .time {
 /* Footer */
 footer {
 	margin-top: 3em;
-	padding: 3em 1em .5em 1em;
+	padding: 2em 1em .5em 1em;
 	background-color: #898989;
 	color: black;
 	border-radius: 8px 8px 0 0;
@@ -311,7 +321,7 @@ footer .col a {
 	text-decoration: none;
 }
 footer .col a:hover, footer .col a:focus, footer .col a:active {
-	color: #565656;
+	color: inherit;
 	text-decoration: underline;
 }
 /* footer icon */
@@ -424,17 +434,20 @@ footer:hover p.last {
 /* @media stuff */
 @media screen and (max-width: 900px) {
 	
-	header h1, footer h1 {
-		font-size: 1.7em;
-	}
-	p, span, ul {
-		font-size: .9em;
+	#bg {
+		height: 360px;
 	}
 	
 	/* section and aside */
+	.main {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+	}
 	section, aside {
 		width: 92%;
-		margin: 1em 4% 0 4%;
+		max-width: 700px;
+		margin: 1em auto 0 auto;
 	}
 	section, aside div {
 		padding: 1.2em 1em;
@@ -451,6 +464,9 @@ footer:hover p.last {
 		margin: 8px 0 2px 0;
 		padding: 0;
 		font-size: 1.2em;
+	}
+	.more h2 {
+		margin-top: 14px;
 	}
 	
 	/* footer */
@@ -493,6 +509,18 @@ footer:hover p.last {
 	}
 }
 @media (max-width: 700px) {
+	
+	header h1, footer h1 {
+		font-size: 1.7em;
+	}
+	p, span, ul {
+		font-size: .9em;
+	}
+	
+	#bg {
+		height: 240px;
+	}
+	
 	/* a bunch of header stuff */
     #bg {
         background-size: cover;
@@ -523,5 +551,36 @@ footer:hover p.last {
 	}
 	nav .search:hover, nav .search:focus, nav .search:active {
 		border-bottom: 1px transparent;
+	}
+}
+
+/* accessibility */
+@media screen and (prefers-reduced-motion: reduce) {
+	/* background */
+	#bg {
+		 transition: width 0s, height 0s;
+	}
+	
+	/* section and aside */
+	section, aside div, .post, .post img {
+		transition: box-shadow 0s;
+	}
+	section:hover, aside div:hover {
+		box-shadow: 3px 5px 3px rgb(0 0 0 / 40%);
+	}
+	a.post:hover, a.post:focus, a.post:active, .post img:hover {
+		box-shadow: none;
+	}
+	
+	/* footer */
+	footer:hover {
+		margin-top: 3em;
+	}
+	footer p.last {
+		padding-bottom: 0;
+		transition: padding 0s;
+	}
+	footer:hover p.last {
+		padding-bottom: .4em;
 	}
 }
