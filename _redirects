@@ -1,5 +1,9 @@
 # Redirects from what the browser requests to what we serve
-/index.html   /              302
-/home         /              302
-/about        /about.html
-/xyrcodes     https://xyr.codes
+/home			/
+/rqs-trcker		/programming/reqs-tracker.html
+/file-maker		/random/file-maker.html
+/ikhub			https://blog.xyr.codes/2020/12/ikhub.html
+/numaboutnow	https://blog.xyr.codes/2021/01/numbers-about-now.html
+/cdbpage		https://blog.xyr.codes/2020/08/cdbpage.html
+/projects		https://blog.xyr.codes/search/label/projects
+/khubslow		https://iskhubslow.xyr11.repl.co/

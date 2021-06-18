@@ -1,0 +1,26 @@
+1:'Feature Photos of 2020'
+2:'Introducing the Feature Photos of 2020! Made out of pictures taken last year that shows beauty, inspiration, and joy amidst the challenges we faced in 2020.'
+3:'i/FPhotos2020/2020-07-25.jpg'
+4:'phts'
+5:'2021-02-05'
+6:'<p>2020 has been a difficult year for us all. Now that it's 2021, let's take a look back at some of the pictures taken last year that are in for the Featured Photos of 2020 that shows beauty, inspiration, hope, and joy coming of from probably the worst year humanity had. Enjoy!</p>
+        <p>Yep, this is now an annual thing! Introducing the Feature Photos of 2020:</p>
+        <img src="../i/FPhotos2020/2020-11-19.jpg" loading="lazy" alt="A green field and a setting sun in the background with some trees">
+        <p class="imgdesc">A green field with a setting sun</p>
+        <img src="../i/FPhotos2020/2020-06-05.jpg" loading="lazy" alt="A small moon" style="max-width: 400px">
+        <p class="imgdesc">My clearest shot of a full moon using my phone!</p>
+        <img src="../i/FPhotos2020/2020-06-03.jpg" loading="lazy" alt="Long exposure shot of the highway">
+        <p class="imgdesc"><i class="cursive">‘Time is nothing but an invention of humans’</i></p>
+        <img src="../i/FPhotos2020/2020-04-30.jpg" loading="lazy" alt="A close-up shot of a cat sleeping on the floor">
+        <p class="imgdesc">A close-up shot of my cat</p>
+        <img src="../i/FPhotos2020/2020-06-19.jpg" loading="lazy" alt="Panorama shot of the formation of altocumulus clouds in the sky">
+        <p class="imgdesc">Panorama shot of the formation of altocumulus clouds in the sky</p>
+        <img src="../i/FPhotos2020/2020-05-30.jpg" loading="lazy" alt="Coconut tree and clouds visible on the distance">
+        <p class="imgdesc">Coconut tree and clouds</p>
+        <img src="../i/FPhotos2020/2020-06-21_01.jpg" loading="lazy" alt="PSHS-CVC Acad Building 2">
+        <img src="../i/FPhotos2020/2020-06-21_02.jpg" loading="lazy" alt="PSHS-CVC Acad Building 2">
+        <p class="imgdesc">Partial solar eclipse last June 6 captured by my phone!</p>
+        <img src="../i/FPhotos2020/2020-07-25.jpg" loading="lazy" alt="Close up of a flower with greenery on the background">
+        <p class="imgdesc last">Close-up of a flower <br> I think I'll crown this picture as the 2020 Feature Photo because this shot is just perfect. Congrats!</p>
+        <p>And there you have it! I hope you enjoyed this collection of pictures for this year's Feature Photo. Keep safe and cheers to 2021!</p>'
+7: 'All pictures are shot on a phone!'

@@ -1,7 +1,7 @@
 # a comment
 /images/*
-  Cache-Control: public, s-max-age=120960
+  Cache-Control: public, s-max-age=259200
 /*.css
-  Cache-Control: public, s-max-age=604800
+  Cache-Control: public, s-max-age=0
 /*.js
-  Cache-Control: public, s-max-age=604800
+  Cache-Control: public, s-max-age=0

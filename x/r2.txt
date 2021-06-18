@@ -1,0 +1,182 @@
+1:'Requirements Tracker'
+2:'You can now track my requirements using this page that records and displays data live! Why? Idk too!'
+3:'i/emb.png'
+4:'prgm'
+5:'2021-01-25'
+6:'<style>
+          h2 {
+            margin-bottom: 4px;
+          }
+          td.left {
+            padding-right: 6px;
+          }
+          td.column-num {
+            padding-left: 10px;
+            font-size: .80em;
+          }
+          td.meterBar {
+            width: 16em;
+            transition: width .5s ease-out;
+          }
+          @media (max-width: 450px) {
+            td.meterBar {
+              width: 12em;
+            }
+          }
+          @media (max-width: 350px) {
+            td.meterBar {
+              width: 8em;
+            }
+            td.column-num {
+              font-size: .70em;
+            }
+          }
+          .error {
+            padding: 0 8px 0 4px;
+            cursor: help;
+          }
+          .error::before {
+            content: '\1F4A5';
+            padding-right: 4px;
+          }
+          .invalid, .nodata {
+            color: #cb3333;
+          }
+          meter {
+            --background: #dadada;
+            --grn: MediumSeaGreen;
+            --ylw: #fce421;
+            --red: crimson;
+            background: var(--background);
+            border: 1px solid #ccc;
+            border-radius: 0;
+            box-sizing: content-box;
+            display: block;
+            width: 100%;
+            height: 16px;
+          }
+          /* Webkit */
+          meter::-webkit-meter-bar {
+            background: var(--background);
+            border: 0;
+            border-radius: 0;
+            box-sizing: content-box;
+            display: block;
+            width: 100%;
+            height: 16px;
+          }
+          meter::-webkit-meter-optimum-value { background: var(--grn) }
+          meter::-webkit-meter-suboptimum-value { background: var(--ylw) }
+          meter::-webkit-meter-even-less-good-value { background: var(--red) }
+          /* Firefox */
+          meter:-moz-meter-optimum::-moz-meter-bar { background: var(--grn) }
+          meter:-moz-meter-sub-optimum::-moz-meter-bar { background: var(--ylw) }
+          meter:-moz-meter-sub-sub-optimum::-moz-meter-bar { background: var(--red) }
+        </style>
+
+        <p>Using this tool, you can now track my progress in my school requirements! Why? I absolutely don't know!</p>
+        <p>Last updated <span id="lastUpdated"></span> <button onclick="window.location.reload()">Refresh page manually</button></p>
+        <h2 id="q3">3rd Quarter</h2>
+        <div id="q3Div"></div>
+        <h2 id="q2">2nd Quarter</h2>
+        <div id="q2Div"></div>
+        <h2 id="q2">1st Quarter</h2>
+        <div id="q1Div"></div>
+        <div class="alert-box" style="font-family: arial; min-height: 42px; margin-top: 3em; display: none;" title="Updated some statistics" id="alert-box">
+          Updated statistics a while ago
+        </div>
+
+        <script src="https://file.xyr.codes/KjUAw8N/data.js"></script>
+        <script>
+        var BIO1,CHEM1,PHY1,MATH3,STAT1,CS3,ENG3,FIL3,SOCSCI3,PE3,HE3,MU3;
+        var FBIO1,FCHEM1,FPHY1,FMATH3,FSTAT1,FCS3,FENG3,FFIL3,FSOCSCI3,FPE3,FHE3,FMU3;
+        var lastUpdate, subjN, subjId;
+
+        var totalSum = [0,0,0,0], finishedSum = [0,0,0,0], errorVal = false;
+        var totalAll = [BIO1,CHEM1,PHY1,MATH3,STAT1,CS3,ENG3,FIL3,SOCSCI3,PE3,HE3,MU3];
+        var finishedAll = [FBIO1,FCHEM1,FPHY1,FMATH3,FSTAT1,FCS3,FENG3,FFIL3,FSOCSCI3,FPE3,FHE3,FMU3];
+
+        if (finishedAll[0] !== undefined) {
+          for(var j=0; j<finishedAll[0].length; j++)
+            for(var i=0; i<finishedAll.length; i++) {
+              if(totalAll[i] === undefined || finishedAll[i] === undefined) {
+                errorVal = true;
+                break;
+              }
+              totalSum[j] += totalAll[i][j]; finishedSum[j] += finishedAll[i][j];
+            }
+        } else {
+          errorVal = true;
+          console.log("[Variable Error] Invalid variable. Please check variable declaration.");
+        }
+        totalAll = [BIO1,CHEM1,PHY1,MATH3,STAT1,CS3,ENG3,FIL3,SOCSCI3,PE3,HE3,MU3,totalSum];
+        finishedAll = [FBIO1,FCHEM1,FPHY1,FMATH3,FSTAT1,FCS3,FENG3,FFIL3,FSOCSCI3,FPE3,FHE3,FMU3,finishedSum];
+
+        // Generate the table
+        let outputArr = ['', '', '', '']
+        if(!errorVal) {
+          for(var j = 0; j < finishedAll[0].length; j++) {
+            var output = "<table>";
+            for(var i = 0; i < finishedAll.length; i++) {
+              // first column
+              output += `<tr><td class='left'>${subjN[i] ? subjN[i] : "<span class='error invalid name'>Err</span>"}</td>`
+              // 2nd column
+              output += "<td class='meterBar'>";
+              const total = totalAll[i][j]
+              const finished = finishedAll[i][j]
+              if (total === 0) {
+                // check if total requirements is equal to zero
+                output += "<span class='error nodata'>No data yet</span>";
+              } else if (finished > total || typeof finished !== "number" || typeof total !== "number" ||  isNaN(finished) || isNaN(total)) {
+                // check if finished requirements is greater than total no of requirements, and check if any of the 2 variables isn't a number
+                errorVal = true;
+                output += "<span class='error invalid'>Data error</span>";
+              } else {
+                let ratio = finished + " of " + total;
+                output += `<meter max='${total}' low='${total*0.5}' high='${total*0.85}' optimum='${total*0.95}' value='${finished}' title='${ratio} requirements (${Math.floor(finished / total * 100)}%)'></meter></td>`
+                // 3rd column
+                output += '<td class="column-num">' + ratio;
+              }
+              output += '</td></tr>'
+            }
+            output += '</table>'
+            outputArr[j] = output
+          }
+        } else {
+          outputArr = ['Data error', 'Data error', 'Data error', 'Data error']
+        }
+
+        for (var i = 4; i > 0; i--) {
+          if (document.getElementById(`q${i}Div`) !== null) {
+            document.getElementById(`q${i}Div`).innerHTML = outputArr[i-1];
+          }
+        }
+
+        var setAttribTitle = [['nodata','No available data yet'],['invalid','Data error'],['invalid name','Cannot find subject name']]
+        for (var j=0; j<setAttribTitle.length; j++) {
+          const errClasses = document.getElementsByClassName(setAttribTitle[j][0])
+          for (var i=0; i < errClasses.length; i++)
+            errClasses[i].setAttribute("title", setAttribTitle[j][1]);
+        }
+
+        // Last updated
+        document.getElementById("lastUpdated").innerHTML = new Date().toLocaleString()
+          
+        // Update box
+        var _d = Date.now();
+        if (_d > lastUpdate) {
+          let itrv = Math.floor((_d - lastUpdate) / 60000) // interval
+          if (itrv < 18000) {
+            var updatedMsg = "Updated statistics ";
+            if (itrv < 10) updatedMsg += "less than 10 minutes"
+            else if (itrv < 60) updatedMsg += `about ${Math.floor(itrv/10)}0 minutes`
+            else if (itrv < 300)  updatedMsg += `about ${Math.floor(itrv/60)} hours`
+            updatedMsg += " ago";
+            const alertBox = document.getElementById("alert-box")
+            alertBox.style.display = 'inherit'
+            alertBox.innerHTML = updatedMsg
+            alertBox.setAttribute('title', updatedMsg)
+          }
+        }
+        </script>'
+7: 'I spend wayyyyy too long on these things...'
