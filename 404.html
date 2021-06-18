@@ -1,24 +1,91 @@
-<!DOCTYPE html>
 <html>
 	<head>
-		<title>local.xyr.codes</title>
-		<meta charset="UTF-8">
+		<title>404 Not Found</title>
+        <!-- meta tags -->
+        <meta charset="UTF-8">
+		<meta name="description" content="The requested URL was not found on the server.">
+		<meta property='og:title' content='404 Not Found'>
+		<meta property='og:image' content='../images/bg-embed.png'>
+		<meta property='og:description' content='The requested URL was not found on the server.'>
+		<meta name='twitter:card' content='../images/bg-embed.png'>
+		<meta name='theme-color' content='#77e4ff'>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<!-- favicon -->
+		<link href="../../images/favicon.png" rel="icon">
+		<!-- stylesheets -->
+		<link href="main.css" rel="stylesheet">
+		<link href="simple-line-icons.css" rel="stylesheet">
 	</head>
 	<body>
-		<!-- Why are you looking here? I swear I'm still building this site. Bookmark this page or something so that you'll remember it and you'll be able to see it when it's done. -->
-		<h1>Hello World!</h1>
-		<p>It looks like you discovered a new "xyr.codes" site. Nice!</p>
-		<p>Unfortunately this site is currently still being built.</p>
-		<p>Come back later or forget that you saw this page ever again!</p>
-		<footer style="margin-top: 2em">
-			<hr>
-            <p>by Xyrus Kurt Roldan
-			•
-			<a href="https://xyr.codes">Main Website</a>
-			•
-			<a href="https://twitter.com/xy_rus">Twitter</a></p>
-        </footer>
+        <!-- Header -->
+        <header>
+            <div id="bg"></div>
+            <h1><a href="index.html">XYR<span style="color:#77e4ff">.</span>site</a></h1>
+			<p>Tutorials, journals, photographs, blogs and stuff. Official website of Xyrus Roldan.</p>
+        </header>
+        <nav>
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Programming</a></li>
+				<li><a href="#">Journals</a></li>
+				<li><a href="#">Photographs</a></li>
+				<li><a href="#">About</a></li>
+				<li><a class="search" href="#">Search</a></li>
+			</ul>
+        </nav>
+		<!-- Main part -->
+		<div class="main">
+			<!-- Content -->
+			<section>
+				<h1>404 Not Found :'(</h1>
+				<article class="post full">
+					<p>The requested URL was not found on the server.</p>
+					<p>What you can do:</p>
+        			<ul>
+						<li>Double-check the URL of the page you want to visit</li>
+						<li>Try visiting the page later</li>
+						<li><a href="index.html">Go back to the Home page</a></li>
+					</ul>
+				</article>
+			</section>
+			<!-- Sidebar -->
+			<aside>
+				
+				<div class="feature">
+					<h1>Featured Article</h1>
+					<a href="journals/concentration.html" class="post">
+						<h2>Concentration</h2>
+                        <p><i>A fact you should know: “time’s your foe”</i></p>
+					</a>
+				</div>
+			</aside>
+		</div>
+		<!-- Footer -->
+		<footer>
+			<h1 class="name">XYR.site</h1>
+			<p>Did you know that this website is responsive?</p>
+			<div class="links">
+				<div class="ico">
+					<img src="../images/favicon.png">
+				</div>
+				<div class="col">
+					<a href="#">Home</a>
+					<a href="about.html">About</a>
+					<a href="https://xyrcoding.blogspot.com/contact">Contact Us</a>
+				</div>
+				<div class="col">
+					<a href="https://twitter.com/xy_rus/">Twitter</a>
+					<a href="#">Private Policy</a>
+					<a href="#">Report Content</a>
+				</div>
+				<div class="col">
+					<a onclick="scrollToTop()" tabindex="0">Back to top</a>
+				</div>
+			</div>
+			<p class="last">&copy; 2021 by Xyrus Kurt Roldan. All rights reserved.</p>
+		</footer>
+		<a id="backtotop"></a>
+		<script src="main.js"></script>
 	</body>
 </html>
