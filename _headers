@@ -1,7 +1,6 @@
-# a comment
-/images/*
-  Cache-Control: public, s-max-age=259200
+/i/*
+  Cache-Control: public, s-max-age=259200	# 3 days
 /*.css
-  Cache-Control: public, s-max-age=0
+  Cache-Control: public, s-max-age=43200	# 1 day
 /*.js
-  Cache-Control: public, s-max-age=0
+  Cache-Control: public, s-max-age=43200	# 1 day

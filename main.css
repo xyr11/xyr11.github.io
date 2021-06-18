@@ -634,6 +634,10 @@ footer .ico img {
   color: var(--bbt-color);
   transition: color .2s, line-height .2s;
 }
+#backtotop.show {
+  opacity: 1;
+  visibility: visible;
+}
 @media (hover: hover) {
   /* hover and active */
   #backtotop:hover {
@@ -647,17 +651,12 @@ footer .ico img {
       bttHoverLoop 1.3s .6s ease infinite;
     }
   }
-  
   #backtotop:active {
     background-color: var(--bbt-act-bg);
     border: 0;
   }
   #backtotop:hover::after, #backtotop:active::after {
     color: var(--accent);
-  }
-  #backtotop.show {
-    opacity: 1;
-    visibility: visible;
   }
 }
 @keyframes bttHoverLoop {
@@ -745,7 +744,7 @@ footer .ico img {
     font-size: 2em;
   }
   p, div, span, ul, table {
-    font-size: .9em;
+    font-size: .95em;
   }
   
   #bg {
