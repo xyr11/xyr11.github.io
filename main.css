@@ -1,13 +1,60 @@
 /* GENERAL STYLES */
 
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
-@font-face {
-  font-family: 'Cascadia Code';
-  src: url('files/fonts/CascadiaCode.ttf');
-  src: url('files/fonts/CascadiaCode.woff2');
+/*
+ * Simple line icons (https://github.com/simplelineicons/simplelineicons.github.io)
+ * MIT License: /files/fonts/simple-line-icons-LICENSE.md
+ */
+ @font-face {
+  font-family: "simple-line-icons";
+  src: url("files/fonts/Simple-Line-Icons.woff2?v=2.4.0") format("woff2"),
+    url("files/fonts/Simple-Line-Icons.ttf?v=2.4.0") format("truetype");
   font-weight: normal;
   font-style: normal;
+}
+/*
+ * Cascadia Code (https://github.com/microsoft/cascadia-code)
+ * SIL Open Font License 1.1: /files/fonts/cascadia-code-LICENSE
+ */
+@font-face {
+  font-family: "Cascadia Code";
+  src: local("Cascadia Code"),
+    url("files/fonts/CascadiaCode.woff2") format("woff2"),
+    url("files/fonts/CascadiaCode.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+/*
+ * Roboto (https://github.com/googlefonts/roboto)
+ * Apache License 2.0: /files/fonts/roboto-LICENSE
+ */
+@font-face {
+  font-family: Roboto;
+  src: local("Roboto");
+}
+@font-face {
+  font-family: Roboto;
+  src: url("files/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("files/fonts/Roboto-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("files/fonts/Roboto-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("files/fonts/Roboto-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
 }
 
 :root {
@@ -676,7 +723,7 @@ footer .ico img {
   #bg {
     height: 360px;
   }
-  
+
   /* section and aside */
   .main {
     display: flex;
@@ -716,7 +763,7 @@ footer .ico img {
     width: 280px;
     max-width: 50vw;
   }
-  
+
   /* back to top button */
   #backtotop {
     width: 2.5em;
@@ -739,18 +786,18 @@ footer .ico img {
   }
 }
 @media (max-width: 700px) {
-  
+
   header h1, footer h1 {
     font-size: 2em;
   }
   p, div, span, ul, table {
     font-size: .95em;
   }
-  
+
   #bg {
     height: 280px;
   }
-  
+
   /* a bunch of header stuff */
   #bg {
     background-size: cover;
