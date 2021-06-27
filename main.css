@@ -443,6 +443,7 @@ footer .links {
 }
 .col {
   margin: 0 2em 0.5em 0;
+  max-width: 100%;
   flex-shrink: 0;
   flex-grow: 0;
 }
