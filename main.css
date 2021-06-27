@@ -118,9 +118,7 @@ a {
   text-decoration: none;
   outline: none;
 }
-a:hover, a:active, a:focus {
-  color: var(--link-active)
-}
+a:hover, a:active, a:focus {color: var(--link-active)}
 a:focus-visible {border-color: var(--link-active)}
 
 code {
@@ -134,10 +132,6 @@ code {
 }
 
 .icon::before {font-family: "simple-line-icons"}
-
-@media (max-width: 700px) {
-  p, div, span, ul, table {font-size: .95em}
-}
 
 /* header */
 header {
@@ -191,12 +185,9 @@ header p {margin: 0}
   background: var(--bg-gradient);
   z-index: -5;
 }
+/* bg styling changes need an exact size to be applied to */
 @media (max-width: 900px) {
   #bg {height: 360px}
-}
-@media (max-width: 700px) {
-  header h1 {font-size: 2.1em}
-  header [aria-label=Subtitle] {font-size: .9em}
 }
 @media (max-width: 540px) {
   #bg::before {background-size: auto 100%}
@@ -210,11 +201,9 @@ nav {
   padding: 0 1.5em;
   margin: 1.5em 0;
   font-size: 1em;
-  overflow: hidden;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  list-style-type: none;
 }
 nav a {
   display: block;
@@ -239,26 +228,6 @@ nav a:focus-visible {border-color: var(--accent)}
 }
 #search.isIcon:hover {border-color: transparent}
 #search.isIcon::before {content: "\e090"}
-
-@media (max-width: 700px) {
-  header h1 {margin-top: 1em}
-  #bg {
-    height: 280px;
-    background-size: cover;
-  }
-  nav {
-    margin-top: 10px;
-    margin-bottom: 16px;
-  }
-}
-@media (max-width: 359px) {
-  header, nav {
-    padding-left: 0.9em;
-    padding-right: 0.9em;
-  }
-  nav {font-size: .95em}
-  nav .current {border-bottom: none}
-}
 
 /* body */
 .main {
@@ -350,9 +319,7 @@ aside {width: 25%}
 aside div {margin-bottom: 1em}
 aside div:last-child {margin: 0}
 
-.updates span .post {
-  min-width: 160px
-}
+.updates span .post {min-width: 160px}
 .new::before {content: "\e03f"}
 .annual::before {content: "\e075"}
 .promoted::before {content: "\e077"}
@@ -363,49 +330,12 @@ aside div:last-child {margin: 0}
   min-width: auto;
 }
 
-@media (max-width: 900px) {
-  .main {
-    flex-direction: column;
-    align-items: center;
-    margin: 0 1em;
-  }
-  main, aside {
-    width: 100%;
-    max-width: 700px;
-    margin-right: 0;
-  }
-  aside {margin-top: 1em}
-  main, aside div {padding: 1.2em 1em}
-  main h1, aside h1 {
-    margin: .5em 0;
-    padding: 0;
-    font-size: 1.5em;
-  }
-  main h2, aside h2 {
-    margin: 8px 0 2px 0;
-    padding: 0;
-    font-size: 1.1em;
-  }
-  .main span {width: calc(100% + .6em) !important}
-  main .post, aside .post {margin-bottom: .6em}
-}
-@media (max-width: 700px) {
-  main, aside {max-width: 560px}
-}
-
 /* post article */
-.post a {
-  color: var(--link);
-}
-.post a:hover, .post a:focus, .post a:active {
-  text-decoration: underline;
-}
-.post a:active {
-  color: var(--link-active);
-}
-article.post {
-  padding: 1em .9em;
-}
+.post a {color: var(--link)}
+.post a:hover, .post a:focus, .post a:active {text-decoration: underline}
+.post a:active {color: var(--link-active)}
+.post a:focus-visible {border-color: var(--link)}
+article.post {padding: 1em .9em}
 /* post title */
 .title {
   font-size: 1.5em;
@@ -463,18 +393,6 @@ article img {box-shadow: 2px 3px 5px rgba(0,0,0,0.4)}
 }
 .post .imgdesc.last {margin-bottom: 1.2em}
 
-@media (max-width: 359px) {
-  .main {margin: 0}
-  main, aside div {
-    border-radius: 0;
-    padding-left: 0.7em;
-    padding-right: 0.7em;
-  }
-  a.post {
-    min-width: calc(100% - .8em);
-  }
-}
-
 /* table */
 table {
   border-collapse: collapse;
@@ -504,7 +422,7 @@ footer {
   cursor: default;
   transition: margin-top .4s, padding-bottom .4s;
 }
-footer .name {margin-bottom: 0}
+footer h1 {margin-bottom: 0}
 footer p {margin: 0.4em 0}
 footer a {
   color: var(--text);
@@ -518,29 +436,29 @@ footer a:hover, footer a:focus {
 footer .links {
   display: flex;
   flex-wrap: wrap;
-  margin: 1.5em 0 .7em 0;
-  width: 80%;
-  max-width: 400px;
-  justify-content: space-between;
+  margin: 1.5em 0;
+  width: 600px;
+  max-width: 80%;
+  justify-content: flex-start;
 }
 .col {
-  margin: 0 0.8em 0.8em 0;
-  flex-grow: 1;
-  max-width: 120px;
+  margin: 0 2em 0.5em 0;
+  flex-shrink: 0;
+  flex-grow: 0;
 }
 .col a {
   display: block;
   text-decoration: none;
 }
-.col a:hover, .col a:active {
-  text-decoration: underline;
-}
+.col a:hover, .col a:active {text-decoration: underline}
+footer .ico {position: relative}
 footer .ico img {
   position: absolute;
-  right: 2em;
-  min-width: 48px;
-  width: 15%;
-  max-width: 96px;
+  top: .5em;
+  right: 1.2em;
+  min-width: 60px;
+  width: calc(20% - 2em);
+  max-width: 92px;
   border-radius: 28%;
 }
 /* footer hover animation */
@@ -628,9 +546,7 @@ footer .ico img {
   height: 100%;
 }
 @media (max-width: 1115px) {
-  .video {
-    padding-bottom: 56.25%;
-  }
+  .video {padding-bottom: 56.25%}
 }
 
 /* notifications */
@@ -673,23 +589,13 @@ footer .ico img {
   transition: .3s;
   margin-left: .5em;
 }
-[id^="ntf"] .x:hover {
-  color: var(--link-active);
-}
+[id^="ntf"] .x:hover {color: var(--link-active)}
 [id^="ntf"].medium {animation: alertFade .8s 15s}
 [id^="ntf"].long {animation: alertFade .8s 30s}
 [id^="ntf"].longer {animation: alertFade .8s 60s}
 @keyframes alertFade {
   0% { opacity: 1 }
   100% { opacity: 0 }
-}
-@media (max-width: 900px) {
-  /* notifications */
-  #notifs-wonderland {padding: .8em}
-  [id^="ntf"] {
-    width: 280px;
-    max-width: 50vw;
-  }
 }
 
 /* Back to top button */
@@ -764,7 +670,7 @@ footer .ico img {
   45% {bottom: 20%}
   100% {bottom: -20%}
 }
-
+/* back to top position in different screen sizes */
 @media (max-width: 900px) {
   #backtotop {
     bottom: 24px;
@@ -777,4 +683,106 @@ footer .ico img {
     width: 2.7em;
     height: 2.7em;
   }
+}
+
+/* general styles that vary in different screen sizes (specifically screen width) */
+
+/* a 1-column layout for large tablets and pcs with small screens. */
+@media (max-width: 900px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1em;
+  }
+  main, aside {
+    width: 100%;
+    max-width: 700px;
+    margin-right: 0;
+  }
+  aside {margin-top: 1em}
+  main, aside div {padding: 1.2em 1em}
+  main h1, aside h1 {
+    margin: .5em 0;
+    padding: 0;
+    font-size: 1.5em;
+  }
+  main h2, aside h2 {
+    margin: 8px 0 2px 0;
+    padding: 0;
+    font-size: 1.1em;
+  }
+  .main span {width: calc(100% + .6em) !important}
+  main .post, aside .post {margin-bottom: .6em}
+  /* notifications */
+  #notifs-wonderland {padding: .8em}
+  [id^="ntf"] {
+    width: 280px;
+    max-width: 50vw;
+  }
+}
+
+/* a smaller variant of the previous layout for very large phones, tablets, and pcs with very small screens. */
+@media (max-width: 700px) {
+  p, div, span, ul, table {font-size: .95em !important}
+  header h1 {font-size: 2.1em}
+  header [aria-label=Subtitle] {font-size: .9em}
+  header h1 {margin-top: 1em}
+  #bg {
+    height: 280px;
+    background-size: cover;
+  }
+  nav {
+    margin-top: 10px;
+    margin-bottom: 16px;
+  }
+  main, aside {max-width: 560px}
+}
+
+/* a compact version for phones with width less than my phone. */
+@media (max-width: 359px) {
+  header, nav {
+    padding-left: 0.9em;
+    padding-right: 0.9em;
+  }
+  nav a {
+    font-size: .95em;
+    padding: 0 .6em 0 0;
+  }
+  nav .current {border-bottom: none}
+  .main {margin: 0}
+  main, aside div {
+    border-radius: 0;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+  }
+  a.post {
+    min-width: calc(100% - .8em);
+  }
+}
+
+/* a very compact version for very small screens. */
+@media (max-width: 240px) {
+  p, nav a, div, ul, table {font-size: 10px !important}
+  header [aria-label=Subtitle] {display: none}
+  header h1 {
+    margin: .3em 0;
+    font-size: 14vw !important;
+  }
+  .main h1 {
+    font-size: 15px !important;
+  }
+  .main h2 {
+    font-size: 12px !important;
+  }
+  .updates span .post {min-width: calc(100% - .7em)}
+  footer {
+    margin-top: 1.5em;
+    padding: .85em .5em .5em .5em;
+  }
+  footer .ico img {min-width: 40px}
+  header, nav, footer .links {
+    margin: .6em 0;
+  }
+  footer h1 {display: none}
+  #backtotop {display: none !important}
 }
