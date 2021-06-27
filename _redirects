@@ -1,9 +1,15 @@
-# Redirects from what the browser requests to what we serve
-/home			/
+# for Netlify
+/home					/
+/about				/site/about.html
+/contact			/contact/index.html
+/file-maker		/others/file-maker.html
+/journals			/search.html?q=journals
+/photography	/search.html?q=photography
+/programming	/search.html?q=programming
 /rqs-trcker		/programming/reqs-tracker.html
-/file-maker		/random/file-maker.html
-/ikhub			https://blog.xyr.codes/2020/12/ikhub.html
+/versions			/versions/index.html
+/cdbpage			https://blog.xyr.codes/2020/08/cdbpage.html
+/ikhub				https://blog.xyr.codes/2020/12/ikhub.html
+/khubslow			https://iskhubslow.xyr11.repl.co/
 /numaboutnow	https://blog.xyr.codes/2021/01/numbers-about-now.html
-/cdbpage		https://blog.xyr.codes/2020/08/cdbpage.html
-/projects		https://blog.xyr.codes/search/label/projects
-/khubslow		https://iskhubslow.xyr11.repl.co/
+/projects			https://blog.xyr.codes/search/label/projects
