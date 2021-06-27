@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CSS tests // XYR.codes Dev 🛠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /*
+     * Roboto (https://github.com/googlefonts/roboto)
+     * Apache License 2.0: /files/fonts/roboto-LICENSE
+     */
+    @font-face {
+      font-family: Roboto;
+      src: url("../files/fonts/Roboto-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: Roboto;
+      src: local("Roboto"), url('../files/fonts/Roboto-Light.ttf');
+      font-weight: 300;
+      font-style: normal;
+    }
+    /*
+    * Cascadia Code (https://github.com/microsoft/cascadia-code)
+    * SIL Open Font License 1.1: /files/fonts/cascadia-code-LICENSE
+    */
+    @font-face {
+      font-family: "Cascadia Code";
+      src: local("Cascadia Code"),
+        url("../files/fonts/CascadiaCode.woff2") format("woff2"),
+        url("../files/fonts/CascadiaCode.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* Colors */
+    :root {
+      --body-bg: #ffffff;
+      --body-color: #555555;
+      --heading-color: #000000;
+      --link-color: #222222;
+      --border-color: #767676;
+      --focus-color: #767676;
+      --light-bg: #ededed;
+      --light-hover-bg: #dddddd;
+      --dark-bg: #d3d3d3;
+    }
+    .dark * {
+      --body-bg: #23272D;
+      --body-color: #cac2c2;
+      --heading-color: #fff;
+      --link-color: #222;
+      --focus-color: rgba(86,87,93,0.6);
+      --light-bg: #2a2f38;
+      --light-hover-bg: #2f3d4a;
+      --dark-bg: #161b1f;
+    }
+    ::selection {
+      background-color: rgba(30,30,30,0.8);
+      color: white;
+    }
+    .dark ::selection {
+      background-color: rgba(93, 106, 117, 0.8);
+      color: #b2b2b2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Roboto, sans-serif;
+      background-color: var(--body-bg);
+      color: var(--body-color);
+      margin: 1.8em .6em 1em .6em;
+      transition: background-color .3s;
+    }
+
+    h1, h2, h3 {
+      font-weight: 300;
+      margin-bottom: .4em;
+      transition: color .3s;
+    }
+    h1 {color: var(--heading-color)}
+    h2, h3 {margin-top: .4em}
+
+    header {
+      margin-bottom: 1em;
+    }
+    header * {
+      margin: 0;
+    }
+
+    fieldset {
+      width: 90%;
+      max-width: 90%;
+      border: 1.5px solid var(--border-color);
+      border-radius: 4px;
+    }
+    fieldset legend * {margin: 0}
+
+    button, textarea {
+      font-family: inherit;
+      color: var(--body-color);
+      background-color: var(--light-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: color .3s, background-color .3s, box-shadow .3s;
+    }
+    button {
+      padding: 2px 8px;
+      cursor: pointer;
+    }
+    textarea {
+      display: block;
+      font-family: "Cascadia Code", monospace;
+      font-size: .8em;
+      margin: .2em 0 .6em 0;
+      padding: .8em;
+      height: 2em;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    #input {
+      width: 100%;
+      height: 6em;
+    }
+    #desc, #post { height: 3em }
+    button:hover, textarea:hover,
+    button:focus, textarea:focus {
+      background-color: var(--light-hover-bg);
+    }
+    button:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 4pt var(--focus-color);
+    }
+    button:focus-visible, textarea:focus-visible {
+      border-color: var(--link-color)
+    }
+
+    section {margin: .8em 0}
+    #output {
+      width: 90%;
+      height: 12em;
+      background-color: var(--dark-bg);
+      resize: vertical;
+    }
+    #outputJson {height: 4em}
+
+    /* toggle theme */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 2.65em;
+      height: 1.6em;
+    }
+    #tSwitch {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    /* container */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #f1d74c;
+      transition: .4s;
+      border-radius: 34px;
+      border: .15em solid #ba9527;
+    }
+    /* moving circle thing */
+    .slider i {
+      position: absolute;
+      display: block;
+      height: 1.2em;
+      width: 1.2em;
+      left: .1em;
+      bottom: .05em;
+      background-color: white;
+      transition: all .3s ease, transform .5s cubic-bezier(.4,-0.3,.6,1.29);
+      border-radius: 50%;
+      font-style: normal;
+    }
+    /* icon inside circle */
+    .slider i::after {
+      position: absolute;
+      content: '☀️';
+      font-size: .8em;
+    }
+    #tSwitch:hover + .slider { filter: brightness(.95) }
+
+    #tSwitch:checked + .slider i::after {
+      content: '🌙';
+    }
+    #tSwitch:checked + .slider {
+      background-color: #3C3C46;
+      border-color: black;
+    }
+    #tSwitch:checked:hover + .slider {
+      background-color: #4B4B56;
+    }
+    #tSwitch:checked + .slider i {
+      transform: translateX(1em);
+      background-color: #787878;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>CSS Tests for XYR.codes</h1>
+    <p>Check if CSS passes tests here.</p>
+  </header>
+  <main>
+    <fieldset>
+      <legend><h2><label for="input">Paste CSS below</label></h2></legend>
+      <textarea id="input" spellcheck="false"></textarea>
+      <div>
+        <button onclick="runTest()">▶️ Test</button>
+        <button onclick="document.getElementById('input').value = ''">🔃 Reset</button>
+      </div>
+    </fieldset>
+    <section>
+      <h2><label for="output">Output</label></h2>
+      <textarea id="output" tabindex="0" readonly onfocus="this.select()"></textarea>
+    </section>
+    <footer>
+      <label class="switch" title="Click to toggle theme">
+        <input type="checkbox" id="tSwitch" onclick="toggle()">
+        <span class="slider"><i id="slider-inside"></i></span>
+      </label>
+      <label for="tSwitch" id="identify" style="position: relative;top: 0.15em;vertical-align:middle;">Toggle themes</label>
+    </footer>
+  </main>
+  <script>
+    const id = id => document.getElementById(id)
+
+    // test master list
+
+    const test = {
+      /* test.notDense:
+       * abcdef {
+       *   only-one-attrib: but not on "dense" mode
+       * }
+       */
+      notDense: {
+        run (str) {return str.match(/(.+{(\n+[^}\n]+)\n+})+/g)},
+        error: 'Detected a CSS declaration that only contains one attribute but is not dense.'
+      },
+
+      /* test.densitySpace:
+       * abcdef { spaces-inside-brackets  }
+       */
+      densitySpace: {
+        run (str) {return str.match(/(.+{(?=[^\n])((\s[^}\n]+\s*)|([^}\n]+\s))})+/g)},
+        error: 'Detected a dense CSS declaration that have spaces near the curly brackets.'
+      },
+
+      /* test.densitySemicolon:
+       * abcdef {semicolon: in-last;}
+       */
+       densitySemicolon: {
+        run (str) {return str.match(/(.+{(?=[^\n])[^\n};]+;[^\n}]?})+/g)},
+        error: 'Detected a dense CSS declaration that contains a semicolon in the end.'
+      }
+    }
+
+    const runTest = (css = document.getElementById('input').value) => {
+      id('output').value = 'Loading...'
+      if (!css || css === '') return id('output').value = 'Error: empty/null input'
+
+      let returN = `Results: (rand id: ${Math.floor(Math.random() * 1e+22 * 2)}) \n------------ \n\n`
+      for (const name of Object.keys(test)) {
+        // check if there are actually any tests on test[name]()
+        if (test[name]['run']) {
+          const a = test[name]['run'](css)
+          const err = test[name]['error'] || 'test.' + name + '(No given info)'
+          if (a) {
+            returN += `(test.${name}) ✘ Error: ${test[name]['error']} \n`
+            for (const i of a) returN += `  at "${i.replace(/\n/gm, '\\n')}" \n`
+            returN += `\n`
+          } else {
+            returN += `(test.${name}) ✔ Passed test \n\n`
+          }
+        } else {
+          returN += `(test.${name}) Error on our part: test.${name} doesn't have any tests coded. We'll try to fix this in later updates. \n\n`
+        }
+      }
+      id('output').value = returN + '\nEnd of test'
+    }
+
+
+    // Toggle theme
+    var tswitch = id("tSwitch"); // theme switch
+    var body = document.getElementsByTagName("html")[0];
+
+    function toggle() {
+      if (tswitch.checked) {
+        body.classList.add('dark')
+        id('identify').innerHTML = 'Dark theme active'
+      } else {
+        body.classList.remove('dark')
+        id('identify').innerHTML = 'Light theme active'
+      }
+    }
+    tswitch.addEventListener('keyup', (e) => { // for accessibility
+      if (e.keyCode === 13) {
+        tswitch.checked = !tswitch.checked
+        toggle()
+      }
+    })
+    toggle()
+
+    window.matchMedia('(prefers-color-scheme: dark)') // automatic check
+    .addEventListener('change', e => {
+      tswitch.checked = e.matches
+      toggle()
+    })
+  </script>
+</body>
+
+</html>
