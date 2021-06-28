@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>File Maker // XYR.codes Dev 🛠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /*
+     * Roboto (https://github.com/googlefonts/roboto)
+     * Apache License 2.0: /files/fonts/roboto-LICENSE
+     */
+    @font-face {
+      font-family: Roboto;
+      src: local("Roboto"), url("../files/fonts/Roboto-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: Roboto;
+      src: local("Roboto Light"), url('../files/fonts/Roboto-Light.ttf');
+      font-weight: 300;
+      font-style: normal;
+    }
+    /*
+    * Cascadia Code (https://github.com/microsoft/cascadia-code)
+    * SIL Open Font License 1.1: /files/fonts/cascadia-code-LICENSE
+    */
+    @font-face {
+      font-family: "Cascadia Code";
+      src: local("Cascadia Code"),
+        url("../files/fonts/CascadiaCode.woff2") format("woff2"),
+        url("../files/fonts/CascadiaCode.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* Colors */
+    :root {
+      --body-bg: #ffffff;
+      --body-color: #555555;
+      --heading-color: #000000;
+      --link-color: #222222;
+      --border-color: #767676;
+      --focus-color: #767676;
+      --light-bg: #ededed;
+      --light-hover-bg: #dddddd;
+      --dark-bg: #d3d3d3;
+    }
+    .dark * {
+      --body-bg: #23272D;
+      --body-color: #cac2c2;
+      --heading-color: #fff;
+      --link-color: #222;
+      --focus-color: rgba(86,87,93,0.6);
+      --light-bg: #2a2f38;
+      --light-hover-bg: #2f3d4a;
+      --dark-bg: #161b1f;
+    }
+    ::selection {
+      background-color: rgba(30,30,30,0.8);
+      color: white;
+    }
+    .dark ::selection {
+      background-color: rgba(93, 106, 117, 0.8);
+      color: #b2b2b2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Roboto, sans-serif;
+      background-color: var(--body-bg);
+      color: var(--body-color);
+      margin: 1.8em .6em 1em .6em;
+      transition: background-color .3s;
+    }
+
+    h1, h2, h3 {
+      font-weight: 300;
+      margin-bottom: .4em;
+      transition: color .3s;
+    }
+    h1 {color: var(--heading-color)}
+    h2, h3 {margin-top: .4em}
+
+    header {
+      margin-bottom: 1em;
+    }
+    header * {
+      margin: 0;
+    }
+
+    fieldset {
+      width: 90%;
+      max-width: 520px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 4px;
+    }
+    fieldset legend * {margin: 0}
+    fieldset div {
+      display: flex;
+      margin: .8em 0;
+    }
+    fieldset div:first-of-type {
+      margin-top: 0
+    }
+    fieldset div:last-child {
+      margin-bottom: 0
+    }
+    fieldset div>label:after {
+      content: ':';
+    }
+    .req::after {
+      content: '*';
+      color: #ec4949;
+    }
+
+    div label {
+      margin-top: 4px;
+      padding-right: .4em;
+    }
+    div textarea {
+      width: 100%;
+      font-family: inherit;
+    }
+
+    /* Preview iframe */
+    #post-preview {
+      width: 100%;
+      height: 50vmax;
+      border: 1.5px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    input, button, textarea {
+      font-family: inherit;
+      color: var(--body-color);
+      background-color: var(--light-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: color .3s, background-color .3s, box-shadow .3s;
+    }
+    input {
+      padding: 2px;
+      cursor: pointer;
+    }
+    button {
+      padding: 2px 8px;
+      cursor: pointer;
+    }
+    textarea {
+      padding: 4px;
+      font-size: .9em;
+      height: 2em;
+      resize: none;
+    }
+    textarea.large {
+      height: 6em;
+      resize: auto;
+    }
+    #desc, #post { height: 3em }
+    input:hover, button:hover, textarea:hover,
+    input:focus, button:focus, textarea:focus {
+      background-color: var(--light-hover-bg);
+    }
+    input:focus, button:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 4pt var(--focus-color);
+    }
+    input:focus-visible, button:focus-visible, textarea:focus-visible {
+      border-color: var(--link-color)
+    }
+
+    section {margin: .8em 0}
+    #output, #outputJson {
+      display: block;
+      width: calc(100% - 2.5em);
+      height: 12em;
+      background-color: var(--dark-bg);
+      margin: .5em 0;
+      padding: 16px;
+      font-family: "Cascadia Code", monospace;
+      font-size: .7em;
+      resize: vertical;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    #outputJson {height: 4em}
+
+    @media screen and (min-width: 600px) {
+      main {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      fieldset, #preview {
+        flex-grow: 1;
+        flex-shrink: 1;
+      }
+      fieldset {
+        width: 50%;
+        margin-right: 2em;
+      }
+      #preview {
+        margin-right: 1em;
+        width: 35%;
+        max-width: 400px;
+      }
+      #post-preview {
+        width: 100%;
+        height: calc(100% - 3em);
+        border: 1.5px solid var(--border-color);
+        border-radius: 4px;
+      }
+      section, footer {
+        flex-shrink: 0;
+        width: 100%;
+      }
+    }
+
+    /* toggle theme */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 2.65em;
+      height: 1.6em;
+    }
+    #tSwitch {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    /* container */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #f1d74c;
+      transition: .4s;
+      border-radius: 34px;
+      border: .15em solid #ba9527;
+    }
+    /* moving circle thing */
+    .slider i {
+      position: absolute;
+      display: block;
+      height: 1.2em;
+      width: 1.2em;
+      left: .1em;
+      bottom: .05em;
+      background-color: white;
+      transition: all .3s ease, transform .5s cubic-bezier(.4,-0.3,.6,1.29);
+      border-radius: 50%;
+      font-style: normal;
+    }
+    /* icon inside circle */
+    .slider i::after {
+      position: absolute;
+      content: '☀️';
+      font-size: .8em;
+    }
+    #tSwitch:hover + .slider { filter: brightness(.95) }
+
+    #tSwitch:checked + .slider i::after {
+      content: '🌙';
+    }
+    #tSwitch:checked + .slider {
+      background-color: #3C3C46;
+      border-color: black;
+    }
+    #tSwitch:checked:hover + .slider {
+      background-color: #4B4B56;
+    }
+    #tSwitch:checked + .slider i {
+      transform: translateX(1em);
+      background-color: #787878;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>File maker for XYR.codes</h1>
+    <p>Note: Items with <span class="req"></span> are required and the default values of each item are in their respective placeholders (no placeholder means no default value).</p>
+  </header>
+  <main>
+    <fieldset>
+      <legend><h2>Fill this thing first</h2></legend>
+      <div>
+        <button onclick="inputObj()">📝 Paste stringified object</button>
+      </div>
+      <div>
+        <label for="name">Title<span class="req"></span></label>
+        <textarea id="name" maxlength="70" spellcheck="false"></textarea>
+      </div>
+      <div>
+        <label for="type">Type</label>
+        <textarea id="type" placeholder="main"></textarea>
+      </div>
+      <div>
+        <label for="location">Location</label>
+        <textarea id="location" placeholder="&quot;&quot; (root)" spellcheck="false"></textarea>
+      </div>
+      <div>
+        <label for="desc">Description<span class="req"></span></label>
+        <textarea class="large" id="desc" maxlength="160"></textarea>
+      </div>
+      <div>
+        <label for="img">og:image path</label>
+        <textarea id="img" placeholder="i/emb.png" spellcheck="false"></textarea>
+      </div>
+      <div>
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" min="2019-01-01">
+      </div>
+      <div>
+        <label for="content">Content</label>
+        <textarea class="large" id="content" maxlength="40000" spellcheck="false"></textarea>
+      </div>
+      <div>
+        <label for="footer">Footer</label>
+        <textarea id="footer" placeholder="Made with &lt;3, HTML, CSS &amp; Javascript!"></textarea>
+      </div>
+      <div>
+        <button onclick="reset()">🔃 Default values</button>
+      </div>
+    </fieldset>
+    <!-- <div id="preview">
+      <div style="margin: 1.1em 0 .4em 0">Preview:</div>
+      <iframe id="post-preview" title="Preview"></iframe>
+    </div> -->
+    <section>
+      <h2><label for="output">Output</label></h2>
+      <div>
+        <button class="tooltip" id="copyCodeBtn" onclick="copyCode('output')">💾 Copy code</button>
+        <button class="tooltip" id="copyCodeBtn" onclick="copyCode('outputJson')">🔠 Copy object literal</button>
+      </div>
+      <textarea id="output" tabindex="0" spellcheck="false" onfocus="this.select()">fill the thing above</textarea>
+      <textarea aria-label="Object literal output" id="outputJson" tabindex="0" spellcheck="false" readonly onfocus="this.select()"></textarea>
+    </section>
+    <footer>
+      <label class="switch" title="Click to toggle theme">
+        <input type="checkbox" id="tSwitch" onclick="toggle()">
+        <span class="slider"><i id="slider-inside"></i></span>
+      </label>
+      <label for="tSwitch" id="identify" style="position: relative;top: 0.15em;vertical-align:middle;">Toggle themes</label>
+    </footer>
+  </main>
+  <script src="../files/indenter.js"></script>
+  <script>
+    // Get element by Id or Tag
+    const id = id => document.getElementById(id)
+    const tag = tag => document.querySelector(tag)
+
+    var cacheValues = []
+
+    id('date').value = new Date().toISOString().slice(0, new Date().toISOString().length - 14) // set date to its default value
+
+    const rgx = (txt, reg, val = '') => txt.replace(reg, val)
+
+    let valuesCache = {}
+    const output = () => {
+      // reduce number of times referencing to dom for better performance
+      let a = {
+        ogname: rgx(id('name').value, /\n/g, ' '), // name of page
+        type: id('type').value || 'main', // page type
+        location: id('location').value, // location of page relative to root ('')
+        desc: id('desc').value, // meta description
+        img: id('img').value || 'i/emb.png', // embed image (og:image)
+        date: id('date').value, // date
+        content: rgx(id('content').value, /^\s{1,}/gm) || '', // content of page
+        footer: id('footer').value || 'Made with &lt;3, HTML, CSS &amp; Javascript!' // footer
+      }
+      a.path = rgx(rgx(a.location, /((^|(?<=\/))[^\/\n]*$)/gm), /([^\/\n]+(?=\/))/g, '..') // "a/b.html" -> "../"
+      a.name = a.ogname + (a.type !== 'main' ? ' | XYR.codes' : '') // name visible in h1
+
+      // check if there are no changes in the input
+      if (JSON.stringify(a) === JSON.stringify(valuesCache)) return 0
+
+      const is = (val, check, text) => val === check ? text : ''
+
+      // create the page
+      let strResult = `<!DOCTYPE html>
+      <html lang="en"${a.path ? ' data-loc="root"' : ''}>
+
+      <head>
+      <meta charset="UTF-8">
+      <title>${a.name}</title>
+      <meta name="author" content="Xyrus Kurt Roldan">
+      <meta name="description" content="${a.desc}">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta property="og:title" content="${a.ogname}">
+      <meta property="og:description" content="${a.desc}">
+      <meta property="og:image" content="https://xyr11.github.io/${a.img}">
+      <meta property="og:url" content="https://xyr11.github.io/${a.location}">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="theme-color" content="#77e4ff">
+      <link href="${a.path}favicon.ico" rel="shortcut icon" type="image/ico">
+      <link href="${a.path}main.css" rel="stylesheet">
+      </head>\n
+      <body>
+      <header role="banner">
+      <div id="bg" style="background-color:#0B161D" aria-hidden="true"></div>
+      <h1 aria-labelledby="pagetitle"><a id="pagetitle" href="${a.path}index.html">XYR<span style="color:#77e4ff">.</span>codes</a></h1>
+      <p aria-label="Subtitle">Projects, tutorials, photography, blogs, and more!</p>
+      </header>
+      <nav role="navigation">
+      <a href="${a.path}index.html">Home</a>${(() => { let b = ''; for (const i of ['Programming', 'Journals', 'Photography']) b += `\n<a${a.type === i.toLowerCase() ? ' class="current"' : ''} href="${a.path}search.html?q=${i}" aria-label="Browse pages under ${i}">${i}</a>`; return b })()}
+      ${is(a.type, 'others', `<a class="current" aria-disabled="true" href="${a.path}search.html?q=Others">Others</a>`)}<a href="${a.path}site/about.html">About</a>
+      <a id="search" class="icon" href="${a.path}search.html" aria-label="Search XYR.codes">Search</a>
+      </nav>
+      <div class="main">
+      <main role="main" aria-labelledby="mainTitle">
+      <h1 id="mainTitle" class="title" onclick="copyjs()" title="Click to copy link">${a.ogname}</h1>
+      ${a.date ? `<p class="time" data-posted="${a.date}"${a.type === 'main' ? ' data-text="Last updated"' : ''}>${new Date(a.date + 'T00:00+08:00').toLocaleString('default', {dateStyle: 'long'})}</p>` : ''}
+      <article class="post">\n${a.content}\n</article>
+      </main>
+      <aside></aside>
+      </div>
+      <footer role="contentinfo" aria-label="Footer">
+      <h1 class="name">XYR.codes</h1>
+      <p>${a.footer}</p>
+      <div class="ico" aria-hidden="true">
+      <img src="${a.path}i/fav.ico" alt="">
+      </div>
+      <div class="links" aria-label="Footer links">
+      <div class="col">\n<a href="${a.path}index.html">Home</a>\n<a href="${a.path}site/about.html">About</a>\n<a href="${a.path}contact/index.html">Contact</a>\n<a href="${a.path}site/privacy.html">Privacy Policy</a>\n</div>
+      <div class="col">\n<a href="${a.path}search.html">Search</a>\n<a href="${a.path}versions/index.html">Versions</a>\n<a href="${a.path}site/sitemap.html">Sitemap</a>\n<a href="https://github.com/xyr11/xyr11.github.com">Contribute on GitHub</a>\n</div>
+      <div class="col">\n<a href="https://blog.xyr.codes">Blog</a>\n<a href="https://twitter.com/xy_rus/">Twitter</a>\n<a id="gototop" tabindex="0">Go to top</a>\n</div>
+      </div>
+      </footer>
+      <script type="text/javascript" src="${a.path}files/main.js">\<\/script>
+      <\/body>\n
+      <\/html>`
+      if (strResult) strResult = indent.js(rgx(strResult, /^\s{1,}/gm), {tabString: '  '}) // indent
+
+      let jsonResult = '{'
+      for (const at of ['name', 'type', 'location', 'desc', 'ogname', 'img', 'date', 'content', 'footer']) jsonResult += `${at}:"${a[at].toString().replace(/"/g, '\\"').replace(/\n/g, '\\n')}"${at !== 'footer' ? ',' : ''}`
+      jsonResult += '}'
+      // check if the important vars have values
+      if (!a.ogname || !a.desc) {
+        strResult = 'fill the thing above'
+        jsonResult = ''
+      }
+      // output
+      id('output').value = strResult
+      id('outputJson').value = jsonResult
+      localStorage.data = JSON.stringify(a)
+      valuesCache = a // cache to check if the input changed
+    }
+
+    tag('fieldset').addEventListener('input', output)
+
+    function inputObj (obj) {
+      let input, isOk
+      if (obj) {
+        input = obj
+      } else {
+        do {
+          isOk = true
+          try { input = JSON.parse(prompt('Please paste your JSON string below. It must have the following attributes: name, type, location, desc, ogname, img, date, content, footer')) } catch(e) {}
+          if (typeof input === 'undefined') {
+            alert('Invalid JSON string. Please try again')
+          } else if (input !== null) {
+            if (Object.keys(input).toString() === 'name,type,location,desc,ogname,img,date,content,footer') {
+              alert('Accepted! Thank you!')
+            } else {
+              isOk = false
+              alert('JSON not accepted. The JSON must have the following attributes: name, type, location, desc, ogname, img, date, content, footer.')
+            }
+          }
+        } while ((!input || !isOk) && input !== null)
+      }
+
+      if (input === null) return 0
+      // replace values on the element of the same attribute name
+      for (const n of Object.keys(input)) if (id(n)) id(n).value = input[n]
+
+      output()
+    }
+
+    if (localStorage.data) inputObj(JSON.parse(localStorage.data))
+
+    // Copy code
+    function copyCode(Id) {
+      if (!id(Id)) return 0
+      id(Id).select()
+      id(Id).setSelectionRange(0, 99999) // for mobile
+      document.execCommand('copy')
+      alert('Copied to clipboard successfully!')
+    }
+
+    // Reset
+    const reset = () => {
+      for (const n of ['name', 'type', 'location', 'desc', 'img', 'date', 'content', 'footer']) if (id(n)) id(n).value = ''
+      id('date').value = new Date().toISOString().slice(0, new Date().toISOString().length - 14) // set date to its default value
+    }
+
+    // Toggle theme
+    var tswitch = id("tSwitch") // theme switch
+    var body = document.getElementsByTagName("html")[0]
+
+    function toggle() {
+      if (tswitch.checked) {
+        body.classList.add('dark')
+        id('identify').innerHTML = 'Dark theme active'
+      } else {
+        body.classList.remove('dark')
+        id('identify').innerHTML = 'Light theme active'
+      }
+    }
+    tswitch.addEventListener('keyup', (e) => { // for accessibility
+      if (e.keyCode === 13) {
+        tswitch.checked = !tswitch.checked
+        toggle()
+      }
+    })
+    toggle()
+
+    window.matchMedia('(prefers-color-scheme: dark)') // automatic check
+    .addEventListener('change', e => {
+      tswitch.checked = e.matches
+      toggle()
+    })
+  </script>
+</body>
+
+</html>
