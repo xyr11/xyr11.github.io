@@ -158,10 +158,10 @@
       resize: none;
     }
     textarea.large {
-      height: 6em;
+      height: 10em;
       resize: auto;
     }
-    #desc, #post { height: 3em }
+    #desc, #post { height: 5em }
     input:hover, button:hover, textarea:hover,
     input:focus, button:focus, textarea:focus {
       background-color: var(--light-hover-bg);
@@ -178,17 +178,17 @@
     #output, #outputJson {
       display: block;
       width: calc(100% - 2.5em);
-      height: 12em;
+      height: 14em;
       background-color: var(--dark-bg);
       margin: .5em 0;
-      padding: 16px;
+      padding: .7em 1em;
       font-family: "Cascadia Code", monospace;
-      font-size: .7em;
+      font-size: .8em;
       resize: vertical;
       overflow-x: hidden;
       overflow-y: auto;
     }
-    #outputJson {height: 4em}
+    #outputJson {height: 8em}
 
     @media screen and (min-width: 600px) {
       main {
@@ -367,7 +367,7 @@
     const output = () => {
       // reduce number of times referencing to dom for better performance
       let a = {
-        ogname: rgx(id('name').value, /\n/g, ' '), // name of page
+        name: rgx(id('name').value, /\n/g, ' '), // name of page
         type: id('type').value || 'main', // page type
         location: id('location').value, // location of page relative to root ('')
         desc: id('desc').value, // meta description
@@ -377,7 +377,6 @@
         footer: id('footer').value || 'Made with &lt;3, HTML, CSS &amp; Javascript!' // footer
       }
       a.path = rgx(rgx(a.location, /((^|(?<=\/))[^\/\n]*$)/gm), /([^\/\n]+(?=\/))/g, '..') // "a/b.html" -> "../"
-      a.name = a.ogname + (a.type !== 'main' ? ' | XYR.codes' : '') // name visible in h1
 
       // check if there are no changes in the input
       if (JSON.stringify(a) === JSON.stringify(valuesCache)) return 0
@@ -390,14 +389,14 @@
 
       <head>
       <meta charset="UTF-8">
-      <title>${a.name}</title>
+      <title>${a.name}${a.type !== 'main' ? ' | XYR.codes' : ''}</title>
       <meta name="author" content="Xyrus Kurt Roldan">
       <meta name="description" content="${a.desc}">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta property="og:title" content="${a.ogname}">
+      <meta property="og:title" content="${a.name}">
       <meta property="og:description" content="${a.desc}">
-      <meta property="og:image" content="https://xyr11.github.io/${a.img}">
-      <meta property="og:url" content="https://xyr11.github.io/${a.location}">
+      <meta property="og:image" content="http://xyr.codes/${a.img}">
+      <meta property="og:url" content="https://xyr.codes/${a.location}">
       <meta name="twitter:card" content="summary_large_image">
       <meta name="theme-color" content="#77e4ff">
       <link href="${a.path}favicon.ico" rel="shortcut icon" type="image/ico">
@@ -416,7 +415,7 @@
       </nav>
       <div class="main">
       <main role="main" aria-labelledby="mainTitle">
-      <h1 id="mainTitle" class="title" onclick="copyjs()" title="Click to copy link">${a.ogname}</h1>
+      <h1 id="mainTitle" class="title" onclick="copyjs()" title="Click to copy link">${a.name}</h1>
       ${a.date ? `<p class="time" data-posted="${a.date}"${a.type === 'main' ? ' data-text="Last updated"' : ''}>${new Date(a.date + 'T00:00+08:00').toLocaleString('default', {dateStyle: 'long'})}</p>` : ''}
       <article class="post">\n${a.content}\n</article>
       </main>
@@ -429,9 +428,25 @@
       <img src="${a.path}i/fav.ico" alt="">
       </div>
       <div class="links" aria-label="Footer links">
-      <div class="col">\n<a href="${a.path}index.html">Home</a>\n<a href="${a.path}site/about.html">About</a>\n<a href="${a.path}contact/index.html">Contact</a>\n<a href="${a.path}site/privacy.html">Privacy Policy</a>\n</div>
-      <div class="col">\n<a href="${a.path}search.html">Search</a>\n<a href="${a.path}versions/index.html">Versions</a>\n<a href="${a.path}site/sitemap.html">Sitemap</a>\n<a href="https://github.com/xyr11/xyr11.github.com">Contribute on GitHub</a>\n</div>
-      <div class="col">\n<a href="https://blog.xyr.codes">Blog</a>\n<a href="https://twitter.com/xy_rus/">Twitter</a>\n<a id="gototop" tabindex="0">Go to top</a>\n</div>
+      <div class="col">
+      <a href="${a.path}index.html">Home</a>
+      <a href="${a.path}site/about.html">About</a>
+      <a href="${a.path}contact/index.html">Contact</a>
+      <a href="${a.path}contact/feedback.html">Feedback</a>
+      </div>
+      <div class="col">
+      <a href="${a.path}search.html">Search</a>
+      <a href="${a.path}versions/index.html">Versions</a>
+      <a href="${a.path}site/credits.html">Credits</a>
+      <a href="${a.path}site/sitemap.html">Sitemap</a>
+      </div>
+      <div class="col">
+      <span class="social">
+      <a class="gthb" href="https://github.com/xyr11/xyr11.github.com" title="Check the repository on GitHub"></a> <a class="twtr" href="https://twitter.com/xy_rus/" title="Follow me on Twitter"></a> <a class="doc" href="https://github.com/xyr11/xyr11.github.io/blob/main/README.md" title="Read the README.md file"></a>
+      </span>
+      <a href="${a.path}site/licenses.html">Licenses</a>
+      <a id="gototop" tabindex="0">Go to top</a>
+      </div>
       </div>
       </footer>
       <script type="text/javascript" src="${a.path}files/main.js">\<\/script>
@@ -440,10 +455,10 @@
       if (strResult) strResult = indent.js(rgx(strResult, /^\s{1,}/gm), {tabString: '  '}) // indent
 
       let jsonResult = '{'
-      for (const at of ['name', 'type', 'location', 'desc', 'ogname', 'img', 'date', 'content', 'footer']) jsonResult += `${at}:"${a[at].toString().replace(/"/g, '\\"').replace(/\n/g, '\\n')}"${at !== 'footer' ? ',' : ''}`
+      for (const at of ['name', 'type', 'location', 'desc', 'img', 'date', 'content', 'footer']) jsonResult += `${at}:"${a[at].toString().replace(/"/g, '\\"').replace(/\n/g, '\\n')}"${at !== 'footer' ? ',' : ''}`
       jsonResult += '}'
       // check if the important vars have values
-      if (!a.ogname || !a.desc) {
+      if (!a.name || !a.desc) {
         strResult = 'fill the thing above'
         jsonResult = ''
       }
@@ -463,11 +478,11 @@
       } else {
         do {
           isOk = true
-          try { input = JSON.parse(prompt('Please paste your JSON string below. It must have the following attributes: name, type, location, desc, ogname, img, date, content, footer')) } catch(e) {}
+          try { input = JSON.parse(prompt('Please paste your JSON string below. It must have the following attributes: name, type, location, desc, img, date, content, footer')) } catch(e) {}
           if (typeof input === 'undefined') {
             alert('Invalid JSON string. Please try again')
           } else if (input !== null) {
-            if (Object.keys(input).toString() === 'name,type,location,desc,ogname,img,date,content,footer') {
+            if (Object.keys(input).toString() === 'name,type,location,desc,img,date,content,footer') {
               alert('Accepted! Thank you!')
             } else {
               isOk = false

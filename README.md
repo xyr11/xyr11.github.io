@@ -1,18 +1,18 @@
 # XYR.codes
 This is XYR.codes, the official webpage of Xyrus Kurt Roldan in the depths of the internet! Here, you can find stuff I make on the internet ranging from coding projects to blogging and photography.
 
-![GitHub branch checks state](https://img.shields.io/github/checks-status/xyr11/xyr11.github.com/main?logo=github&style=flat-square) [![Netlify Status](https://api.netlify.com/api/v1/badges/58f1ecc1-7536-4cf3-a90e-a5b50228043a/deploy-status)](https://app.netlify.com/sites/xyrcodes/deploys) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com) [![Twitter Follow](https://img.shields.io/twitter/follow/xy_rus?color=brightgreen&logo=twitter&style=flat-square)](https://twitter.com/xy_rus)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com) ![GitHub branch checks state](https://img.shields.io/github/checks-status/xyr11/xyr11.github.io/main?logo=github&style=flat-square) [![Netlify Status](https://api.netlify.com/api/v1/badges/58f1ecc1-7536-4cf3-a90e-a5b50228043a/deploy-status)](https://app.netlify.com/sites/xyrcodes/deploys)
 
 ## Versions
-To see the latest stable version, check the link above. You can also download it [here](https://github.com/xyr11/xyr11.github.com/archive/refs/heads/main.zip), which fully works offline too!
+To see the latest stable version, check the link above. You can also download it [here](https://github.com/xyr11/xyr11.github.io/archive/refs/heads/main.zip), which fully works offline too!
 
 ### Other versions
 Version | Description | View
 -- | -- | --
-Pre-release | Most recent release candidate | [Branch](https://github.com/xyr11/xyr11.github.com/tree/pre-release) \| [Link](https://rc.xyr.codes)
-Development | Most recent commit (*VERY* buggy) | [Branch](https://github.com/xyr11/xyr11.github.com/tree/development) \| [Link](https://dev.xyr.codes)
+Pre-release | Most recent release candidate | [Branch](https://github.com/xyr11/xyr11.github.io/tree/pre-release) \| [Link](https://rc.xyr.codes)
+Development | Most recent commit (*VERY* buggy) | [Branch](https://github.com/xyr11/xyr11.github.io/tree/development) \| [Link](https://dev.xyr.codes)
 
-For old versions, [check the Releases page](https://github.com/xyr11/xyr11.github.com/releases).
+For old versions, [check the Releases page](https://github.com/xyr11/xyr11.github.io/releases).
 
 ## Update workflow
 ```js
@@ -37,4 +37,6 @@ Long-term dream as a kid, short-term rushed CS assignment that doesn't deserve t
 Funny story actually. On my school, one of the perks given is having a GitHub Student Developer Pack, of which I can choose and own one of the selection of domains for free... for 1 year. *and yada yada yada*, I found `xyr.codes` and gladly took it. So that's why I (for now) have 2 urls of the site.
 
 ## License
-This is licensed under [MIT License](https://github.com/xyr11/xyr11.github.com/blob/main/LICENSE)
+The content of this project itself is licensed under [CC BY 4.0 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg">](http://creativecommons.org/licenses/by/4.0/). All pictures taken by or made by the repository owner ("Xyrus Kurt Roldan") is licensed under [CC BY-SA 4.0 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg">](http://creativecommons.org/licenses/by-sa/4.0/). The source code used to build and display the site is licensed under [MIT License](https://github.com/xyr11/xyr11.github.io/blob/main/LICENSE).
+
+The author is not responsible for the content on the site.

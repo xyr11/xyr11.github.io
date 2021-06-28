@@ -143,8 +143,10 @@ window.addEventListener('scroll', () => { // check if user has scrolled 0.8x the
 })
 backToTop.addEventListener('click', scrollToTop)
 // go to top text
-id('gototop').addEventListener('click', scrollToTop)
-id('gototop').addEventListener('keypress', e => (e.key === 'Enter') && id('gototop').click())
+if (id('gototop')) {
+  id('gototop').addEventListener('click', scrollToTop)
+  id('gototop').addEventListener('keypress', e => (e.key === 'Enter') && id('gototop').click())
+}
 
 // change contents of elements with class='date'
 const time = document.getElementsByClassName('time')
@@ -152,13 +154,28 @@ for (const t of time) {
   const _d = new Date(t.getAttribute('data-posted') + 'T00:00:00+08:00')
   const dSince = (Date.now() - _d.getTime()) / 86400000
   if (_d.toString() !== 'Invalid Date') {
-    if (dSince < 1) t.innerHTML = 'Posted today'
-    else if (dSince < 2) t.innerHTML = 'Posted yesterday'
-    else if (dSince < 31) t.innerHTML = `Posted ${Math.floor(dSince)} days ago`
+    const text = t.getAttribute('data-text') || 'Posted'
+    if (dSince < 1) t.innerHTML = `${text} today`
+    else if (dSince < 2) t.innerHTML = `${text} yesterday`
+    else if (dSince < 31) t.innerHTML = `${text} ${Math.floor(dSince)} days ago`
     else if (_d.getYear() === new Date().getYear()) {
-      t.innerHTML = `Posted last ${_d.toLocaleString('default', { month: 'long', day: '2-digit' })}`
-    } else t.innerHTML = `Posted on ${_d.toLocaleString('default', { dateStyle: 'long' })}`
+      t.innerHTML = `${text} last ${_d.toLocaleString('default', { month: 'long', day: '2-digit' })}`
+    } else t.innerHTML = `${text} on ${_d.toLocaleString('default', { dateStyle: 'long' })}`
   }
+}
+
+// replace <a>/contact/</a> to <a href"../contact/index.html"
+for (const i of document.getElementsByTagName('a')) {
+  const link = i.innerText.match(/^\/[^\n]+$/gm)
+  if (link) {
+    i.setAttribute('href', document.querySelector('link').getAttribute('href').replace(/((.|\/)[^\n/]*$)/gm, '') + link[0] + (link[0][link[0].length - 1] === '/' ? 'index.html' : ''))
+  }
+}
+
+// add title to images with an alt value
+for (const i of document.getElementsByTagName('img')) {
+  const alt = i.getAttribute('alt')
+  if (alt) i.setAttribute('title', alt)
 }
 
 // toolbar

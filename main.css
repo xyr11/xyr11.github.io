@@ -248,7 +248,7 @@ main, aside div {
   background: var(--accent-2);
   padding: 1.4em;
   border-radius: 8px;
-  box-shadow: 3px 5px 3px rgba(0,0,0,0.4);
+  box-shadow: 3px 5px 4px rgba(0,0,0,0.4);
   transition: box-shadow .5s;
 }
 
@@ -291,7 +291,7 @@ a.post {
   border: 2px solid transparent;
   flex-grow: 1;
   width: calc(33% - 1em);
-  margin-right: .8em;
+  margin-right: .6em;
   min-width: 270px;
 }
 /* different sizes */
@@ -311,11 +311,15 @@ a.post:focus-visible {border-color: var(--link-active)}
 .more a:hover, .more a:focus {text-decoration: underline}
 
 /* Aside */
-aside {width: 25%}
+aside {width: 22%}
 aside div {margin-bottom: 1em}
 aside div:last-child {margin: 0}
 
-.updates span .post {min-width: 160px}
+.updates span .post {
+  width: 160px;
+  min-width: calc(33% - 1em);
+  max-width: calc(100% - .6em);
+}
 .new::before {content: "\e03f"}
 .annual::before {content: "\e075"}
 .promoted::before {content: "\e077"}
@@ -375,19 +379,26 @@ h1[onclick="copyjs()"].clicked::after {
   max-width: 580px;
   height: auto;
   margin: auto;
-  margin-top: .8em;
+  margin-top: .6em;
   margin-bottom: .4em;
   border-radius: 10px;
   background: #c8f4ff;
   transition: box-shadow .3s;
 }
-article img {box-shadow: 2px 3px 5px rgba(0,0,0,0.4)}
-.post .imgdesc {
+figure {
+  margin: 0 0 1em 0;
+}
+article img {box-shadow: 2px 3px 4px rgba(0,0,0,0.2)}
+figcaption {
   font-style: italic;
   font-size: 0.9em;
   text-align: center;
+  margin: 1em 2em;
 }
-.post .imgdesc.last {margin-bottom: 1.2em}
+.post figcaption p {
+  padding: 0;
+  margin-top: .3em;
+}
 
 /* table */
 table {
@@ -405,9 +416,9 @@ tr:nth-child(even) {background: #eee}
 
 /* body content and article box-shadow transitions */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  main:hover, aside div:hover {box-shadow: 3px 5px 3px rgba(0,0,0,0.7)}
+  main:hover, aside div:hover {box-shadow: 3px 5px 6px rgba(0,0,0,0.6)}
   a.post:hover, a.post:focus, a.post:active {box-shadow: 3px 5px 3px rgba(0,0,0,0.6)}
-  article img:hover {box-shadow: 2px 3px 7px rgba(0,0,0,0.7)}
+  article img:hover {box-shadow: 2px 3px 6px rgba(0,0,0,0.5)}
 }
 
 /* Footer */
@@ -448,6 +459,14 @@ footer .links {
   text-decoration: none;
 }
 .col a:hover, .col a:active {text-decoration: underline}
+.social a {
+  font-family: simple-line-icons;
+  display: inline-block;
+  text-decoration: none !important;
+}
+.social .gthb::after {content: "\e60c"}
+.social .twtr::after {content: "\e009"}
+.social .doc::after {content: "\e085"}
 footer .ico {position: relative}
 footer .ico img {
   position: absolute;
@@ -613,7 +632,7 @@ footer .ico img {
   position: fixed;
   bottom: 32px;
   right: 32px;
-  z-index: 10;
+  z-index: 4;
   cursor: pointer;
   border-radius: 10px;
   box-shadow: 1px 2px 3px rgba(0,0,0,0.4) !important;
@@ -710,6 +729,9 @@ footer .ico img {
   }
   .main span {width: calc(100% + .6em) !important}
   main .post, aside .post {margin-bottom: .6em}
+  .updates span .post {
+    min-width: 140px;
+  }
   /* notifications */
   #notifs-wonderland {padding: .8em}
   [id^="ntf"] {
@@ -733,10 +755,12 @@ footer .ico img {
     margin-bottom: 16px;
   }
   main, aside {max-width: 560px}
+  figure {margin-bottom: .85em}
+  figcaption {margin: .6em .5em}
 }
 
 /* a compact version for phones with width less than my phone. */
-@media (max-width: 359px) {
+@media (max-width: 358px) {
   header, nav {
     padding-left: 0.9em;
     padding-right: 0.9em;
@@ -751,9 +775,17 @@ footer .ico img {
     border-radius: 0;
     padding-left: 0.7em;
     padding-right: 0.7em;
+    box-shadow: 1px 3px 4px rgba(0,0,0,0.4);
   }
   a.post {
     min-width: calc(100% - .8em);
+  }
+  article.post img {
+    position: relative;
+    left: -0.9em;
+    border-radius: 0;
+    width: calc(100% + 1.8em);
+    box-shadow: none;
   }
 }
 
