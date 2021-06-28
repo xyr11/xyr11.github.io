@@ -1,0 +1,36 @@
+/*
+ * Roboto (https://github.com/googlefonts/roboto)
+ * Apache License 2.0: /files/fonts/roboto-LICENSE
+ */
+@font-face {
+  font-family: Roboto;
+  src: local("Roboto"), url("../files/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {box-sizing: border-box}
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  overflow: hidden;
+}
+header {
+  padding: 15px 10px;
+  background: yellow;
+  box-shadow: 0px 1px 8px black;
+  cursor: help;
+  transition: box-shadow .3s;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  font-size: .95em;
+}
+header:hover {
+  background: #f7f73e;
+  box-shadow: 0px 3px 8px black;
+}
+#info {margin-top: .5em}
+@media (max-width: 700px) {
+  header {font-size: .75em}
+}
