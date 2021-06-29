@@ -415,7 +415,7 @@
       </nav>
       <div class="main">
       <main role="main" aria-labelledby="mainTitle">
-      <h1 id="mainTitle" class="title" onclick="copyjs()" title="Click to copy link">${a.name}</h1>
+      <h1 id="mainTitle" class="title">${a.name}</h1>
       ${a.date ? `<p class="time" data-posted="${a.date}"${a.type === 'main' ? ' data-text="Last updated"' : ''}>${new Date(a.date + 'T00:00+08:00').toLocaleString('default', {dateStyle: 'long'})}</p>` : ''}
       <article class="post">\n${a.content}\n</article>
       </main>

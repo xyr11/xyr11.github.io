@@ -10,11 +10,11 @@ const html = tag('html')
 const body = tag('body')
 
 // check if current tab
-let isCurrentTab
-document.addEventListener('visibilitychange', event => {
-  if (document.visibilityState === 'visible') isCurrentTab = true
-  else isCurrentTab = false
-})
+// let isCurrentTab
+// document.addEventListener('visibilitychange', event => {
+//   if (document.visibilityState === 'visible') isCurrentTab = true
+//   else isCurrentTab = false
+// })
 
 // notifications
 body.innerHTML += '<div id="notifs-wonderland"></div>'
@@ -39,7 +39,7 @@ const newNotif = (text, length = 'short') => {
   }, time[validLength.indexOf(length)])
 }
 
-// debug
+// output errors as a notif
 window.addEventListener('error', e => newNotif(`${e.message} at line ${e.lineno} of ${e.filename && new URL(e.filename).pathname}`, 'medium'))
 
 // transform search button
@@ -63,10 +63,10 @@ window.addEventListener('load', changeSearchBtn)
 window.addEventListener('resize', changeSearchBtn)
 
 // copy text
-const copyjs = (id = window.location.href) => { // eslint-disable-line no-unused-vars
+const copyjs = (id = window.location.href, elm = null) => { // eslint-disable-line no-unused-vars
   // check if local file
   const urlOrigin = new URL(document.URL).origin
-  if (urlOrigin === 'null' || urlOrigin === 'file://') id = 'https://xyr11.github.io/'
+  if (urlOrigin === 'null' || urlOrigin === 'file://') id = 'https://xyr.codes/'
   const inputTemp = document.createElement('input')
   inputTemp.value = id
   document.body.appendChild(inputTemp)
@@ -75,11 +75,14 @@ const copyjs = (id = window.location.href) => { // eslint-disable-line no-unused
   document.body.removeChild(inputTemp)
 
   // add 'clicked' class
-  const h1 = document.querySelector('.title')
-  h1.setAttribute('title', '')
-  if (!h1.classList.contains('clicked')) {
-    h1.classList.add('clicked')
-    newNotif('Copied link successfully')
+  if (elm) {
+    if (!elm.classList.contains('clicked')) {
+      elm.classList.add('clicked')
+      newNotif('Copied link successfully!')
+      setTimeout(() => { elm.classList.remove('clicked') }, 2500)
+    }
+  } else {
+    newNotif('Copied successfully!')
   }
 }
 
@@ -87,8 +90,6 @@ const copyjs = (id = window.location.href) => { // eslint-disable-line no-unused
 const path = html.getAttribute('data-loc') === 'root' ? '' : '../' // check if page is on root
 if (tag('aside')) {
   tag('aside').innerHTML = `
-  <div><span id="loc"></span><span id="tools"></span><span id="settings"></span>
-  </div>
   <div class="updates" aria-labelledby="updates">
   <h1 id="updates">Updates</h1>
   <span>
@@ -112,6 +113,8 @@ if (tag('aside')) {
   </div>`
 }
 /*
+<div><span id="loc"></span><span id="tools"></span><span id="settings"></span></div>
+...
 <div class="feature" aria-labelledby="featured">
   <h1 id="featured">Featured Article</h1>
   <a href="${path}photography/feature-photos-2020.html" class="post">
@@ -120,6 +123,17 @@ if (tag('aside')) {
   </a>
 </div>
  */
+
+// add links to headings inside article.post
+for (const h of ['h2', 'h3']) {
+  for (const i of document.getElementsByTagName(h)) {
+    const id = i.getAttribute('id')
+    if (i.parentElement === document.querySelector('article.post') && id) { // check if element is inside .post
+      i.innerHTML += ` <a class="hlink" href="javascript:void(0)" title="Copy link to this part" aria-label="Copy link to this part" onclick="copyjs('${window.location.href}#${id}', this)" onkeypress="e => (e.key === 'Enter') && id('gototop').click()"></a>`
+    }
+  }
+}
+if (document.querySelector('#mainTitle')) document.querySelector('#mainTitle').innerHTML += ` <a class="hlink" href="javascript:void(0)" title="Copy link to this part" aria-label="Copy link of this page" onclick="copyjs('${window.location.href}#${id}', this)" onkeypress="e => (e.key === 'Enter') && id('gototop').click()"></a>`
 
 // back to top
 const scrollToTop = () => { // scroll to top function
