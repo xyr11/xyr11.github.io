@@ -321,14 +321,16 @@ a.post {
   flex-grow: 1;
   width: calc(33% - 1em);
   margin-right: .6em;
-  min-width: 270px;
+  min-width: 15em;
 }
 /* different sizes */
 a.post.small {width: calc(20% - .6em)}
 a.post.medium {width: calc(55% - .6em)}
-a.post.long, a.post.hasimg {width: calc(100% - .6em)}
+a.post.long {width: calc(100% - .6em)}
 a.post:hover, a.post:focus, a.post:active {background: var(--hover-bg)}
 a.post:focus-visible {border-color: var(--link-active)}
+/* horizontal only for .horiz */
+span.horiz a.post {width: calc(100% - .6em)}
 
 /* see more posts */
 .more {
@@ -801,6 +803,16 @@ footer .ico img {
   figcaption {margin: .6em .5em}
 }
 
+@media (max-width: 450px) {
+  .post img {
+    position: relative;
+    left: -0.9em;
+    border-radius: 0;
+    width: calc(100% + 1.8em);
+    box-shadow: none;
+  }
+}
+
 /* a compact version for phones with width less than my phone. */
 @media (max-width: 358px) {
   header, nav {
@@ -822,13 +834,6 @@ footer .ico img {
   a.post {
     min-width: calc(100% - .8em);
   }
-  article.post img {
-    position: relative;
-    left: -0.9em;
-    border-radius: 0;
-    width: calc(100% + 1.8em);
-    box-shadow: none;
-  }
 }
 
 /* a very compact version for very small screens. */
@@ -838,6 +843,10 @@ footer .ico img {
   header h1 {
     margin: .3em 0;
     font-size: 14vw !important;
+  }
+  nav {
+    overflow: auto;
+    flex-wrap: nowrap;
   }
   .main h1 {
     font-size: 15px !important;
