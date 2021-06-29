@@ -37,6 +37,13 @@ Long-term dream as a kid, short-term rushed CS assignment that doesn't deserve t
 Funny story actually. On my school, one of the perks given is having a GitHub Student Developer Pack, of which I can choose and own one of the selection of domains for free... for 1 year. *and yada yada yada*, I found `xyr.codes` and gladly took it. So that's why I (for now) have 2 urls of the site.
 
 ## License
-The content of this project itself is licensed under [CC BY 4.0 ![Creative Commons License](https://i.creativecommons.org/l/by/4.0/80x15.png)](http://creativecommons.org/licenses/by/4.0/). All pictures taken by or made by the repository owner ("Xyrus Kurt Roldan") is licensed under [CC BY-SA 4.0 ![Creative Commons License](https://i.creativecommons.org/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/). The source code used to build and display the site is licensed under [MIT License](https://github.com/xyr11/xyr11.github.io/blob/main/LICENSE).
+© 2021 Xyrus Kurt Roldan. Third-party materials are the copyright of their respective owners and shared under various licenses.
 
-The author is not responsible for the content on the site.
+The content of the project itself is licensed under [CC BY 4.0 ![CC BY 4.0 Button](https://i.creativecommons.org/l/by/4.0/80x15.png)](http://creativecommons.org/licenses/by/4.0/) <br>
+All pictures taken by or made by the repository owner and its contributors is licensed under [CC BY-SA 4.0 ![CC BY-SA 4.0 Button](https://i.creativecommons.org/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/) <br>
+Code examples and snippets that are not particularly under any existing projects are dedicated to the public domain ([CC0 ![CC0](https://licensebuttons.net/p/zero/1.0/80x15.png)](http://creativecommons.org/publicdomain/mark/1.0/)) <br>
+The source code used to build and display the site is licensed under [MIT License](https://github.com/xyr11/xyr11.github.io/blob/main/LICENSE)
+
+Prior to version 1.3, the project as a whole is not licensed.
+
+The author is not responsible for the content on the site. If you wish to contribute, you must make your contibutions under similar licenses.

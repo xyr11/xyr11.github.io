@@ -118,6 +118,8 @@ body {
   font-family: Roboto, sans-serif;
   scroll-behavior: smooth;
 }
+
+.icon::before {font-family: "simple-line-icons"}
 a {
   color: var(--text);
   border: 1px solid transparent;
@@ -128,7 +130,6 @@ a {
 }
 a:hover, a:active, a:focus {color: var(--link-active)}
 a:focus-visible {border-color: var(--link-active)}
-
 code {
   font-family: "Cascadia Code", monospace;
   font-size: .8em;
@@ -138,7 +139,6 @@ code {
   padding: 2px;
   border-radius: 6px;
 }
-
 pre {
   font-family: 'Cascadia Code', monospace;
   font-size: .9em;
@@ -150,8 +150,13 @@ pre {
   border-radius: 8px;
   background-color: var(--article-bg);
 }
-
-.icon::before {font-family: "simple-line-icons"}
+hr {
+  margin: .8em 15%;
+  /* border-top: 1px solid var(--text); */
+  height: 3px;
+  box-shadow: 0 -1px 0 var(--text), 0 1px 0 var(--text) !important;
+  border: 0;
+}
 
 /* header */
 header {
@@ -418,6 +423,19 @@ figcaption {
 .post figcaption p {
   padding: 0;
   margin-top: .3em;
+}
+figure.small img {
+  width: initial !important;
+  left: 0 !important;
+  border-radius: 0;
+  margin: .4em 0 0 0;
+  box-shadow: none !important;
+}
+figure.small figcaption {
+  font-style: initial;
+  font-size: initial;
+  text-align: initial;
+  margin: 0;
 }
 
 /* table */
