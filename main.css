@@ -40,13 +40,25 @@
 }
 @font-face {
   font-family: Roboto;
-  src: local("Roboto Black"), url("files/fonts/Roboto-Bold.ttf") format("truetype");
+  src: local("Roboto Medium"), url("files/fonts/Roboto-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: Roboto;
+  src: local("Roboto Medium Italic"), url("files/fonts/Roboto-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: Roboto;
+  src: local("Roboto Bold"), url("files/fonts/Roboto-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: Roboto;
-  src: local("Roboto Black"), url("files/fonts/Roboto-BoldItalic.ttf") format("truetype");
+  src: local("Roboto Bold Italic"), url("files/fonts/Roboto-BoldItalic.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
 }
@@ -89,13 +101,13 @@
 
 * {
   box-sizing: border-box;
-  scroll-margin-top: 2em;
+  scroll-margin-top: 1.8em;
 }
 
-:target {animation: targetFade 2.5s}
+:target {animation: targetFade 4s}
 @keyframes targetFade {
   0% {background-color: var(--target)}
-  20% {background-color: var(--target)}
+  30% {background-color: var(--target)}
   100% {background-color: none}
 }
 
