@@ -1,42 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-loc="root">
 <head>
   <meta charset="UTF-8">
   <title>Requirements Tracker | XYR.codes</title>
-  <meta name="description" content="You can now track my requirements using this page that records and displays data live! Why? Idk too!">
   <meta name="author" content="Xyrus Kurt Roldan">
+  <meta name="description" content="You can now track my requirements using this page that records and displays data live! Why? Idk too!">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="Requirements Tracker">
   <meta property="og:description" content="You can now track my requirements using this page that records and displays data live! Why? Idk too!">
-  <meta property="og:image" content="https://local.xyr.codes/i/emb.png">
-  <meta property="og:url" content="https://local.xyr.codes/">
+  <meta property="og:image" content="http://xyr.codes/i/emb.png">
+  <meta property="og:url" content="https://xyr.codes/programming/reqs-tracker.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#77e4ff">
+  <link href="../favicon.ico" rel="shortcut icon" type="image/ico">
   <link href="../main.css" rel="stylesheet">
-  <link href="../files/simple-line-icons.css" rel="stylesheet">
 </head>
-
 <body>
   <header role="banner">
-    <div id="bg" style="background-color:#0B161D"></div>
-    <h1><a href="../index.html">XYR<span style="color:#77e4ff">.</span>codes</a></h1>
-    <p>Projects, tutorials, photography, blogs, and more!</p>
+    <div id="bg" style="background-color:#0B161D" aria-hidden="true"></div>
+    <h1 aria-labelledby="pagetitle"><a id="pagetitle" href="../index.html">XYR<span style="color:#77e4ff">.</span>codes</a></h1>
+    <p aria-label="Subtitle">Projects, tutorials, photography, blogs, and more!</p>
   </header>
   <nav role="navigation">
-    <ul>
-      <li><a href="../index.html">Home</a></li>
-      <li><a class="current">Programming</a></li>
-      <li><a>Journals</a></li>
-      <li><a>Photography</a></li>
-      <li><a href="../about.html">About</a></li>
-      <li><a class="search">Search</a></li>
-    </ul>
+    <a href="../index.html">Home</a>
+    <a class="current" href="../search.html?q=Programming" aria-label="Browse pages under Programming">Programming</a>
+    <a href="../search.html?q=Journals" aria-label="Browse pages under Journals">Journals</a>
+    <a href="../search.html?q=Photography" aria-label="Browse pages under Photography">Photography</a>
+    <a href="../site/about.html">About</a>
+    <a id="search" class="icon" href="../search.html" aria-label="Search XYR.codes">Search</a>
   </nav>
-  <div class="main" id="main">
-    <main role="main">
-      <h1 class="title" onclick="copyjs()" title="Click to copy link">Requirements Tracker</h1>
-      <p class="time" data-posted="2021-01-25">Posted on January 25, 2021</p>
+  <div class="main">
+    <main role="main" aria-labelledby="mainTitle">
+      <h1 id="mainTitle" class="title">Requirements Tracker</h1>
+      <p class="time" data-posted="2021-01-25">January 25, 2021</p>
       <article class="post">
         <style>
           h2 {
@@ -108,7 +104,6 @@
           meter:-moz-meter-sub-optimum::-moz-meter-bar { background: var(--ylw) }
           meter:-moz-meter-sub-sub-optimum::-moz-meter-bar { background: var(--red) }
         </style>
-
         <p>Using this tool, you can now track my progress in my school requirements! Why? I absolutely don't know!</p>
         <p>Last updated <span id="lastUpdated"></span> <button onclick="window.location.reload()">Refresh page manually</button></p>
         <h2 id="q3">3rd Quarter</h2>
@@ -120,128 +115,124 @@
         <div class="alert-box" style="font-family: arial; min-height: 42px; margin-top: 3em; display: none;" title="Updated some statistics" id="alert-box">
           Updated statistics a while ago
         </div>
-
         <script src="https://file.xyr.codes/KjUAw8N/data.js"></script>
         <script>
-        var BIO1,CHEM1,PHY1,MATH3,STAT1,CS3,ENG3,FIL3,SOCSCI3,PE3,HE3,MU3;
-        var FBIO1,FCHEM1,FPHY1,FMATH3,FSTAT1,FCS3,FENG3,FFIL3,FSOCSCI3,FPE3,FHE3,FMU3;
-        var lastUpdate, subjN, subjId;
-
-        var totalSum = [0,0,0,0], finishedSum = [0,0,0,0], errorVal = false;
-        var totalAll = [BIO1,CHEM1,PHY1,MATH3,STAT1,CS3,ENG3,FIL3,SOCSCI3,PE3,HE3,MU3];
-        var finishedAll = [FBIO1,FCHEM1,FPHY1,FMATH3,FSTAT1,FCS3,FENG3,FFIL3,FSOCSCI3,FPE3,FHE3,FMU3];
-
-        if (finishedAll[0] !== undefined) {
-          for(var j=0; j<finishedAll[0].length; j++)
-            for(var i=0; i<finishedAll.length; i++) {
-              if(totalAll[i] === undefined || finishedAll[i] === undefined) {
-                errorVal = true;
-                break;
+          var BIO1, CHEM1, PHY1, MATH3, STAT1, CS3, ENG3, FIL3, SOCSCI3, PE3, HE3, MU3
+          var FBIO1, FCHEM1, FPHY1, FMATH3, FSTAT1, FCS3, FENG3, FFIL3, FSOCSCI3, FPE3, FHE3, FMU3
+          var lastUpdate, subjN, subjId
+          const totalSum = [0, 0, 0, 0]; const finishedSum = [0, 0, 0, 0]; let errorVal = false
+          var totalAll = [BIO1, CHEM1, PHY1, MATH3, STAT1, CS3, ENG3, FIL3, SOCSCI3, PE3, HE3, MU3]
+          var finishedAll = [FBIO1, FCHEM1, FPHY1, FMATH3, FSTAT1, FCS3, FENG3, FFIL3, FSOCSCI3, FPE3, FHE3, FMU3]
+          if (finishedAll[0] !== undefined) {
+            for (let j = 0; j < finishedAll[0].length; j++) {
+              for (let i = 0; i < finishedAll.length; i++) {
+                if (totalAll[i] === undefined || finishedAll[i] === undefined) {
+                  errorVal = true
+                  break
+                }
+                totalSum[j] += totalAll[i][j]; finishedSum[j] += finishedAll[i][j]
               }
-              totalSum[j] += totalAll[i][j]; finishedSum[j] += finishedAll[i][j];
             }
-        } else {
-          errorVal = true;
-          console.log("[Variable Error] Invalid variable. Please check variable declaration.");
-        }
-        totalAll = [BIO1,CHEM1,PHY1,MATH3,STAT1,CS3,ENG3,FIL3,SOCSCI3,PE3,HE3,MU3,totalSum];
-        finishedAll = [FBIO1,FCHEM1,FPHY1,FMATH3,FSTAT1,FCS3,FENG3,FFIL3,FSOCSCI3,FPE3,FHE3,FMU3,finishedSum];
-
-        // Generate the table
-        let outputArr = ['', '', '', '']
-        if(!errorVal) {
-          for(var j = 0; j < finishedAll[0].length; j++) {
-            var output = "<table>";
-            for(var i = 0; i < finishedAll.length; i++) {
-              // first column
-              output += `<tr><td class='left'>${subjN[i] ? subjN[i] : "<span class='error invalid name'>Err</span>"}</td>`
-              // 2nd column
-              output += "<td class='meterBar'>";
-              const total = totalAll[i][j]
-              const finished = finishedAll[i][j]
-              if (total === 0) {
-                // check if total requirements is equal to zero
-                output += "<span class='error nodata'>No data yet</span>";
-              } else if (finished > total || typeof finished !== "number" || typeof total !== "number" ||  isNaN(finished) || isNaN(total)) {
-                // check if finished requirements is greater than total no of requirements, and check if any of the 2 variables isn't a number
-                errorVal = true;
-                output += "<span class='error invalid'>Data error</span>";
-              } else {
-                let ratio = finished + " of " + total;
-                output += `<meter max='${total}' low='${total*0.5}' high='${total*0.85}' optimum='${total*0.95}' value='${finished}' title='${ratio} requirements (${Math.floor(finished / total * 100)}%)'></meter></td>`
-                // 3rd column
-                output += '<td class="column-num">' + ratio;
+          } else {
+            errorVal = true
+            console.log('[Variable Error] Invalid variable. Please check variable declaration.')
+          }
+          totalAll = [BIO1, CHEM1, PHY1, MATH3, STAT1, CS3, ENG3, FIL3, SOCSCI3, PE3, HE3, MU3, totalSum]
+          finishedAll = [FBIO1, FCHEM1, FPHY1, FMATH3, FSTAT1, FCS3, FENG3, FFIL3, FSOCSCI3, FPE3, FHE3, FMU3, finishedSum]
+          // Generate the table
+          let outputArr = ['', '', '', '']
+          if (!errorVal) {
+            for (let j = 0; j < finishedAll[0].length; j++) {
+              let output = '<table>'
+              for (let i = 0; i < finishedAll.length; i++) {
+                // first column
+                output += `<tr><td class='left'>${subjN[i] ? subjN[i] : "<span class='error invalid name'>Err</span>"}</td>`
+                // 2nd column
+                output += "<td class='meterBar'>"
+                const total = totalAll[i][j]
+                const finished = finishedAll[i][j]
+                if (total === 0) {
+                  // check if total requirements is equal to zero
+                  output += "<span class='error nodata'>No data yet</span>"
+                } else if (finished > total || typeof finished !== 'number' || typeof total !== 'number' || isNaN(finished) || isNaN(total)) {
+                  // check if finished requirements is greater than total no of requirements, and check if any of the 2 variables isn't a number
+                  errorVal = true
+                  output += "<span class='error invalid'>Data error</span>"
+                } else {
+                  const ratio = finished + ' of ' + total
+                  output += `<meter max='${total}' low='${total * 0.5}' high='${total * 0.85}' optimum='${total * 0.95}' value='${finished}' title='${ratio} requirements (${Math.floor(finished / total * 100)}%)'></meter></td>`
+                  // 3rd column
+                  output += '<td class="column-num">' + ratio
+                }
+                output += '</td></tr>'
               }
-              output += '</td></tr>'
+              output += '</table>'
+              outputArr[j] = output
             }
-            output += '</table>'
-            outputArr[j] = output
+          } else {
+            outputArr = ['Data error', 'Data error', 'Data error', 'Data error']
           }
-        } else {
-          outputArr = ['Data error', 'Data error', 'Data error', 'Data error']
-        }
-
-        for (var i = 4; i > 0; i--) {
-          if (document.getElementById(`q${i}Div`) !== null) {
-            document.getElementById(`q${i}Div`).innerHTML = outputArr[i-1];
+          for (let i = 4; i > 0; i--) {
+            if (document.getElementById(`q${i}Div`) !== null) {
+              document.getElementById(`q${i}Div`).innerHTML = outputArr[i - 1]
+            }
           }
-        }
-
-        var setAttribTitle = [['nodata','No available data yet'],['invalid','Data error'],['invalid name','Cannot find subject name']]
-        for (var j=0; j<setAttribTitle.length; j++) {
-          const errClasses = document.getElementsByClassName(setAttribTitle[j][0])
-          for (var i=0; i < errClasses.length; i++)
-            errClasses[i].setAttribute("title", setAttribTitle[j][1]);
-        }
-
-        // Last updated
-        document.getElementById("lastUpdated").innerHTML = new Date().toLocaleString()
-          
-        // Update box
-        var _d = Date.now();
-        if (_d > lastUpdate) {
-          let itrv = Math.floor((_d - lastUpdate) / 60000) // interval
-          if (itrv < 18000) {
-            var updatedMsg = "Updated statistics ";
-            if (itrv < 10) updatedMsg += "less than 10 minutes"
-            else if (itrv < 60) updatedMsg += `about ${Math.floor(itrv/10)}0 minutes`
-            else if (itrv < 300)  updatedMsg += `about ${Math.floor(itrv/60)} hours`
-            updatedMsg += " ago";
-            const alertBox = document.getElementById("alert-box")
-            alertBox.style.display = 'inherit'
-            alertBox.innerHTML = updatedMsg
-            alertBox.setAttribute('title', updatedMsg)
+          const setAttribTitle = [['nodata', 'No available data yet'], ['invalid', 'Data error'], ['invalid name', 'Cannot find subject name']]
+          for (let j = 0; j < setAttribTitle.length; j++) {
+            const errClasses = document.getElementsByClassName(setAttribTitle[j][0])
+            for (let i = 0; i < errClasses.length; i++) { errClasses[i].setAttribute('title', setAttribTitle[j][1]) }
           }
-        }
+          // Last updated
+          document.getElementById('lastUpdated').innerHTML = new Date().toLocaleString()
+          // Update box
+          const _d = Date.now()
+          if (_d > lastUpdate) {
+            const itrv = Math.floor((_d - lastUpdate) / 60000) // interval
+            if (itrv < 18000) {
+              let updatedMsg = 'Updated statistics '
+              if (itrv < 10) updatedMsg += 'less than 10 minutes'
+              else if (itrv < 60) updatedMsg += `about ${Math.floor(itrv / 10)}0 minutes`
+              else if (itrv < 300) updatedMsg += `about ${Math.floor(itrv / 60)} hours`
+              updatedMsg += ' ago'
+              const alertBox = document.getElementById('alert-box')
+              alertBox.style.display = 'inherit'
+              alertBox.innerHTML = updatedMsg
+              alertBox.setAttribute('title', updatedMsg)
+            }
+          }
         </script>
       </article>
     </main>
     <aside></aside>
   </div>
-  <footer role="contentinfo">
+  <footer role="contentinfo" aria-label="Footer">
     <h1 class="name">XYR.codes</h1>
     <p>I spend wayyyyy too long on these things...</p>
-    <div class="links">
-      <div class="ico">
-        <img src="../i/fav.ico" alt="">
-      </div>
+    <div class="ico" aria-hidden="true">
+      <img src="../i/fav.ico" alt="">
+    </div>
+    <div class="links" aria-label="Footer links">
       <div class="col">
         <a href="../index.html">Home</a>
-        <a href="../about.html">About</a>
-        <a href="https://xyr.codes/contact">Contact Us</a>
+        <a href="../site/about.html">About</a>
+        <a href="../contact/index.html">Contact</a>
+        <a href="../contact/feedback.html">Feedback</a>
       </div>
       <div class="col">
-        <a href="https://twitter.com/xy_rus/">Twitter</a>
-        <a href="https://xyr.codes/feedback">Feedback?</a>
-        <a href="#">Report Content</a>
+        <a href="../search.html">Search</a>
+        <a href="../versions/index.html">Versions</a>
+        <a href="../site/credits.html">Credits</a>
+        <a href="../site/sitemap.html">Sitemap</a>
       </div>
       <div class="col">
-        <a onclick="scrollToTop()" onkeydown="scrollEnterKey()" tabindex="0">Back to top</a>
+        <span class="social">
+          <a class="gthb" href="https://github.com/xyr11/xyr11.github.io" title="Check the repository on GitHub"></a> <a class="twtr" href="https://twitter.com/xy_rus/" title="Follow me on Twitter"></a> <a class="doc" href="https://github.com/xyr11/xyr11.github.io/blob/main/README.md" title="Read the README.md file"></a>
+        </span>
+        <a href="../site/license.html">License</a>
+        <a id="gototop" tabindex="0">Go to top</a>
       </div>
     </div>
-    <p class="last">&copy; 2021 by Xyrus Kurt Roldan. All rights reserved.</p>
   </footer>
-  <script src="../files/main.js"></script>
+  <script type="text/javascript" src="../files/main.js"></script>
 </body>
-
 </html>

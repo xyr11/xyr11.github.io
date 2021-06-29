@@ -1,53 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-loc="root">
 <head>
   <meta charset="UTF-8">
   <title>Introducing the @IsKHubSlow bot! | XYR.codes</title>
-  <meta name="description" content="Have you heard about the @IsKHubSlow bot? Get to know my new project that checks if KHub is slow or not!">
   <meta name="author" content="Xyrus Kurt Roldan">
+  <meta name="description" content="Have you heard about the @IsKHubSlow bot? Get to know my new project that checks if KHub is slow or not!">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="Introducing the @IsKHubSlow bot!">
   <meta property="og:description" content="Have you heard about the @IsKHubSlow bot? Get to know my new project that checks if KHub is slow or not!">
-  <meta property="og:image" content="https://local.xyr.codes/i/emb.png">
-  <meta property="og:url" content="https://local.xyr.codes/">
+  <meta property="og:image" content="http://xyr.codes/i/emb.png">
+  <meta property="og:url" content="https://xyr.codes/programming/iskhubslow.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#77e4ff">
+  <link href="../favicon.ico" rel="shortcut icon" type="image/ico">
   <link href="../main.css" rel="stylesheet">
-  <link href="../files/simple-line-icons.css" rel="stylesheet">
 </head>
-
 <body>
   <header role="banner">
-    <div id="bg" style="background-color:#0B161D"></div>
-    <h1><a href="../index.html">XYR<span style="color:#77e4ff">.</span>codes</a></h1>
-    <p>Projects, tutorials, photography, blogs, and more!</p>
+    <div id="bg" style="background-color:#0B161D" aria-hidden="true"></div>
+    <h1 aria-labelledby="pagetitle"><a id="pagetitle" href="../index.html">XYR<span style="color:#77e4ff">.</span>codes</a></h1>
+    <p aria-label="Subtitle">Projects, tutorials, photography, blogs, and more!</p>
   </header>
   <nav role="navigation">
-    <ul>
-      <li><a href="../index.html">Home</a></li>
-      <li><a class="current">Programming</a></li>
-      <li><a>Journals</a></li>
-      <li><a>Photography</a></li>
-      <li><a href="../about.html">About</a></li>
-      <li><a class="search">Search</a></li>
-    </ul>
+    <a href="../index.html">Home</a>
+    <a class="current" href="../search.html?q=Programming" aria-label="Browse pages under Programming">Programming</a>
+    <a href="../search.html?q=Journals" aria-label="Browse pages under Journals">Journals</a>
+    <a href="../search.html?q=Photography" aria-label="Browse pages under Photography">Photography</a>
+    <a href="../site/about.html">About</a>
+    <a id="search" class="icon" href="../search.html" aria-label="Search XYR.codes">Search</a>
   </nav>
-  <div class="main" id="main">
-    <main role="main">
-      <h1 class="title" onclick="copyjs()" title="Click to copy link">Introducing the @IsKHubSlow bot!</h1>
-      <p class="time" data-posted="2021-03-09">Posted last March 9, 2021</p>
+  <div class="main">
+    <main role="main" aria-labelledby="mainTitle">
+      <h1 id="mainTitle" class="title">Introducing the @IsKHubSlow bot!</h1>
+      <p class="time" data-posted="2021-03-09">March 9, 2021</p>
       <article class="post">
         <p>There's a new project in town! Introducing my new bot, @IsKHubSlow!</p>
-        <h2>About the Project</h2>
+        <h2 id="about">About the Project</h2>
         <p>IsKHubSlow is a bot that checks if KHub is slow based on its response time and tweets it, inspired by the idea of <a href="https://twitter.com/IsKHubDown" title="@IsKHubDown">@IsKHubDown</a> on Twitter. Open source on <a href="https://github.com/xyr11/iskhubslow/tree/beta">GitHub</a>! (Not affiliated to KHub or PSHS.)</p>
-        <h3>Features</h3>
+        <h3 id="features">Features</h3>
         <ul>
           <li>Requests data from an API that checks for response times</li>
           <li>Determines if current response time is slow using historical data and statistics</li>
           <li>Condense information and tweets the results</li>
         </ul>
-        <h3>Built With</h3>
+        <h3 id="built-with">Built With</h3>
         <ul>
           <li>Node.js</li>
           <li>Twitter API v2</li>
@@ -56,37 +52,41 @@
         </ul>
         <p style="margin-top: 1em"><b>Visit the official site at <a href="https://xyr.codes/khubslow">xyr.codes/khubslow</a> for more</b> or start contributing on Github at <a href="https://github.com/xyr11/iskhubslow/tree/beta">xyr11/iskhubslow</a>!</p>
         <div class="twt">
-          <a class="twitter-timeline" id="twt" data-dnt="true" href="https://twitter.com/IsKHubSlow?ref_src=twsrc%5Etfw" data-align="center" data-height="500" data-chrome="noheader nofooter noborders">Follow @IsKHubSlow on Twitter to see what he's been tweeting!</a>
+          <a class="twitter-timeline" id="twt" data-dnt="true" href="https://twitter.com/IsKHubSlow?ref_src=twsrc%5Etfw" data-align="center" data-height="500" data-chrome="noheader nofooter noborders">Twitter Timeline Embed // Follow @IsKHubSlow on Twitter!</a>
         </div>
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </article>
     </main>
     <aside></aside>
   </div>
-  <footer role="contentinfo">
+  <footer role="contentinfo" aria-label="Footer">
     <h1 class="name">XYR.codes</h1>
     <p>See more open source projects on <a href="github.com/xyr11/">Github</a>!</p>
-    <div class="links">
-      <div class="ico">
-        <img src="../i/fav.ico" alt="">
-      </div>
+    <div class="ico" aria-hidden="true">
+      <img src="../i/fav.ico" alt="">
+    </div>
+    <div class="links" aria-label="Footer links">
       <div class="col">
         <a href="../index.html">Home</a>
-        <a href="../about.html">About</a>
-        <a href="https://xyr.codes/contact">Contact Us</a>
+        <a href="../site/about.html">About</a>
+        <a href="../contact/index.html">Contact</a>
+        <a href="../contact/feedback.html">Feedback</a>
       </div>
       <div class="col">
-        <a href="https://twitter.com/xy_rus/">Twitter</a>
-        <a href="https://xyr.codes/feedback">Feedback?</a>
-        <a href="#">Report Content</a>
+        <a href="../search.html">Search</a>
+        <a href="../versions/index.html">Versions</a>
+        <a href="../site/credits.html">Credits</a>
+        <a href="../site/sitemap.html">Sitemap</a>
       </div>
       <div class="col">
-        <a onclick="scrollToTop()" onkeydown="scrollEnterKey()" tabindex="0">Back to top</a>
+        <span class="social">
+          <a class="gthb" href="https://github.com/xyr11/xyr11.github.io" title="Check the repository on GitHub"></a> <a class="twtr" href="https://twitter.com/xy_rus/" title="Follow me on Twitter"></a> <a class="doc" href="https://github.com/xyr11/xyr11.github.io/blob/main/README.md" title="Read the README.md file"></a>
+        </span>
+        <a href="../site/license.html">License</a>
+        <a id="gototop" tabindex="0">Go to top</a>
       </div>
     </div>
-    <p class="last">&copy; 2021 by Xyrus Kurt Roldan. All rights reserved.</p>
   </footer>
-  <script src="../files/main.js"></script>
+  <script type="text/javascript" src="../files/main.js"></script>
 </body>
-
 </html>

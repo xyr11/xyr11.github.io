@@ -1,46 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-loc="root">
 <head>
   <meta charset="UTF-8">
   <title>“Concentration” | XYR.codes</title>
-  <meta name="description" content="A Shakespearean sonnet-inspired poem about concentration.">
   <meta name="author" content="Xyrus Kurt Roldan">
+  <meta name="description" content="A Shakespearean sonnet-inspired poem about concentration.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="“Concentration”">
   <meta property="og:description" content="A Shakespearean sonnet-inspired poem about concentration.">
-  <meta property="og:image" content="https://local.xyr.codes/i/emb.png">
-  <meta property="og:url" content="https://local.xyr.codes/">
+  <meta property="og:image" content="http://xyr.codes/i/emb.png">
+  <meta property="og:url" content="https://xyr.codes/journals/concentration.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#77e4ff">
+  <link href="../favicon.ico" rel="shortcut icon" type="image/ico">
   <link href="../main.css" rel="stylesheet">
-  <link href="../files/simple-line-icons.css" rel="stylesheet">
 </head>
-
 <body>
   <header role="banner">
-    <div id="bg" style="background-color:#0B161D"></div>
-    <h1><a href="../index.html">XYR<span style="color:#77e4ff">.</span>codes</a></h1>
-    <p>Projects, tutorials, photography, blogs, and more!</p>
+    <div id="bg" style="background-color:#0B161D" aria-hidden="true"></div>
+    <h1 aria-labelledby="pagetitle"><a id="pagetitle" href="../index.html">XYR<span style="color:#77e4ff">.</span>codes</a></h1>
+    <p aria-label="Subtitle">Projects, tutorials, photography, blogs, and more!</p>
   </header>
   <nav role="navigation">
-    <ul>
-      <li><a href="../index.html">Home</a></li>
-      <li><a>Programming</a></li>
-      <li><a class="current">Journals</a></li>
-      <li><a>Photography</a></li>
-      <li><a href="../about.html">About</a></li>
-      <li><a class="search">Search</a></li>
-    </ul>
+    <a href="../index.html">Home</a>
+    <a href="../search.html?q=Programming" aria-label="Browse pages under Programming">Programming</a>
+    <a class="current" href="../search.html?q=Journals" aria-label="Browse pages under Journals">Journals</a>
+    <a href="../search.html?q=Photography" aria-label="Browse pages under Photography">Photography</a>
+    <a href="../site/about.html">About</a>
+    <a id="search" class="icon" href="../search.html" aria-label="Search XYR.codes">Search</a>
   </nav>
-  <div class="main" id="main">
-    <main role="main">
-      <h1 class="title" onclick="copyjs()" title="Click to copy link">“Concentration”</h1>
-      <p class="time" data-posted="2021-02-03">Posted last February 3, 2021</p>
+  <div class="main">
+    <main role="main" aria-labelledby="mainTitle">
+      <h1 id="mainTitle" class="title">“Concentration”</h1>
+      <p class="time" data-posted="2021-02-03">February 3, 2021</p>
       <article class="post">
         <p>A Shakespearean sonnet-inspired poem about concentration</p>
         <div style="font-style: italic; text-align: center">
-          <h2 style="font-family: 'Cambria'">Concentration</h2>
+          <h2 id="concentration" style="font-family:Cambria,Arial,sans-serif">Concentration</h2>
           <p>
             A painful thought as he foretold <br>
             Still lingering last yesterday <br>
@@ -69,30 +65,34 @@
     </main>
     <aside></aside>
   </div>
-  <footer role="contentinfo">
+  <footer role="contentinfo" aria-label="Footer">
     <h1 class="name">XYR.codes</h1>
     <p>just to be clear: yes, this is my homework</p>
-    <div class="links">
-      <div class="ico">
-        <img src="../i/fav.ico" alt="">
-      </div>
+    <div class="ico" aria-hidden="true">
+      <img src="../i/fav.ico" alt="">
+    </div>
+    <div class="links" aria-label="Footer links">
       <div class="col">
         <a href="../index.html">Home</a>
-        <a href="../about.html">About</a>
-        <a href="https://xyr.codes/contact">Contact Us</a>
+        <a href="../site/about.html">About</a>
+        <a href="../contact/index.html">Contact</a>
+        <a href="../contact/feedback.html">Feedback</a>
       </div>
       <div class="col">
-        <a href="https://twitter.com/xy_rus/">Twitter</a>
-        <a href="https://xyr.codes/feedback">Feedback?</a>
-        <a href="#">Report Content</a>
+        <a href="../search.html">Search</a>
+        <a href="../versions/index.html">Versions</a>
+        <a href="../site/credits.html">Credits</a>
+        <a href="../site/sitemap.html">Sitemap</a>
       </div>
       <div class="col">
-        <a onclick="scrollToTop()" onkeydown="scrollEnterKey()" tabindex="0">Back to top</a>
+        <span class="social">
+          <a class="gthb" href="https://github.com/xyr11/xyr11.github.io" title="Check the repository on GitHub"></a> <a class="twtr" href="https://twitter.com/xy_rus/" title="Follow me on Twitter"></a> <a class="doc" href="https://github.com/xyr11/xyr11.github.io/blob/main/README.md" title="Read the README.md file"></a>
+        </span>
+        <a href="../site/license.html">License</a>
+        <a id="gototop" tabindex="0">Go to top</a>
       </div>
     </div>
-    <p class="last">&copy; 2021 by Xyrus Kurt Roldan. All rights reserved.</p>
   </footer>
-  <script src="../files/main.js"></script>
+  <script type="text/javascript" src="../files/main.js"></script>
 </body>
-
 </html>
