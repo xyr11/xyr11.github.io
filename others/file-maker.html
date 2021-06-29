@@ -357,7 +357,8 @@
     const id = id => document.getElementById(id)
     const tag = tag => document.querySelector(tag)
 
-    var cacheValues = []
+    let cacheValues = []
+    let dateUpdated
 
     id('date').value = new Date().toISOString().slice(0, new Date().toISOString().length - 14) // set date to its default value
 
@@ -383,10 +384,9 @@
 
       const is = (val, check, text) => val === check ? text : ''
 
-      // create the page
+      // html output
       let strResult = `<!DOCTYPE html>
       <html lang="en"${a.path ? ' data-loc="root"' : ''}>
-
       <head>
       <meta charset="UTF-8">
       <title>${a.name}${a.type !== 'main' ? ' | XYR.codes' : ''}</title>
@@ -450,10 +450,10 @@
       </div>
       </footer>
       <script type="text/javascript" src="${a.path}files/main.js">\<\/script>
-      <\/body>\n
+      <\/body>
       <\/html>`
       if (strResult) strResult = indent.js(rgx(strResult, /^\s{1,}/gm), {tabString: '  '}) // indent
-
+      // json output
       let jsonResult = '{'
       for (const at of ['name', 'type', 'location', 'desc', 'img', 'date', 'content', 'footer']) jsonResult += `${at}:"${a[at].toString().replace(/"/g, '\\"').replace(/\n/g, '\\n')}"${at !== 'footer' ? ',' : ''}`
       jsonResult += '}'
@@ -462,11 +462,17 @@
         strResult = 'fill the thing above'
         jsonResult = ''
       }
-      // output
-      id('output').value = strResult
-      id('outputJson').value = jsonResult
-      localStorage.data = JSON.stringify(a)
-      valuesCache = a // cache to check if the input changed
+      // update at 1.5 second intervals to prevent lag
+      const userTooFast = Math.floor(new Date() / 1000) === dateUpdated
+      window.setTimeout(() => {
+        // output
+        id('output').value = strResult
+        id('outputJson').value = jsonResult
+        localStorage.data = JSON.stringify(a)
+      }, userTooFast ? Math.ceil(new Date() / 1500) * 1500 - new Date() : 0)
+      // caches
+      valuesCache = a
+      dateUpdated = Math.floor(new Date() / 1000)
     }
 
     tag('fieldset').addEventListener('input', output)
