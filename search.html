@@ -1,0 +1,26 @@
+<html>
+
+
+<body>
+  <script src="files/search.js"></script>
+  <script>
+    let rawOutput // result of the search, will be filled later
+
+    // check search params
+    const params = new URLSearchParams(new URL(document.URL).search)
+    if (params) {
+      let q = params.get('q') || params.get('query')
+      const t = params.get('t') || params.get('type')
+      if (q) { // search for text inside pages
+        rawOutput = Search.text(q)
+      } else if (t) { // search for types of pages
+        rawOutput = Search.type(t)
+      }
+    }
+
+    console.log(rawOutput)
+    for (const i of rawOutput) document.body.innerText += JSON.stringify(i) + '\n'
+  </script>
+</body>
+
+</html>
