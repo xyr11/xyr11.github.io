@@ -110,22 +110,22 @@ if (tag('aside')) {
   <p class="new icon"> New</p>
   </a>
   </span>
+  </div>
+  <div class="feature" aria-labelledby="featured">
+  <h1 id="featured">Featured Article</h1>
+  <a href="${path}programming/diy/automate/creating-sites.html" class="post">
+  <h2>DIY.automate(): Making a site that makes sites</h2>
+  <p>A site that explains a site that makes sites</p>
+  <p class="annual icon"> Annual</p>
+  </a>
   </div>`
 }
 /*
 <div><span id="loc"></span><span id="tools"></span><span id="settings"></span></div>
-...
-<div class="feature" aria-labelledby="featured">
-  <h1 id="featured">Featured Article</h1>
-  <a href="${path}photography/feature-photos-2020.html" class="post">
-    <h2>Feature Photos of 2020 is now here!</h2>
-    <p class="annual icon"> Annual</p>
-  </a>
-</div>
  */
 
 // add links to headings inside article.post
-for (const h of ['h2', 'h3']) {
+for (const h of ['h2', 'h3', 'h4']) {
   for (const i of document.getElementsByTagName(h)) {
     const id = i.getAttribute('id')
     if (i.parentElement === document.querySelector('article.post') && id) { // check if element is inside .post
@@ -134,6 +134,15 @@ for (const h of ['h2', 'h3']) {
   }
 }
 if (document.querySelector('#mainTitle')) document.querySelector('#mainTitle').innerHTML += ` <a class="hlink" href="javascript:void(0)" title="Copy link to this part" aria-label="Copy link of this page" onclick="copyjs('${window.location.href}#${id}', this)" onkeypress="e => (e.key === 'Enter') && id('gototop').click()"></a>`
+
+// add attributes to code samples inside textarea
+for (const e of document.getElementsByClassName('codeSample')) {
+  if (e.tagName === 'TEXTAREA') {
+    e.setAttribute('onfocus', 'this.select()')
+    e.setAttribute('readonly', '')
+    e.setAttribute('aria-label', 'Code snippet')
+  }
+}
 
 // back to top
 const scrollToTop = () => { // scroll to top function

@@ -17,10 +17,14 @@
 @font-face {
   font-family: "Cascadia Code";
   src: local("Cascadia Code"),
-    url("files/fonts/CascadiaCode.woff2") format("woff2"),
-    url("files/fonts/CascadiaCode.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+    url("files/fonts/cascadiacode.woff2") format("woff2"),
+    url("files/fonts/cascadiacode.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cascadia Mono";
+  src: local("Cascadia Mono"),
+    url("files/fonts/cascadiamono.woff2") format("woff2"),
+    url("files/fonts/cascadiamono.ttf") format("truetype");
 }
 /*
  * Roboto (https://github.com/googlefonts/roboto)
@@ -34,7 +38,7 @@
 }
 @font-face {
   font-family: Roboto;
-  src: local("Roboto"), url("files/fonts/Roboto-Italic.ttf") format("truetype");
+  src: local("Roboto Italic"), url("files/fonts/Roboto-Italic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
 }
@@ -130,17 +134,13 @@ a {
 }
 a:hover, a:active, a:focus {color: var(--link-active)}
 a:focus-visible {border-color: var(--link-active)}
-code {
-  font-family: "Cascadia Code", monospace;
-  font-size: .8em;
-  color: var(--code-color);
-  background-color: var(--light-bg);
-  border: 2px solid transparent;
-  padding: 2px;
-  border-radius: 6px;
+ul {
+  margin: .2em 0 .4em 0;
+  padding-left: 20px;
 }
+li {line-height: 1.5}
 pre {
-  font-family: 'Cascadia Code', monospace;
+  font-family: 'Cascadia Code', Consolas, 'Courier New', monospace;
   font-size: .9em;
   overflow: hidden;
   overflow-x: auto;
@@ -149,6 +149,50 @@ pre {
   border: 2px solid var(--accent);
   border-radius: 8px;
   background-color: var(--article-bg);
+}
+code {
+  font-family: "Cascadia Mono", Consolas, 'Courier New', monospace;
+  font-size: .8em;
+  color: var(--link-active);
+  background-color: var(--hover-bg);
+  padding: .25em .2em;
+  position: relative;
+  top: -.1em;
+  border-radius: .5em;
+}
+textarea {
+  font-family: 'Cascadia Mono', Consolas, 'Courier New', monospace;
+  font-size: .8em;
+  margin: 0;
+  padding: .5em;
+  padding-left: 1.1em;
+  width: 100%;
+  max-height: 2.5em;
+  border: 1px solid var(--footer-bg);
+  border-left: .5em solid var(--footer-bg);
+  background-color: var(--article-bg);
+  border-radius: .5em;
+  overflow: auto;
+  resize: vertical;
+  transition: border .5s, box-shadow .3s;
+}
+textarea:hover {
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+}
+textarea:focus-visible {
+  outline: 0;
+  border-color: var(--link);
+  box-shadow: 1px 2px 5px rgba(0,0,0,0.3);
+}
+textarea.medium {
+  min-height: 3em;
+  height: 7em;
+  max-height: 7em;
+}
+textarea.long {
+  min-height: 9em;
+  height: 50vh;
+  max-height: 80vh;
 }
 hr {
   margin: .8em 15%;
@@ -262,15 +306,12 @@ nav a:focus-visible {border-color: var(--accent)}
   margin: 0 2em;
 }
 .main h1 {margin: .3em 0}
-.main h2 {font-size: 1.2em}
-.main h3 {
-  font-size: 1em;
-  margin: .6em 0 0em 0;
+.main h2 {font-size: 1.3em}
+.main h3, .main h4 {
+  font-size: 1.1em;
+  margin: .6em 0 .2em 0;
 }
-.main ul {
-  margin: 0 0 .8em 0;
-  padding-left: 20px;
-}
+.main h4 {font-size: 1em}
 
 main, aside div {
   color: var(--text);
@@ -366,10 +407,15 @@ aside div:last-child {margin: 0}
 .post a:hover, .post a:focus, .post a:active {text-decoration: underline}
 .post a:active {color: var(--link-active)}
 .post a:focus-visible {border-color: var(--link)}
-article.post {padding: 1em .9em}
+article.post {
+  padding: 1em .9em;
+  line-height: 1.3;
+}
+article.post span {display: initial}
 /* post title */
 .title {font-size: 1.5em}
-/* header links */
+
+/* links for post headers */
 a.hlink {
   position: relative;
   bottom: .1em;
@@ -397,6 +443,13 @@ a.hlink:focus-visible {
 a.hlink:hover, a.hlink:focus {
   text-decoration: none;
   color: var(--link-active);
+}
+
+/* subtitle for post headers */
+.post .sub {
+  font-style: italic;
+  padding-top: 0;
+  font-size: .85em;
 }
 
 /* image */
@@ -438,6 +491,26 @@ figure.small figcaption {
   font-size: initial;
   text-align: initial;
   margin: 0;
+}
+img.border  {
+  box-shadow: none !important;
+  border: 1px solid var(--footer-bg);
+}
+
+.iframe {
+  display: flex;
+  margin: .5em 0;
+  flex-direction: column;
+  align-items: center;
+}
+iframe {
+  width: 100%;
+  margin-bottom: .4em;
+  border: 1px solid var(--link-active);
+  border-radius: 4px;
+  height: 25em;
+  max-width: 800px;
+  max-height: 75vh;
 }
 
 /* table */
@@ -581,7 +654,7 @@ footer .ico img {
   }
 }
 
-/* iframe video embed */
+/* youtube video embed */
 .video {
   position: relative;
   padding-bottom: 393.75px;
@@ -595,11 +668,12 @@ footer .ico img {
 }
 .video iframe, .video object, .video embed {
   position: absolute;
-  border-radius: 8px;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  border: none;
+  border-radius: 8px;
 }
 @media (max-width: 1115px) {
   .video {padding-bottom: 56.25%}
@@ -783,10 +857,9 @@ footer .ico img {
 /* a smaller variant of the previous layout for very large phones, tablets, and pcs with very small screens. */
 @media (max-width: 700px) {
   p, div, span, ul, table {font-size: .95em !important}
-  pre {
-    font-size: .75em;
-    margin: .3em 0;
-  }
+  pre {margin: .3em 0}
+  textarea {max-height: 20em}
+  pre, textarea {font-size: .75em}
   header h1 {font-size: 2.1em}
   header [aria-label=Subtitle] {font-size: .9em}
   header h1 {margin-top: 1em}
@@ -804,7 +877,7 @@ footer .ico img {
 }
 
 @media (max-width: 450px) {
-  .post img {
+  .post img, .video {
     position: relative;
     left: -0.9em;
     border-radius: 0;

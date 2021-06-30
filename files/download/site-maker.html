@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>A site that makes sites</title>
+</head>
+<body>
+  <h1>A site that makes sites</h1>
+  <!-- This is where you add the values of your site -->
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Input</th>
+    </tr>
+    <tr>
+      <td>Title only</td>
+      <td>
+        <textarea id="title"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td>
+        <textarea id="description"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>Location</td>
+      <td>
+        <textarea id="location"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>Date</td>
+      <td>
+        <textarea id="date"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>Content</td>
+      <td>
+        <textarea id="content"></textarea>
+      </td>
+    </tr>
+  </table>
+  <!-- This is where the output goes when the button is clicked -->
+  <!-- Click this button to generate the site -->
+  <div>
+    <button onclick="makeTheSite()">Click here to generate the site!</button>
+  </div>
+  <div>
+    <h2>Output: </h2>
+    <textarea id="output" style="width: 100%"></textarea>
+  </div>
+  <!-- This is JavaScript part where magic happens -->
+  <script>
+    // When you click the button, you are triggering this function
+    function makeTheSite() {
+      // Get the values on the <textareas>
+        var description = document.getElementById('description').value;
+        var title = document.getElementById('title').value;
+        var location = document.getElementById('location').value;
+        var date = document.getElementById('date').value;
+        var content = document.getElementById('content').value;
+        // This the template of your site
+        // REMEMBER TO CHANGE THE STUFF HERE ACCORDING TO STUFF ON YOUR SITE!
+        var Output = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>${title} || YourSiteName™</title>
+  <meta name="description" content="${description}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="${description}">
+  <meta property="og:title" content="${title}">
+  <meta property="og:description" content="${description}">
+  <!-- ADD STUFF HERE -->
+  <!-- for example:
+    <link href="${location}main.css" rel="stylesheet">
+    if your file is inside a folder, location = "../"
+  -->
+</head>
+<body>
+  <!-- ADD STUFF HERE -->
+  <!-- for example:
+    <header>
+      <h1><a href="${location}index.html">YourSiteName™</a></h1>
+    </header>
+    if your file is inside a folder, location = "../"
+  -->
+  <main>
+    <h1>${title}</h1>
+    <p>${date}</p>
+    <article>${content}</article>
+  </main>
+  <!-- ADD STUFF HERE -->
+\<\/body>
+\<\/html>`
+        // output the Output variable
+        document.getElementById('output').value = Output
+      }
+      // end of the magic
+    </script>
+  </body>
+  </html>
