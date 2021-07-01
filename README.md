@@ -14,19 +14,10 @@ Development | Most recent commit (*VERY* buggy) | [Branch](https://github.com/xy
 
 For old versions, [check the Releases page](https://github.com/xyr11/xyr11.github.io/releases).
 
-## Update workflow
-```js
-main ─╴1.0╶──────────────────────────────────╴1.1╶───────╴1.1.1╶──>
-        ↑                                      ↑            ↑
-rc   ─╴1.0╶───────────────────╴1.1-rc1╶╴rc2╶─╴1.1╶───────╴1.1.1╶──>
-        ↓                         ↑            ↓            ↑
-dev  ───■─╴a╶╴b╶╴beta1╶╴c╶╴beta2╶─┴────╴e╶───> ■╶╴f╶╴beta1╶─┴─╴g╶─>
-```
-+ `main` is the <u>main branch</u> which contains stable and fully released versions.
-+ `rc` is the <u>pre-release branch</u> (*rc* is short for release candidate). No new features will be added and only bug fixing is done here. Major updates (`v1.0 → v1.1`) need to finalize here before its full release.
-+ `dev` is the <u>development branch</u> ("development") which adds features and fixes over time until it is ready for release. Major updates (`v1.0 → v1.1`) will be transfered to the rc branch for finalizing while minor updates (`v1.1 → v1.1.1`) can merge directly to `main`.
-
-This workflow is inspired by and a combination of the [Gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) and the [GitHub flow](https://guides.github.com/introduction/flow/) which only uses 1 development branch but doesn't have that many branches. But I probably won't be able to update often, so I'll probably leave a bunch of things out.
+### Branches and Update flow
++ `main` is the main branch which contains full and stable versions.
++ `rc` is the preview branch (*rc* is short for release candidate). All stable but unfinished builds from development will be merged in this branch.
++ `dev` is the development branch which mainly adds features and fixes.
 
 ## Other stuff I guess
 
