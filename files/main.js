@@ -67,7 +67,8 @@ window.addEventListener('resize', changeSearchBtn)
 const copyjs = (id = window.location.href, elm = null) => { // eslint-disable-line no-unused-vars
   // check if local file
   const urlOrigin = new URL(document.URL).origin
-  if (urlOrigin === 'null' || urlOrigin === 'file://') id = 'https://xyr.codes/'
+  if (id === window.location.href && (urlOrigin === 'null' || urlOrigin === 'file://')) id = 'https://xyr.codes/'
+  // create element
   const inputTemp = document.createElement('input')
   inputTemp.value = id
   document.body.appendChild(inputTemp)
