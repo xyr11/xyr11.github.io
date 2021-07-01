@@ -17,7 +17,7 @@ const body = tag('body')
 // })
 
 // notifications
-body.innerHTML += '<div id="notifs-wonderland"></div>'
+body.innerHTML += '<div id="notifs"></div>'
 const newNotif = (text, length = 'short') => {
   if (!text || text === undefined) console.error('newNotif() text cannot be empty')
 
@@ -29,9 +29,10 @@ const newNotif = (text, length = 'short') => {
   const alert = document.createElement('div')
   alert.classList.add('alert')
   if (validLength.indexOf(length) > -1) alert.classList.add(length)
+  else return
   alert.setAttribute('id', alertId)
-  alert.innerHTML = text + '<span class="x" onclick="this.parentNode.parentNode.removeChild(this.parentNode)">&times;</span>'
-  document.getElementById('notifs-wonderland').appendChild(alert)
+  alert.innerHTML = `<span>${text}</span><span class="x" onclick="this.parentNode.parentNode.removeChild(this.parentNode)">&times;</span>`
+  document.getElementById('notifs').appendChild(alert)
 
   setTimeout(() => {
     const alDiv = document.getElementById(alertId)
