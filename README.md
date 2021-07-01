@@ -7,17 +7,17 @@ This is XYR.codes, the official webpage of Xyrus Kurt Roldan in the depths of th
 To see the latest stable version, check the link above. You can also download it [here](https://github.com/xyr11/xyr11.github.io/archive/refs/heads/main.zip), which fully works offline too!
 
 ### Other versions
-Version | Description | View
+Version | Description | Where to find
 -- | -- | --
-Pre-release | Most recent release candidate | [Branch](https://github.com/xyr11/xyr11.github.io/tree/pre-release) \| [Link](https://rc.xyr.codes)
-Development | Most recent commit (*VERY* buggy) | [Branch](https://github.com/xyr11/xyr11.github.io/tree/development) \| [Link](https://dev.xyr.codes)
+Full | Full, stable versions | [Branch](https://github.com/xyr11/xyr11.github.io) \| [Link](https://xyr.codes) \| [Releases page](https://github.com/xyr11/xyr11.github.io/releases)
+Pre-release | Most recent release candidate, stable but unfinished builds | [Branch](https://github.com/xyr11/xyr11.github.io/tree/pre-release) \| [Link](https://rc.xyr.codes) \| [`v0.0-rc#` tags](https://github.com/xyr11/xyr11.github.io/tags)
+Beta | Most recent beta version, stability not guaranteed | [`v0.0-beta#` tags](https://github.com/xyr11/xyr11.github.io/tags)
+Development | Most recent commit and *VERY* buggy | [Branch](https://github.com/xyr11/xyr11.github.io/tree/development) \| [Link](https://dev.xyr.codes)
 
-For old versions, [check the Releases page](https://github.com/xyr11/xyr11.github.io/releases).
-
-### Branches and Update flow
-+ `main` is the main branch which contains full and stable versions.
-+ `rc` is the preview branch (*rc* is short for release candidate). All stable but unfinished builds from development will be merged in this branch.
-+ `dev` is the development branch which mainly adds features and fixes.
+### Branches and updates
++ The `main` branch contains full and stable versions. If the version currently being worked on is fully done, it will merge to this branch.
++ The `pre-release` branch contains the "release candidate" versions. All stable but unfinished builds from development will be merged in this branch.
++ The `development` branch mainly adds features and fixes and is considered very buggy.
 
 ## Other stuff I guess
 
