@@ -124,16 +124,17 @@ if (tag('aside')) {
 <div><span id="loc"></span><span id="tools"></span><span id="settings"></span></div>
  */
 
+// add link to <main> title
+if (document.querySelector('#mainTitle')) document.querySelector('#mainTitle').innerHTML += ` <a class="hlink" href="javascript:void(0)" title="Copy link to this part" aria-label="Copy link of this page" onclick="copyjs('${window.location.href}', this)" onkeypress="e =&gt; (e.key === 'Enter') && id('gototop').click()"></a>`
 // add links to headings inside article.post
 for (const h of ['h2', 'h3', 'h4']) {
   for (const i of document.getElementsByTagName(h)) {
     const id = i.getAttribute('id')
     if (i.parentElement === document.querySelector('article.post') && id) { // check if element is inside .post
-      i.innerHTML += ` <a class="hlink" href="javascript:void(0)" title="Copy link to this part" aria-label="Copy link to this part" onclick="copyjs('${window.location.href}#${id}', this)" onkeypress="e => (e.key === 'Enter') && id('gototop').click()"></a>`
+      i.innerHTML += ` <a class="hlink" href="javascript:void(0)" title="Copy link to this part" aria-label="Copy link to this part" onclick="copyjs('${window.location.href}#${id}', this)" onkeypress="e =&gt; (e.key === 'Enter') && id('gototop').click()"></a>`
     }
   }
 }
-if (document.querySelector('#mainTitle')) document.querySelector('#mainTitle').innerHTML += ` <a class="hlink" href="javascript:void(0)" title="Copy link to this part" aria-label="Copy link of this page" onclick="copyjs('${window.location.href}#${id}', this)" onkeypress="e => (e.key === 'Enter') && id('gototop').click()"></a>`
 
 // add attributes to code samples inside textarea
 for (const e of document.getElementsByClassName('codeSample')) {
