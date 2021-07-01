@@ -125,12 +125,14 @@ if (tag('aside')) {
  */
 
 // add link to <main> title
-if (document.querySelector('#mainTitle')) document.querySelector('#mainTitle').innerHTML += ` <a class="hlink" href="javascript:void(0)" title="Copy link to this part" aria-label="Copy link of this page" onclick="copyjs('${window.location.href}', this)" onkeypress="e =&gt; (e.key === 'Enter') && id('gototop').click()"></a>`
+const mainTitle = tag('#mainTitle')
+// don't add links if element has 'nolink' class
+if (mainTitle && !mainTitle.classList.contains('nolink')) mainTitle.innerHTML += ` <a class="hlink" href="javascript:void(0)" title="Copy link to this part" aria-label="Copy link of this page" onclick="copyjs('${window.location.href}', this)" onkeypress="e =&gt; (e.key === 'Enter') && id('gototop').click()"></a>`
 // add links to headings inside article.post
 for (const h of ['h2', 'h3', 'h4']) {
   for (const i of document.getElementsByTagName(h)) {
     const id = i.getAttribute('id')
-    if (i.parentElement === document.querySelector('article.post') && id) { // check if element is inside .post
+    if (i.parentElement === tag('article.post') && id) { // check if element is inside .post
       i.innerHTML += ` <a class="hlink" href="javascript:void(0)" title="Copy link to this part" aria-label="Copy link to this part" onclick="copyjs('${window.location.href}#${id}', this)" onkeypress="e =&gt; (e.key === 'Enter') && id('gototop').click()"></a>`
     }
   }
