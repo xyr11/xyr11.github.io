@@ -386,7 +386,7 @@
 
       // html output
       let strResult = `<!DOCTYPE html>
-      <html lang="en"${a.path ? ' data-loc="root"' : ''}>
+      <html lang="en" data-loc="${a.path ? a.path : 'root'}">
       <head>
       <meta charset="UTF-8">
       <title>${a.name}${a.type !== 'main' ? ' | XYR.codes' : ''}</title>

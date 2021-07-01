@@ -87,7 +87,7 @@ const copyjs = (id = window.location.href, elm = null) => { // eslint-disable-li
 }
 
 // change sidebar content
-const path = html.getAttribute('data-loc') === 'root' ? '' : '../' // check if page is on root
+const path = html.getAttribute('data-loc') === 'root' ? '' : html.getAttribute('data-loc') // check if page is on root
 if (tag('aside')) {
   tag('aside').innerHTML = `
   <div class="updates" aria-labelledby="updates">
