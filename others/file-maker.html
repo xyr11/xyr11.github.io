@@ -409,8 +409,8 @@
       <p aria-label="Subtitle">Projects, tutorials, photography, blogs, and more!</p>
       </header>
       <nav role="navigation">
-      <a href="${a.path}index.html">Home</a>${(() => { let b = ''; for (const i of ['Programming', 'Journals', 'Photography']) b += `\n<a${a.type === i.toLowerCase() ? ' class="current"' : ''} href="${a.path}search.html?q=${i}" aria-label="Browse pages under ${i}">${i}</a>`; return b })()}
-      ${is(a.type, 'others', `<a class="current" aria-disabled="true" href="${a.path}search.html?q=Others">Others</a>`)}<a href="${a.path}site/about.html">About</a>
+      <a href="${a.path}index.html">Home</a>${(() => { let b = ''; for (const i of ['Programming', 'Journals', 'Photography']) b += `\n<a${a.type === i.toLowerCase() ? ' class="current"' : ''} href="${a.path}search.html?t=${i}" aria-label="Browse pages under ${i}">${i}</a>`; return b })()}
+      ${is(a.type, 'others', `<a class="current" aria-disabled="true" href="${a.path}search.html?t=Others">Others</a>`)}<a href="${a.path}site/about.html">About</a>
       <a id="search" class="icon" href="${a.path}search.html" aria-label="Search XYR.codes">Search</a>
       </nav>
       <div class="main">
