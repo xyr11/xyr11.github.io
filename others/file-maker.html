@@ -373,7 +373,7 @@
         desc: id('desc').value, // meta description
         img: id('img').value || 'i/emb.png', // embed image (og:image)
         date: id('date').value, // date
-        content: id('content').value || '', // content of page
+        content: id('content').value.replaceAll('\\', '\\\\') || '', // content of page
         footer: id('footer').value || 'Made with &lt;3, HTML, CSS &amp; Javascript!' // footer
       }
       a.path = rgx(rgx(a.location, /((^|(?<=\/))[^\/\n]*$)/gm), /([^\/\n]+(?=\/))/g, '..') // "a/b.html" -> "../"
