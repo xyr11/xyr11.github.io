@@ -21,16 +21,15 @@
         flex-wrap: wrap;
         justify-content: flex-start;
         position: relative;
-        margin: .6em 0 .8em 0;
-        height: 1.8em;
+        margin: .6em 0;
       }
       #query {
-        padding: .2em 1.8em .2em .4em;
+        padding: .4em 1.8em .4em .4em;
         font-size: inherit;
         flex-grow: 1;
         flex-shrink: 1;
         outline: none;
-        border: 2px solid transparent;
+        border: 1px solid transparent;
         border-radius: 8px;
         max-width: 100%;
         height: 100%;
@@ -46,12 +45,12 @@
         justify-content: center;
         right: .2em;
         font-size: inherit;
-        height: 1.8em;
+        height: 100%;
         cursor: pointer;
         background: transparent;
         border: 1px solid transparent;
         outline: 0;
-        transition: visibility .3s, opacity .3s;
+        transition: color .3s;
       }
       #searchBtn::before {
         font-family: 'simple-line-icons';
@@ -59,6 +58,7 @@
         position: relative;
         top: -.05em;
       }
+      #searchBtn:hover, #searchBtn:focus {color: var(--footer-bg)}
       #searchBtn:focus-visible {border: 1px solid}
       @media (min-width: 450px) {
         .focus #query {padding-right: 5.5em}
@@ -67,16 +67,20 @@
           opacity: 0;
           content: '';
         }
-        .focus #searchBtn, #searchBtn:focus {
+        .focus #searchBtn, #searchBtn:focus-visible {
           right: .3em;
+        }
+        .focus #searchBtn {
           animation: fancy .6s;
         }
-        .focus #searchBtn::after, #searchBtn:focus::after {
+        .focus #searchBtn::after, #searchBtn:focus-visible::after {
           visibility: visible;
           opacity: 1;
           font-family: inherit;
           padding-left: .3em;
           content: 'Search';
+        }
+        .focus #searchBtn::after {
           animation: fade .6s;
         }
       }
@@ -103,6 +107,7 @@
       <a href="search.html?t=Journals" aria-label="Browse pages under Journals">Journals</a>
       <a href="search.html?t=Photography" aria-label="Browse pages under Photography">Photography</a>
       <a href="site/about.html">About</a>
+      <a id="search" class="icon" href="search.html" aria-label="Search XYR.codes">Search</a>
     </nav>
     <div class="main">
       <main role="main" aria-labelledby="title">
@@ -111,13 +116,14 @@
         <div class="searchbar">
           <input type="text" id="query" placeholder="Search XYR.codes" aria-label="Search XYR.codes"> <button id="searchBtn" aria-label="Click to search" tabindex="0"></button>
         </div>
+        <div id="categoryHeader" style="margin: 1em 0 .6em 0"></div>
         <div id="output" class="horiz" aria-label="Search results"></div>
       </main>
       <aside></aside>
     </div>
     <footer role="contentinfo" aria-label="Footer">
       <h1 class="name">XYR.codes</h1>
-      <p>Powered by the special in-house-developed bunch-of-overly-enthusiastic-words <span style="cursor:help" title="For legal reasons, this is a joke. The algorithm is open source at GitHub!">XYR.codes Finder Algorithm 99®™</span>, only available in this page.</p>
+      <p>Powered by the special in-house-developed very powerful bunch-of-overly-enthusiastic-words XYR.codes Finder Algorithm 99®™, only available in this page.</p>
       <div class="ico" aria-hidden="true">
         <img src="i/fav.ico" alt="">
       </div>
@@ -162,7 +168,6 @@
       })
       query.addEventListener('keydown', e => (e.key === 'Enter') && searchBtn.click())
       searchBtn.addEventListener('keydown', e => (e.key === 'Enter') && searchBtn.click())
-      const output = id('output')
 
       // check search params
       let rawOutput
@@ -175,14 +180,18 @@
           id('query').value = q
         } else if (t) { // search for types of pages
           rawOutput = Search.type(t)
+          id('title').style.display = 'none'
+          id('categoryHeader').innerHTML = `<h1>Category: ${t}</h1>`
         } else {
           id('msg').innerHTML = 'Search for stuff within XYR.codes by typing in the search bar below and we\'ll (attempt to) find that article. Word order is not checked.'
         }
       }
 
       // display results
+      const output = id('output')
       console.log(rawOutput)
-      if (rawOutput.length) {
+      if (rawOutput) {
+        if (!rawOutput.length) output.innerHTML = 'Unfortunately, we didn\'t find any results. Please try again.'
         for (const i of rawOutput) {
           // create element
           const result = document.createElement('a')
@@ -190,10 +199,7 @@
           result.setAttribute('class', 'post result')
           result.innerHTML = `<h2>${i.name}</h2>${i.date ? `<p class="time" data-posted="${new Date(i.date).toISOString().slice(0,10)}">${new Date(i.date).toLocaleString('default', {dateStyle: 'long'})}</p>` : ''}<p>${i.desc}</p>`
           output.appendChild(result)
-          // id('output').appendChild(document.createElement('div'))
         }
-      } else {
-        output.innerHTML = 'Unfortunately, we didn\'t find any results. Please try again.'
       }
       changeDates()
     </script>
