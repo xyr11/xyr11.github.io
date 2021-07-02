@@ -78,8 +78,8 @@ let Search = { // eslint-disable-line prefer-const, no-unused-vars
       let push = ''
       // get values and add them together
       for (const n of typeNo) if (n) push += Object.values(i)[n] + ' '
-      // filter to reduce length of string
-      push = push.replace(/(<style>|<script)((.|\n)(?!<\/style>))*?(.|\n)*?(<\/style>|<\/script>)/g, '') // remove all the stuff inside <style> and <script>
+      // reduce length of string
+      push = push.replace(/<(style|script|textarea)(.|\n)*?<\/(style|script|textarea)>/g, '') // remove all the stuff inside <style>, <script> and <textarea>
       push = push.replace(/<[^>]*>/g, '') // remove all tags
       push = push.replace(/\n/g, ' ').replace(/^[\s\n]+|[\s\n]+$|(?<=\s)\s/g, '') // remove newlines and extra whitespaces
       extractedArr.push(push)
