@@ -421,6 +421,7 @@ a.hlink {
   bottom: .1em;
   font-family: 'simple-line-icons';
   font-size: .55em;
+  cursor: copy;
   color: var(--text);
   transition: color .3s, opacity .4s .3s;
 }
