@@ -175,20 +175,23 @@ if (id('gototop')) {
 }
 
 // change contents of elements with class='date'
-const time = document.getElementsByClassName('time')
-for (const t of time) {
-  const _d = new Date(t.getAttribute('data-posted') + 'T00:00:00+08:00')
-  const dSince = (Date.now() - _d.getTime()) / 86400000
-  if (_d.toString() !== 'Invalid Date') {
-    const text = t.getAttribute('data-text') || 'Posted'
-    if (dSince < 1) t.innerHTML = `${text} today`
-    else if (dSince < 2) t.innerHTML = `${text} yesterday`
-    else if (dSince < 31) t.innerHTML = `${text} ${Math.floor(dSince)} days ago`
-    else if (_d.getYear() === new Date().getYear()) {
-      t.innerHTML = `${text} last ${_d.toLocaleString('default', { month: 'long', day: '2-digit' })}`
-    } else t.innerHTML = `${text} on ${_d.toLocaleString('default', { dateStyle: 'long' })}`
+const changeDates = () => {
+  const time = document.getElementsByClassName('time')
+  for (const t of time) {
+    const _d = new Date(t.getAttribute('data-posted') + 'T00:00:00+08:00')
+    const dSince = (Date.now() - _d.getTime()) / 86400000
+    if (_d.toString() !== 'Invalid Date') {
+      const text = t.getAttribute('data-text') || 'Posted'
+      if (dSince < 1) t.innerHTML = `${text} today`
+      else if (dSince < 2) t.innerHTML = `${text} yesterday`
+      else if (dSince < 31) t.innerHTML = `${text} ${Math.floor(dSince)} days ago`
+      else if (_d.getYear() === new Date().getYear()) {
+        t.innerHTML = `${text} last ${_d.toLocaleString('default', { month: 'long', day: '2-digit' })}`
+      } else t.innerHTML = `${text} on ${_d.toLocaleString('default', { dateStyle: 'long' })}`
+    }
   }
 }
+changeDates()
 
 // replace <a>/contact/</a> to <a href"../contact/index.html"
 for (const i of document.getElementsByTagName('a')) {

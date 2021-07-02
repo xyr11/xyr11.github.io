@@ -1,26 +1,201 @@
-<html>
-
-
-<body>
-  <script src="files/search.js"></script>
-  <script>
-    let rawOutput // result of the search, will be filled later
-
-    // check search params
-    const params = new URLSearchParams(new URL(document.URL).search)
-    if (params) {
-      let q = params.get('q') || params.get('query')
-      const t = params.get('t') || params.get('type')
-      if (q) { // search for text inside pages
-        rawOutput = Search.text(q)
-      } else if (t) { // search for types of pages
-        rawOutput = Search.type(t)
+<!DOCTYPE html>
+<html lang="en" data-loc="root">
+  <head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <meta name="author" content="Xyrus Kurt Roldan">
+    <meta name="description" content="Search within pages with the all-new special in-house-developed bunch-of-overly-enthusiastic-words XYR.codes Finder Algorithm®™, only available in this page.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Search">
+    <meta property="og:description" content="Search within pages with the all-new special in-house-developed bunch-of-overly-enthusiastic-words XYR.codes Finder Algorithm 99®™, only available in this page.">
+    <meta property="og:image" content="http://xyr.codes/i/emb.png">
+    <meta property="og:url" content="https://xyr.codes/search.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#77e4ff">
+    <link href="favicon.ico" rel="shortcut icon" type="image/ico">
+    <link href="main.css" rel="stylesheet">
+    <style>
+      .searchbar {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        position: relative;
+        margin: .6em 0 .8em 0;
+        height: 1.8em;
       }
-    }
+      #query {
+        padding: .2em 1.8em .2em .4em;
+        font-size: inherit;
+        flex-grow: 1;
+        flex-shrink: 1;
+        outline: none;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        max-width: 100%;
+        height: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      #query:focus {border-color: var(--link-active)}
+      #searchBtn {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        right: .2em;
+        font-size: inherit;
+        height: 1.8em;
+        cursor: pointer;
+        background: transparent;
+        border: 1px solid transparent;
+        outline: 0;
+        transition: visibility .3s, opacity .3s;
+      }
+      #searchBtn::before {
+        font-family: 'simple-line-icons';
+        content: '\e090';
+        position: relative;
+        top: -.05em;
+      }
+      #searchBtn:focus-visible {border: 1px solid}
+      @media (min-width: 450px) {
+        .focus #query {padding-right: 5.5em}
+        #searchBtn::after {
+          visibility: hidden;
+          opacity: 0;
+          content: '';
+        }
+        .focus #searchBtn, #searchBtn:focus {
+          right: .3em;
+          animation: fancy .6s;
+        }
+        .focus #searchBtn::after, #searchBtn:focus::after {
+          visibility: visible;
+          opacity: 1;
+          font-family: inherit;
+          padding-left: .3em;
+          content: 'Search';
+          animation: fade .6s;
+        }
+      }
+      @keyframes fancy {
+        0% {right: -3.1em}
+        100% {right: .3em}
+      }
+      @keyframes fade {
+        0% {visibility: hidden; opacity: 0}
+        45% {visibility: hidden; opacity: 0}
+        100% {visibility: visible; opacity: 1}
+      }
+    </style>
+  </head>
+  <body>
+    <header role="banner">
+      <div id="bg" style="background-color:#0B161D" aria-hidden="true"></div>
+      <h1 aria-labelledby="pagetitle"><a id="pagetitle" href="index.html">XYR<span style="color:#77e4ff">.</span>codes</a></h1>
+      <p aria-label="Subtitle">Projects, tutorials, photography, blogs, and more!</p>
+    </header>
+    <nav role="navigation">
+      <a href="index.html">Home</a>
+      <a href="search.html?t=Programming" aria-label="Browse pages under Programming">Programming</a>
+      <a href="search.html?t=Journals" aria-label="Browse pages under Journals">Journals</a>
+      <a href="search.html?t=Photography" aria-label="Browse pages under Photography">Photography</a>
+      <a href="site/about.html">About</a>
+    </nav>
+    <div class="main">
+      <main role="main" aria-labelledby="title">
+        <h1 id="title" class="posts">Search</h1>
+        <div id="msg"></div>
+        <div class="searchbar">
+          <input type="text" id="query" placeholder="Search XYR.codes" aria-label="Search XYR.codes"> <button id="searchBtn" aria-label="Click to search" tabindex="0"></button>
+        </div>
+        <div id="output" class="horiz" aria-label="Search results"></div>
+      </main>
+      <aside></aside>
+    </div>
+    <footer role="contentinfo" aria-label="Footer">
+      <h1 class="name">XYR.codes</h1>
+      <p>Powered by the special in-house-developed bunch-of-overly-enthusiastic-words <span style="cursor:help" title="For legal reasons, this is a joke. The algorithm is open source at GitHub!">XYR.codes Finder Algorithm 99®™</span>, only available in this page.</p>
+      <div class="ico" aria-hidden="true">
+        <img src="i/fav.ico" alt="">
+      </div>
+      <div class="links" aria-label="Footer links">
+        <div class="col">
+          <a href="index.html">Home</a>
+          <a href="site/about.html">About</a>
+          <a href="contact/index.html">Contact</a>
+          <a href="contact/feedback.html">Feedback</a>
+        </div>
+        <div class="col">
+          <a href="search.html">Search</a>
+          <a href="versions/index.html">Versions</a>
+          <a href="site/credits.html">Credits</a>
+          <a href="site/sitemap.html">Sitemap</a>
+        </div>
+        <div class="col">
+          <span class="social">
+            <a class="gthb" href="https://github.com/xyr11/xyr11.github.io" title="Check the repository on GitHub"></a> <a class="twtr" href="https://twitter.com/xy_rus/" title="Follow me on Twitter"></a> <a class="doc" href="https://github.com/xyr11/xyr11.github.io/blob/main/README.md" title="Read the README.md file"></a>
+          </span>
+          <a href="site/license.html">License</a>
+          <a id="gototop" tabindex="0">Go to top</a>
+        </div>
+      </div>
+    </footer>
+    <script type="text/javascript" src="https://xyr11.github.io/files/version.js"></script> <!-- Check version online thru this link -->
+    <script src="files/search.js"></script>
+    <script type="text/javascript" src="files/main.js"></script>
+    <!-- Magic happens here -->
+    <script>
+      // Search
+      // search bar
+      const searchBtn = id('searchBtn')
+      const query = id('query')
 
-    console.log(rawOutput)
-    for (const i of rawOutput) document.body.innerText += JSON.stringify(i) + '\n'
-  </script>
-</body>
+      // design
+      query.addEventListener('focus', () => {document.querySelector('.searchbar').classList.add('focus')})
+      query.addEventListener('blur', () => {document.querySelector('.searchbar').classList.remove('focus')})
 
+      // listen if user clicked searchBtn / pressed enter
+      searchBtn.addEventListener('click', () => {if (query.value) window.location.href = `search.html?q=${query.value}`
+      })
+      query.addEventListener('keydown', e => (e.key === 'Enter') && searchBtn.click())
+      searchBtn.addEventListener('keydown', e => (e.key === 'Enter') && searchBtn.click())
+      const output = id('output')
+
+      // check search params
+      let rawOutput
+      const params = new URLSearchParams(new URL(document.URL).search)
+      if (params) {
+        let q = params.get('q') || params.get('query')
+        const t = params.get('t') || params.get('type')
+        if (q) { // search for text inside pages
+          rawOutput = Search.text(q)
+          id('query').value = q
+        } else if (t) { // search for types of pages
+          rawOutput = Search.type(t)
+        } else {
+          id('msg').innerHTML = 'Search for stuff within XYR.codes by typing in the search bar below and we\'ll (attempt to) find that article. Word order is not checked.'
+        }
+      }
+
+      // display results
+      console.log(rawOutput)
+      if (rawOutput.length) {
+        for (const i of rawOutput) {
+          // create element
+          const result = document.createElement('a')
+          result.setAttribute('href', i.location)
+          result.setAttribute('class', 'post result')
+          result.innerHTML = `<h2>${i.name}</h2>${i.date ? `<p class="time" data-posted="${new Date(i.date).toISOString().slice(0,10)}">${new Date(i.date).toLocaleString('default', {dateStyle: 'long'})}</p>` : ''}<p>${i.desc}</p>`
+          output.appendChild(result)
+          // id('output').appendChild(document.createElement('div'))
+        }
+      } else {
+        output.innerHTML = 'Unfortunately, we didn\'t find any results. Please try again.'
+      }
+      changeDates()
+    </script>
+  </body>
 </html>

@@ -112,7 +112,7 @@
 @keyframes targetFade {
   0% {background-color: var(--target)}
   30% {background-color: var(--target)}
-  100% {background-color: none}
+  100% {background-color: transparent}
 }
 
 body {
@@ -333,7 +333,7 @@ main p.time {
 }
 
 /* home page flexbox */
-.main span {
+.main span, main #output {
   display: flex;
   position: relative;
   width: calc(100% + .6em);
@@ -371,7 +371,7 @@ a.post.long {width: calc(100% - .6em)}
 a.post:hover, a.post:focus, a.post:active {background: var(--hover-bg)}
 a.post:focus-visible {border-color: var(--link-active)}
 /* horizontal only for .horiz */
-span.horiz a.post {width: calc(100% - .6em)}
+.horiz a.post {width: calc(100% - .6em)}
 
 /* see more posts */
 .more {
