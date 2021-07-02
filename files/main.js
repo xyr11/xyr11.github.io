@@ -75,7 +75,6 @@ const copyjs = (id = window.location.href, elm = null) => { // eslint-disable-li
   inputTemp.select()
   document.execCommand('copy')
   document.body.removeChild(inputTemp)
-
   // add 'clicked' class
   if (elm) {
     if (!elm.classList.contains('clicked')) {
@@ -248,5 +247,33 @@ const commentAdder = (comment, tagLocate) => {
 commentAdder(lmao[Math.floor(Math.random() * 10 % 4)], 'head')
 commentAdder('I just wanna tell you how I\'m feeling, gotta make you understand. I\'ll never gonna give you up, never gonna let you down, never gonna run around and desert you.', 'html')
 
-// check version
-const thisVersion = '1.3.0'
+// version checking
+const latestVer = (local, online) => {
+  local = local.split('.')
+  online = online.split('.')
+  const items = Math.max(local.length, online.length)
+  for (let i = 0; i < items; i++) {
+    if (!local[i]) local[i] = 0
+    if (!online[i]) online[i] = 0
+    // if version contains not-a-number, replace it with 0
+    local[i] = parseInt(isNaN(local[i]) ? 0 : local[i])
+    online[i] = parseInt(isNaN(online[i]) ? 0 : online[i])
+    // if online version is greater than this version, return true, otherwise the loop will still loop
+    if (online > local) return false
+  }
+  return true
+}
+
+const thisVersion = '1.3.0' // the local version
+let onlineVerExists = false
+// attempt to get online version (if it exists)
+try {
+  if (version && version !== null) onlineVerExists = true
+  else onlineVerExists = false
+} catch (e) {}
+if (onlineVerExists) {
+  const isLatest = latestVer(thisVersion, version)
+  if (!isLatest) newNotif('Hey! It seems like your local version is outdated. <a href="https://github.com/xyr11/xyr11.github.io/releases">You can download the latest version here.</a> (Don\'t ask <i>how</i> we figured it out.)', 'medium')
+} else {
+  console.log('Cannot check if version is latest or not')
+}
