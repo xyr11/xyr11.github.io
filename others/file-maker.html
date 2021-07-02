@@ -385,73 +385,75 @@
 
       // html output
       let strResult = `<!DOCTYPE html>
-      <html lang="en" data-loc="${a.path ? a.path : 'root'}">
-      <head>
-      <meta charset="UTF-8">
-      <title>${a.name}${a.type !== 'main' ? ' | XYR.codes' : ''}</title>
-      <meta name="author" content="Xyrus Kurt Roldan">
-      <meta name="description" content="${a.desc}">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta property="og:title" content="${a.name}">
-      <meta property="og:description" content="${a.desc}">
-      <meta property="og:image" content="http://xyr.codes/${a.img}">
-      <meta property="og:url" content="https://xyr.codes/${a.location}">
-      <meta name="twitter:card" content="summary_large_image">
-      <meta name="theme-color" content="#77e4ff">
-      <link href="${a.path}favicon.ico" rel="shortcut icon" type="image/ico">
-      <link href="${a.path}main.css" rel="stylesheet">
-      </head>\n
-      <body>
-      <header role="banner">
-      <div id="bg" style="background-color:#0B161D" aria-hidden="true"></div>
-      <h1 aria-labelledby="pagetitle"><a id="pagetitle" href="${a.path}index.html">XYR<span style="color:#77e4ff">.</span>codes</a></h1>
-      <p aria-label="Subtitle">Projects, tutorials, photography, blogs, and more!</p>
-      </header>
-      <nav role="navigation">
-      <a href="${a.path}index.html">Home</a>${(() => { let b = ''; for (const i of ['Programming', 'Journals', 'Photography']) b += `\n<a${a.type === i.toLowerCase() ? ' class="current"' : ''} href="${a.path}search.html?t=${i}" aria-label="Browse pages under ${i}">${i}</a>`; return b })()}
-      ${is(a.type, 'others', `<a class="current" aria-disabled="true" href="${a.path}search.html?t=Others">Others</a>`)}<a href="${a.path}site/about.html">About</a>
-      <a id="search" class="icon" href="${a.path}search.html" aria-label="Search XYR.codes">Search</a>
-      </nav>
-      <div class="main">
-      <main role="main" aria-labelledby="mainTitle">
+<html lang="en" data-loc="${a.path ? a.path : 'root'}">
+<head>
+  <meta charset="UTF-8">
+  <title>${a.name}${a.type !== 'main' ? ' | XYR.codes' : ''}</title>
+  <meta name="author" content="Xyrus Kurt Roldan">
+  <meta name="description" content="${a.desc}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="${a.name}">
+  <meta property="og:description" content="${a.desc}">
+  <meta property="og:image" content="http://xyr.codes/${a.img}">
+  <meta property="og:url" content="https://xyr.codes/${a.location}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#77e4ff">
+  <link href="${a.path}favicon.ico" rel="shortcut icon" type="image/ico">
+  <link href="${a.path}main.css" rel="stylesheet">
+</head>
+<body>
+  <header role="banner">
+    <div id="bg" style="background-color:#0B161D" aria-hidden="true"></div>
+    <h1 aria-labelledby="pagetitle"><a id="pagetitle" href="${a.path}index.html">XYR<span style="color:#77e4ff">.</span>codes</a></h1>
+    <p aria-label="Subtitle">Projects, tutorials, photography, blogs, and more!</p>
+  </header>
+  <nav role="navigation">
+    <a href="${a.path}index.html">Home</a>${(() => { let b = ''; for (const i of ['Programming', 'Journals', 'Photography']) b += `\n    <a${a.type === i.toLowerCase() ? ' class="current"' : ''} href="${a.path}search.html?t=${i}" aria-label="Browse pages under ${i}">${i}</a>`; return b })()}
+    ${is(a.type, 'others', `    <a class="current" aria-disabled="true" href="${a.path}search.html?t=Others">Others</a>`)}<a href="${a.path}site/about.html">About</a>
+    <a id="search" class="icon" href="${a.path}search.html" aria-label="Search XYR.codes">Search</a>
+  </nav>
+  <div class="main">
+    <main role="main" aria-labelledby="mainTitle">
       <h1 id="mainTitle" class="title">${a.name}</h1>
       ${a.date ? `<p class="time" data-posted="${a.date}"${a.type === 'main' ? ' data-text="Last updated"' : ''}>${new Date(a.date + 'T00:00+08:00').toLocaleString('default', {dateStyle: 'long'})}</p>` : ''}
-      <article class="post">\n${a.content}\n</article>
-      </main>
-      <aside></aside>
-      </div>
-      <footer role="contentinfo" aria-label="Footer">
-      <h1 class="name">XYR.codes</h1>
-      <p>${a.footer}</p>
-      <div class="ico" aria-hidden="true">
+      <article class="post">
+        ${a.content}
+      </article>
+    </main>
+    <aside></aside>
+  </div>
+  <footer role="contentinfo" aria-label="Footer">
+    <h1 class="name">XYR.codes</h1>
+    <p>${a.footer}</p>
+    <div class="ico" aria-hidden="true">
       <img src="${a.path}i/fav.ico" alt="">
-      </div>
-      <div class="links" aria-label="Footer links">
+    </div>
+    <div class="links" aria-label="Footer links">
       <div class="col">
-      <a href="${a.path}index.html">Home</a>
-      <a href="${a.path}site/about.html">About</a>
-      <a href="${a.path}contact/index.html">Contact</a>
-      <a href="${a.path}contact/feedback.html">Feedback</a>
-      </div>
-      <div class="col">
-      <a href="${a.path}search.html">Search</a>
-      <a href="${a.path}versions/index.html">Versions</a>
-      <a href="${a.path}site/credits.html">Credits</a>
-      <a href="${a.path}site/sitemap.html">Sitemap</a>
+        <a href="${a.path}index.html">Home</a>
+        <a href="${a.path}site/about.html">About</a>
+        <a href="${a.path}contact/index.html">Contact</a>
+        <a href="${a.path}contact/feedback.html">Feedback</a>
       </div>
       <div class="col">
-      <span class="social">
-      <a class="gthb" href="https://github.com/xyr11/xyr11.github.io" title="Check the repository on GitHub"></a> <a class="twtr" href="https://twitter.com/xy_rus/" title="Follow me on Twitter"></a> <a class="doc" href="https://github.com/xyr11/xyr11.github.io/blob/main/README.md" title="Read the README.md file"></a>
-      </span>
-      <a href="${a.path}site/license.html">License</a>
-      <a id="gototop" tabindex="0">Go to top</a>
+        <a href="${a.path}search.html">Search</a>
+        <a href="${a.path}versions/index.html">Versions</a>
+        <a href="${a.path}site/credits.html">Credits</a>
+        <a href="${a.path}site/sitemap.html">Sitemap</a>
       </div>
+      <div class="col">
+        <span class="social">
+          <a class="gthb" href="https://github.com/xyr11/xyr11.github.io" title="Check the repository on GitHub"></a> <a class="twtr" href="https://twitter.com/xy_rus/" title="Follow me on Twitter"></a> <a class="doc" href="https://github.com/xyr11/xyr11.github.io/blob/main/README.md" title="Read the README.md file"></a>
+        </span>
+        <a href="${a.path}site/license.html">License</a>
+        <a id="gototop" tabindex="0">Go to top</a>
       </div>
-      </footer>
-      <script type="text/javascript" src="https://xyr11.github.io/files/version.js">\<\/script> <!-- Check version online thru this link -->
-      <script type="text/javascript" src="${a.path}files/main.js">\<\/script>
-      <\/body>
-      <\/html>`
+    </div>
+  </footer>
+  <script type="text/javascript" src="https://xyr11.github.io/files/version.js">\<\/script> <!-- Check version online thru this link -->
+  <script type="text/javascript" src="${a.path}files/main.js">\<\/script>
+<\/body>
+<\/html>`
       // json output
       let jsonResult = '{'
       for (const at of ['name', 'type', 'location', 'desc', 'img', 'date', 'content', 'footer']) jsonResult += `${at}: "${a[at].toString().replace(/"/g, '\\"').replace(/\n/g, '\\n')}"${at !== 'footer' ? ', ' : ''}`
