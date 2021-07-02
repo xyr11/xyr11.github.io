@@ -1,5 +1,5 @@
 // absolutely necessary hidden console message i swear
-console.log('%c👀 Hello there :)', 'font-size: 2em', '\nJavascript errors will show down here (if there are any)')
+console.log('%c👀 Hello there :)', 'font-size: 2em', '\nJavascript errors will show here')
 
 // Shorthand Functions
 const id = id => document.getElementById(id)
@@ -20,11 +20,10 @@ const body = tag('body')
 body.innerHTML += '<div id="notifs"></div>'
 const newNotif = (text, length = 'short') => {
   if (!text || text === undefined) console.error('newNotif() text cannot be empty')
-
   // notif length
   const validLength = ['short', 'medium', 'long', 'longer']
   const time = [5600, 15600, 30600, 60600]
-
+  // alert
   const alertId = 'ntf' + Math.floor(Math.random() * 10000)
   const alert = document.createElement('div')
   alert.classList.add('alert')
@@ -33,7 +32,7 @@ const newNotif = (text, length = 'short') => {
   alert.setAttribute('id', alertId)
   alert.innerHTML = `<span>${text}</span><span class="x" onclick="this.parentNode.parentNode.removeChild(this.parentNode)">&times;</span>`
   document.getElementById('notifs').appendChild(alert)
-
+  // delete element after a cetain amount of time
   setTimeout(() => {
     const alDiv = document.getElementById(alertId)
     if (alDiv !== null) alDiv.parentNode.removeChild(alDiv)
