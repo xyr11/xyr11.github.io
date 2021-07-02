@@ -241,12 +241,11 @@ for (const i of post) { // add event listeners to check for onclick
 }
 
 // hmm
-const lmao = ['\n  __  __    __    __\n /\\ \\_\\ \\  /\\ \\  /\\ \\\n \\ \\  __ \\ \\ \\ \\ \\ \\_\\\n  \\ \\ \\ \\ \\ \\ \\ \\ \\/_/\n   \\ \\_\\ \\_\\ \\ \\_\\ /\\_\\\n    \\/_/\\/_/  \\/_/ \\/_/\n', '\n  _   _        _  _\n | | | |  ___ | || |  ___\n | |_| | / _ \\| || | / _ \\\n |  _  ||  __/| || || |_| |\n |_| |_| \\___||_||_| \\___/\n', '\n  __  __    ______    __  __    __\n /\\ \\ \\ \\  /\\  ___\\  /\\ \\/\\ \\  /\\ \\\n \\ \\ \\_\\ \\ \\ \\ \\___  \\ \\ \\_\\ \\ \\ \\ \\\n  \\ \\  __ \\ \\ \\  ___\\ \\ \\__  _\\ \\ \\_\\\n   \\ \\ \\ \\ \\ \\ \\ \\____ \\/_/\\ \\/  \\/_/\n    \\ \\_\\ \\_\\ \\ \\_____\\   \\ \\_\\   /\\_\\\n     \\/_/\\/_/  \\/_____/    \\/_/   \\/_/\n', '\n  __  __    _______   __\n /\\ \\_\\ \\  /\\__  __\\ /\\ \\\n \\ \\  __ \\ \\/_/\\ \\_/ \\ \\_\\\n  \\ \\ \\ \\ \\   \\_\\ \\__ \\/_/\n   \\ \\_\\ \\_\\ /\\______\\ /\\_\\\n    \\/_/\\/_/ \\/______/ \\/_/\n']
 const commentAdder = (comment, tagLocate) => {
   const location = document.getElementsByTagName(tagLocate)[0]
   location.parentNode.insertBefore(document.createComment(comment), location.nextSibling)
 }
-commentAdder(lmao[Math.floor(Math.random() * 10 % 4)], 'head')
+commentAdder(['\ndo__e __xdyq__?tea__\nl/\\r\\_\\u\\n./\\(\\)d/\\ \\\n \\ \\  __ \\ \\ \\ \\ \\ \\_\\\nsu\\s\\h\\ \\k\\ \\ \\ \\ \\/_/\n f \\ \\_\\ \\_\\ \\ \\_\\ /\\_\\\nq r \\/_/\\/_/u \\/_/ \\/_/\n', '\nj _7t6_ g4ඞfsus_  _\n | | | |f ___ | ||r|h6___\nj|k|_|ඞ|y/6_t\\|h|| | / _ \\\ne|hg_r6|| u__/|i|| ||g|_| |\ne|_| |_| \\___||_||_|r\\___/\n', '\nt __j8__y e ______5 y5__g __2 r __\n /\\ \\t\\h\\ඞl/\\5 ___\\69/\\ \\/\\ \\u /\\ \\\n \\ \\ \\_\\ \\ \\ \\ \\___  \\ \\ \\_\\f\\ \\ \\ \\\n w\\ \\ey__r\\ \\ \\u ___\\ \\ \\__a _\\ \\ \\_\\\n94d\\3\\f\\ \\ \\ \\ \\h\\____ \\/_/\\ \\/42\\/_/\nypo \\ \\_\\ \\_\\ \\ \\_____\\s b\\g\\_\\ඞ4 /\\_\\\nudvtb\\/_/\\/_/i \\/_____/neve\\/_/r g\\/_/\n', '\non__na__give_______you__\nu/\\p\\_\\ \\u /\\__ ඞ__\\ /\\4\\\n \\ \\  __ \\d\\/_/\\v\\_/ \\ \\_\\\nc \\ \\ \\n\\ \\420\\_\\ \\__n\\/_/\n 6 \\ \\_\\ \\_\\ /\\______\\ /\\_\\\nx z \\/_/\\/_/m\\/______/v\\/_/\n'][Math.floor(Math.random() * 10 % 4)].replace(/[^\\/_\n| ]/g, ' '), 'head')
 commentAdder('I just wanna tell you how I\'m feeling, gotta make you understand. I\'ll never gonna give you up, never gonna let you down, never gonna run around and desert you.', 'html')
 
 // version checking
