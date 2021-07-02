@@ -351,7 +351,6 @@
       <label for="tSwitch" id="identify" style="position: relative;top: 0.15em;vertical-align:middle;">Toggle themes</label>
     </footer>
   </main>
-  <script src="../files/indenter.js"></script>
   <script>
     // Get element by Id or Tag
     const id = id => document.getElementById(id)
@@ -370,11 +369,11 @@
       let a = {
         name: rgx(id('name').value, /\n/g, ' '), // name of page
         type: id('type').value || 'main', // page type
-        location: id('location').value, // location of page relative to root ('')
+        location: id('location').value.replaceAll('\\', '/'), // location of page relative to root ('')
         desc: id('desc').value, // meta description
         img: id('img').value || 'i/emb.png', // embed image (og:image)
         date: id('date').value, // date
-        content: rgx(id('content').value, /^\s{1,}/gm) || '', // content of page
+        content: id('content').value || '', // content of page
         footer: id('footer').value || 'Made with &lt;3, HTML, CSS &amp; Javascript!' // footer
       }
       a.path = rgx(rgx(a.location, /((^|(?<=\/))[^\/\n]*$)/gm), /([^\/\n]+(?=\/))/g, '..') // "a/b.html" -> "../"
@@ -450,13 +449,12 @@
       </div>
       </footer>
       <script type="text/javascript" src="https://xyr11.github.io/files/version.js">\<\/script> <!-- Check version online thru this link -->
-      <script type="text/javascript" src="${a.path}files/main.js">\<\/script> <!-- Magic happens here -->
+      <script type="text/javascript" src="${a.path}files/main.js">\<\/script>
       <\/body>
       <\/html>`
-      if (strResult) strResult = indent.js(rgx(strResult, /^\s{1,}/gm), {tabString: '  '}) // indent
       // json output
       let jsonResult = '{'
-      for (const at of ['name', 'type', 'location', 'desc', 'img', 'date', 'content', 'footer']) jsonResult += `${at}:"${a[at].toString().replace(/"/g, '\\"').replace(/\n/g, '\\n')}"${at !== 'footer' ? ',' : ''}`
+      for (const at of ['name', 'type', 'location', 'desc', 'img', 'date', 'content', 'footer']) jsonResult += `${at}: "${a[at].toString().replace(/"/g, '\\"').replace(/\n/g, '\\n')}"${at !== 'footer' ? ', ' : ''}`
       jsonResult += '}'
       // check if the important vars have values
       if (!a.name || !a.desc) {
