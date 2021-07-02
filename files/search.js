@@ -1,15 +1,7 @@
-// join 2 objects
-const joinObj = (obj1, obj2) => {
-  if (typeof obj1 !== 'object' || typeof obj2 !== 'object') return 0
-  obj1 = JSON.stringify(obj1)
-  obj2 = JSON.stringify(obj2)
-  return JSON.parse(obj1.slice(0, obj1.length - 1) + ',' + obj2.slice(1, obj2.length))
-}
 
-/* eslint-disable */
 const t = {
   // variables that aren't declared globally are better, so i placed them all inside this object
-  all: [
+  all: [ /* eslint-disable */
     {name:"XYR.codes",type:"main",location:"index.html",desc:"",img:"",date:"",content:"lmao",footer:""},
     {name: "About", type: "main", location: "site/about.html", desc: "Visit the official website of Xyrus Kurt Roldan, full of code, projects, tutorials, photos, blogs, and stuff!", img: "i/emb.png", date: "2021-06-29", content: "<p>This is XYR.codes, the official webpage of Xyrus Kurt Roldan in the depths of the internet! Here, you can find stuff I make on the internet ranging from coding projects to blogging and photography.</p>\n        <!-- This is an older description ;)\n          <p>[<i>Formerly</i>], this site is a Computer Science 3 project that is being actively developed by Xyrus Roldan for completion of the said course and (more recently) has evolved to encompass for his personal use.</p>\n        -->\n        <h2 id=\"about-the-creator\">About the creator</h2>\n        <p>Xyrus Kurt Roldan is a student and a self-confessed programming addict, but he is still new in the programming world. He enjoys programming and web development in his free time, along with taking pictures and playing video games. His interest started when he was in 6th(?<!--I forgot lol-->) grade when he was first introduced to HTML and has grown interest in programming ever since. He has a basic knowledge and understanding of C++, Javascript, and Nodejs, and is skilled at front-end stuff with HTML and CSS.</p>\n        <h2 id=\"why-did-you-start-this\">Why did you start this?</h2>\n        <p>Long-term dream as a kid, short-term rushed CS assignment that doesn't deserve the rush so that's why I'm continuing it.</p>\n        <h2 id=\"why-the-name\">Why the name?</h2>\n        <p>Funny story actually. At my school, one of the perks given is having a GitHub Student Developer Pack, of which I can choose and own one of the selection of domains for free... for 1 year. <i>and yada yada yada</i>, I found xyr.codes and gladly took it. So that's why I (for now) have 2 urls of the site.</p>\n        <h2 id=\"license\">License</h2>\n        <p><a href=\"license.html\">Visit the License page</a> to see the licenses of the content here.</p>\n        <h2 id=\"contribute-stuff\">Contribute stuff</h2>\n        <p>This project is now on GitHub! If you want to contribute to the source code of this project, <a href=\"https://github.com/xyr11/xyr11.github.com\">visit the repository at GitHub</a> and submit an issue or a pull request. <a href=\"license.html\">Check out the License page</a> for licensing your contributions.</p>\n        <h2 id=\"versions\">Versions</h2>\n        <p>There's a <a href=\"https://rc.xyr.codes/\">pre-release branch</a> for the most recent release candidate and a <a href=\"https://dev.xyr.codes/\">development branch</a> for the most recent commit (which is sometimes very buggy). For old versions, see <a>/versions/</a>.</p>\n        <h2 id=\"projects-used\">Licenses of open-source projects used on this site</h2>\n        <h3 id=\"cascadiacode-font-license\">Cascadia Code Font</h3>\n        <p>A copy of the source code can be downloaded from <a href=\"https://github.com/microsoft/cascadia-code\">https://github.com/microsoft/cascadia-code</a>. This software contains the following license:</p>\n        <pre class=\"embd\">Copyright (c) 2019 - Present, Microsoft Corporation,\nwith Reserved Font Name Cascadia Code.\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license is copied below, and is also available with a FAQ at:\nhttp://scripts.sil.org/OFL\n\n\n-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded,\nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.</pre>\n        <h3 id=\"roboto-font-license\">Roboto Font</h3>\n        <p>A copy of the source code can be downloaded from <a href=\"https://github.com/googlefonts/roboto\">https://github.com/googlefonts/roboto</a>. This software contains the following license:</p>\n        <pre class=\"embd\">                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n</pre>\n        <h3 id=\"simplelineicons-license\">Simple Line Icons</h3>\n        <p>A copy of the source code may be downloaded from <a href=\"https://github.com/simplelineicons/simplelineicons.github.io\">https://github.com/simplelineicons/simplelineicons.github.io</a>. This software contains the following license:</p>\n        <p>The MIT License (MIT) Copyright (c) 2016 Sabbir Ahmed &amp; All Contributors</p>\n        <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>\n        <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>\n        <p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>\n        <h2 id=\"other\">Other stuff</h2>\n        <p>Twitter: <a href=\"https://twitter.com/xy_rus/\">@xy_rus</a></p>\n        <p>Contact page: <a>/contact/</a></p>", footer: "Made with &lt;3, HTML, CSS &amp; JavaScript!"},
     {name:"License",type:"main",location:"site/license.html",desc:"The do's and don'ts of visiting and interacting with XYR.codes, including attribution, liability, and more legal stuff.",img:"i/emb.png",date:"2021-06-29",content:"<p>If you plan to copy or use the content on this site, you must follow this site's license. Similarly, if you want to <a href=\"about.html#contribute-stuff\">contribute to this project</a> then you must publish your contribution in the same or compatible license as this project. The content of this site is available under open source licenses.</p>\n<hr>\n<p>&copy; 2021 Xyrus Kurt Roldan. Third-party materials are the copyright of their respective owners and are shared under various licenses.</p>\n<figure class=\"small\">\n<img src=\"../i/cc/by.svg\" style=\"width:6em !important\" alt=\"CC BY 4.0 Button\">\n<figcaption>\n<p>The content of the project itself is licensed under <a href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution 4.0 International</a>.</p>\n</figcaption>\n</figure>\n<figure class=\"small\">\n<img src=\"../i/cc/by-sa.svg\" style=\"width:6em !important\"  alt=\"CC BY-SA 4.0 Button\">\n<figcaption>\n<p>All pictures taken by or made by the repository owner and its contributors are licensed under <a href=\"http://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-ShareAlike 4.0 International</a>.</p>\n</figcaption>\n</figure>\n<figure class=\"small\">\n<img src=\"../i/cc/zero.svg\" style=\"width:6em !important\"  alt=\"CC 0 Button\">\n<figcaption>\n<p>Code examples and snippets that are not particularly under any existing projects are dedicated to the public domain (<a href=\"http://creativecommons.org/publicdomain/mark/1.0/\">CC0 1.0 Universal Public Domain Dedication</a>).</p>\n</figcaption>\n</figure>\n<p>The source code used to build and display the site is licensed under <a href=\"https://github.com/xyr11/xyr11.github.io/blob/main/LICENSE\">MIT License</a>.</p>\n<hr>\n<p>Before version 1.3, the project as a whole is not licensed.</p>\n<p>The author is not responsible for the content on the site. If you wish to contribute, you must make your contributions under similar licenses.</p>",footer:"Made with &lt;3, HTML, CSS &amp; JavaScript!"},
@@ -26,8 +18,9 @@ const t = {
     {name:"A speed edit 2",type:"journals",location:"journals/speededit2.html",desc:"The second installment of the speed edit playlist on YouTube.",img:"i/emb.png",date:"2020-10-30",content:"<p>The second installment of the <a href=\"https://www.youtube.com/playlist?list=PLijcTtxZjmVvyputTtqXGewmLDGusnVYV\">speed edit playlist</a>.</p>\n        <div class=\"video\"><iframe src='https://www.youtube-nocookie.com/embed/8oKKv7ANWnU' title=\"YouTube video player\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" frameborder='0' allowfullscreen></iframe></div>\n        <p>It's very amazing to look at the video because of the fact that I compressed 2.5 hours of work into a 3 minute video.</p>\n        <p>This is the second speed edit on my channel for my assignment in our Health 3 subject about Human Sexuality.</p>\n        <p>Take note that some parts have been cut off for the sake of time. Would you like a 10 minute-long video just on speed editing? Probably not.</p>\n        <p>\n          Music Used: <br>\n          Lost World by SilentCrafter <a href=\"https://soundcloud.com/silentcrafterofficial\">https://soundcloud.com/silentcrafterofficial</a> <br>\n          Creative Commons — Attribution-ShareAlike 3.0 Unported — CC BY-SA 3.0 <br>\n          Free Download / Stream: <a href=\"https://bit.ly/_lost-world\">https://bit.ly/_lost-world</a> <br>\n          Music promoted by Audio Library <a href=\"https://youtu.be/2oRxLgoNpRs\">https://youtu.be/2oRxLgoNpRs</a>\n        </p>",footer:"heyyyyy, did you know that <a href=\"https://www.youtube.com/channel/UCbSoXeCeSaNo7OPmDQO6XQg\">I have a YouTube channel</a>?"},
     {name:"Old versions",type:"main",location:"versions/index.html",desc:"XYR.codes has gone under many changes ranging from technical to design changes. Check out the old versions here!",img:"i/emb.png",date:"",content:"<p>For local versions, you need an internet connection in order to view old versions.</p>\n          <div style=\"overflow-x:auto\">\n            <table>\n              <thead>\n                <tr>\n                  <th>Version</th>\n                  <th>Published on <abbr style=\"cursor:help\" title=\"All times are in GMT+8\">*</abbr></th>\n                  <th>Links</th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr>\n                  <td>1.3</td>\n                  <td>Current version</td>\n                  <td><a href=\"../index.html\">Home</a></td>\n                </tr>\n                <tr>\n                  <td>1.2.1</td>\n                  <td>Mar 30 11am</td>\n                  <td><a href=\"1.2.1.html\">Archive</a></td>\n                </tr>\n                <tr>\n                  <td>1.2</td>\n                  <td>Mar 30 2am</td>\n                  <td><a href=\"1.2.html\">Archive</a></td>\n                </tr>\n                <tr>\n                  <td>1.1.4</td>\n                  <td>Feb 8 12am</td>\n                  <td><a href=\"1.1.4.html\">Archive</a></td>\n                </tr>\n                <tr>\n                  <td>1.1.3</td>\n                  <td>Feb 8 12am</td>\n                  <td><a href=\"1.1.3.html\">Archive</a></td>\n                </tr>\n                <tr>\n                  <td>1.1.2</td>\n                  <td>Feb 8 12am</td>\n                  <td><a href=\"1.1.2.html\">Archive</a></td>\n                </tr>\n                <tr>\n                  <td>1.1.1</td>\n                  <td>Feb 8 12am</td>\n                  <td><a href=\"1.1.1.html\">Archive</a></td>\n                </tr>\n                <tr>\n                  <td>1.1</td>\n                  <td>Feb 7 11pm</td>\n                  <td><a href=\"1.1.html\">Archive</a></td>\n                </tr>\n                <tr>\n                  <td>1.0.2</td>\n                  <td>Feb 5 5am</td>\n                  <td><a href=\"1.0.2.html\">Archive</a></td>\n                </tr>\n                <tr>\n                  <td>1.0.1</td>\n                  <td>Feb 5 5am</td>\n                  <td><a href=\"1.0.1.html\">Archive</a></td>\n                </tr>\n                <tr>\n                  <td>1.0</td>\n                  <td>Feb 5 5am</td>\n                  <td><a href=\"1.0.html\">Archive</a></td>\n                </tr>\n                <tr>\n                  <td>0.9</td>\n                  <td>Feb 2 3am</td>\n                  <td><a href=\"0.9.html\">Archive</a></td>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n          <br>\n          <p>* Times are in GMT+8</p>",footer:"Did you know that this website is responsive? "},
     {name: "test", content: "journals", type: "main", location: "", desc: "a", img: "i/emb.png", date: "", footer: "Made with &lt;3, HTML, CSS &amp; Javascript!"}
-  ],
-  commonWords: ['to','am','is','are','was','were','be','been','being','do','does','did','doing','has','have','had','having','can','could','will','would','shall','should','may','might','must','dare','need','ought','the','a','an','this','that','these','those','nggyunglydngraady'],
+  ], /* eslint-enable */
+  // list of auxilary verbs + other words I added
+  commonWords: ['to', 'am', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'do', 'does', 'did', 'doing', 'has', 'have', 'had', 'having', 'can', 'could', 'will', 'would', 'shall', 'should', 'may', 'might', 'must', 'dare', 'need', 'ought', 'the', 'a', 'an', 'this', 'that', 'these', 'those', 'nggyunglydngraady'],
   // sorter from greatest to least score
   rankings: arr => {
     const sorted = arr.slice().sort(function (a, b) { return b - a })
@@ -43,9 +36,30 @@ const t = {
       if (arr1[i] !== arr2[i]) return false
     }
     return true
+  },
+  // join 2 objects
+  joinObj (obj1, obj2) {
+    if (typeof obj1 !== 'object' || typeof obj2 !== 'object') return 0
+    obj1 = JSON.stringify(obj1)
+    obj2 = JSON.stringify(obj2)
+    return JSON.parse(obj1.slice(0, obj1.length - 1) + ',' + obj2.slice(1, obj2.length))
+  },
+  // word commonness function that compares if the input word is similar to the reference word
+  wordCommonness (inputWord, referWord) {
+    let match = 0
+    let noMatch = 0
+    let pos = -1
+    for (const k of referWord.split('')) {
+      inputWord.toLowerCase().indexOf(k.toLowerCase(), pos + 1) > -1 ? match++ : noMatch++
+      pos = inputWord.indexOf(k.toLowerCase(), pos + 1)
+    }
+    return {
+      score: Math.max(((match - noMatch) / Math.max(inputWord.length, referWord.length)).toFixed(4), 0),
+      match,
+      noMatch
+    }
   }
 }
-/* eslint-enable */
 
 // alt text extractor
 for (const i in t.all) {
@@ -56,13 +70,44 @@ for (const i in t.all) {
   }
 }
 
-let Search = { // eslint-disable-line prefer-const, no-unused-vars
-  // first type of our search algorithm which finds words on all articles
-  text (query, type = 'desc name content date alt') {
+const Search = { // eslint-disable-line no-unused-vars
+  /*
+   * Search.text(searchTerm, type, sort)
+   * finds words with high "word commonness" as the searchTerm
+   *
+   TODO: type (not yet implemented in front-end)
+   * [x] Name (article/page title)
+   * [x] Page description (meta description) [`desc`]
+   * [x] Page content [`content`]
+   * [x] Date posted/updated [`date`]
+   * [x] Image descriptions (alt text of images) [`alt`]
+   *
+   TODO: sort (not yet implemented)
+   * + revelance (potential words count)
+   * - relevance+ (potential words and total number of words)
+   * - date (old)
+   * - date (new)
+   * - alphabetical
+   */
+  text (searchTerm, type = 'desc name content date alt', sort = 'relevance') {
     // check if query is empty string
-    if (!query) {
+    if (!searchTerm) {
       console.error('Empty string')
       return []
+    }
+    // filter out duplicates from searchTerm and tranfer them to query
+    const query = []
+    searchTerm = searchTerm.split(' ')
+    for (const i in searchTerm) {
+      // check if search term is duplicate
+      if (query.indexOf(searchTerm[i]) <= -1) {
+        if (query.length) {
+          // check for word commonness in each search term with each query term
+          for (const j of query) if (t.wordCommonness(searchTerm[i], j).score <= 0.6) query.push(searchTerm[i])
+        } else {
+          query.push(searchTerm[i])
+        }
+      }
     }
 
     // filter the type
@@ -87,31 +132,25 @@ let Search = { // eslint-disable-line prefer-const, no-unused-vars
     // Check the number of occurance in each value
     // example: photo=1 (100% match), photos=0.8, hot=0.6
     const rankingArr = []
-    for (const q of query.split(' ')) {
+    for (const searchWord of query) {
       for (const i of extractedArr) {
-        let num = 0
+        let tally = 0
         const index = extractedArr.indexOf(i)
         if (i) {
-          for (const j of i.match(/\b(\w+)\b/g)) {
-            let match = 0
-            let noMatch = 0
-            let pos = -1
-            for (const k of j.split('')) {
-              q.toLowerCase().indexOf(k.toLowerCase(), pos + 1) > -1 ? match++ : noMatch++
-              pos = q.indexOf(k.toLowerCase(), pos + 1)
-            }
+          for (const word of i.match(/\b(\w+)\b/g)) {
+            const commonness = t.wordCommonness(word, searchWord)
+            let score = commonness.score
 
-            // get score of the respective word
-            let score = Math.max(((match - noMatch) / q.length).toFixed(3), 0)
-            // if the word is on auxiliaryVerbs, reduce score
-            if (t.commonWords.indexOf(i) > -1) score *= 0.6
-            // add to total tally (num)
-            if (score > 0.332) num += +((match - noMatch) / q.length).toFixed(3)
+            // if search term is not a common word  and the current word is a common word, reduce score by 60%
+            if (!t.commonWords.indexOf(searchWord) > -1 && t.commonWords.indexOf(i) > -1) score *= 0.6
 
-            // if (score > 0.332) console.log(`Word: ${j}, score: ${score}, from "${all[index].name}"`) // test
+            // add to total tally
+            if (score > 0.5) tally += commonness.score
+            if (score > 0.5) console.log(`Word: ${word}, score: ${score}, from "${t.all[index].name}"`) // test
           }
+          if (tally) console.log(`|| "${t.all[index].name}" tally: ${tally}, ratio: ${Math.round(tally / i.match(/\b(\w+)\b/g).length * 10000) / 10000}%`)
         }
-        rankingArr[index] = num + (rankingArr[index] ? rankingArr[index] : 0)
+        rankingArr[index] = tally + (rankingArr[index] ? rankingArr[index] : 0)
       }
     }
 
@@ -135,18 +174,32 @@ let Search = { // eslint-disable-line prefer-const, no-unused-vars
     return returN.filter(e => { return e != null }) // remove empty values
   },
 
-  // second (and much simpler) type of our search algorithm which only returns articles with the same type
-  type (sType) {
-    // check if query is empty string
-    if (!sType) {
+  /*
+   * Search.type(inputType, sort)
+   * returns pages with the same type
+   * doesn't work with type='main'
+   *
+   TODO: sort (not yet implemented)
+   * - date (old)
+   * + date (new)
+   * - alphabetical
+   */
+  type (inputType, sort = 'date (new)') {
+    console.log(inputType)
+    // check if given is empty string
+    if (!inputType) {
       console.error('Empty string')
+      return []
+    } else if (inputType.toLowerCase() === 'main') {
+      console.log('Type cannot be main')
       return []
     }
 
     const returN = []
     for (const i of t.all) {
       const id = t.all.indexOf(i)
-      if (sType.toLowerCase() !== 'main' && i.type === sType.toLowerCase()) {
+      // check if entry type is equal to given type
+      if (i.type === inputType.toLowerCase()) {
         returN.push({
           name: t.all[id].name,
           desc: t.all[id].desc,
