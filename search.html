@@ -2,7 +2,7 @@
 <html lang="en" data-loc="root">
   <head>
     <meta charset="UTF-8">
-    <title>Search</title>
+    <title>Search XYR.codes</title>
     <meta name="author" content="Xyrus Kurt Roldan">
     <meta name="description" content="Search within pages with the all-new special in-house-developed bunch-of-overly-enthusiastic-words XYR.codes Finder Algorithm®™, only available in this page.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,20 +67,16 @@
           opacity: 0;
           content: '';
         }
-        .focus #searchBtn, #searchBtn:focus-visible {
+        .focus #searchBtn, #searchBtn:hover {
           right: .3em;
-        }
-        .focus #searchBtn {
           animation: fancy .6s;
         }
-        .focus #searchBtn::after, #searchBtn:focus-visible::after {
+        .focus #searchBtn::after, #searchBtn:hover::after {
           visibility: visible;
           opacity: 1;
           font-family: inherit;
           padding-left: .3em;
           content: 'Search';
-        }
-        .focus #searchBtn::after {
           animation: fade .6s;
         }
       }
@@ -114,7 +110,7 @@
         <h1 id="title" class="posts">Search</h1>
         <div id="msg"></div>
         <div class="searchbar">
-          <input type="text" id="query" placeholder="Search XYR.codes" aria-label="Search XYR.codes"> <button id="searchBtn" aria-label="Click to search" tabindex="0"></button>
+          <input type="text" id="query" placeholder="Enter words..." aria-label="Search XYR.codes"> <button id="searchBtn" aria-label="Click to search" tabindex="0"></button>
         </div>
         <div id="categoryHeader" style="margin: 1em 0 .6em 0"></div>
         <div id="output" class="horiz" aria-label="Search results"></div>
@@ -156,16 +152,18 @@
     <script>
       // Search
       // search bar
+      const searchBar = document.querySelector('.searchbar').classList
       const searchBtn = id('searchBtn')
       const query = id('query')
 
-      // design
-      query.addEventListener('focus', () => {document.querySelector('.searchbar').classList.add('focus')})
-      query.addEventListener('blur', () => {document.querySelector('.searchbar').classList.remove('focus')})
+      // for aesthetics only
+      query.addEventListener('focus', () => searchBar.add('focus'))
+      query.addEventListener('blur', () => searchBar.remove('focus'))
 
-      // listen if user clicked searchBtn / pressed enter
+      // if clicked searchBtn
       searchBtn.addEventListener('click', () => {if (query.value) window.location.href = `search.html?q=${query.value}`
       })
+      // if pressed enter
       query.addEventListener('keydown', e => (e.key === 'Enter') && searchBtn.click())
       searchBtn.addEventListener('keydown', e => (e.key === 'Enter') && searchBtn.click())
 
@@ -183,13 +181,12 @@
           id('title').style.display = 'none'
           id('categoryHeader').innerHTML = `<h1>Category: ${t}</h1>`
         } else {
-          id('msg').innerHTML = 'Search for stuff within XYR.codes by typing in the search bar below and we\'ll (attempt to) find that article. Word order is not checked.'
+          id('msg').innerHTML = 'Search for stuff within XYR.codes by entering it in the search bar below and we\'ll give back pages with that stuff. Word order is not checked.'
         }
       }
 
       // display results
       const output = id('output')
-      console.log(rawOutput)
       if (rawOutput) {
         if (!rawOutput.length) output.innerHTML = 'Unfortunately, we didn\'t find any results. Please try again.'
         for (const i of rawOutput) {
