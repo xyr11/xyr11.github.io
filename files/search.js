@@ -75,7 +75,7 @@ const Search = { // eslint-disable-line no-unused-vars
    * Search.text(searchTerm, type, sort)
    * finds words with high "word commonness" as the searchTerm
    *
-   TODO: type (not yet implemented in front-end)
+   TODO: includes (not yet implemented in front-end)
    * [x] Name (article/page title)
    * [x] Page description (meta description) [`desc`]
    * [x] Page content [`content`]
@@ -85,11 +85,11 @@ const Search = { // eslint-disable-line no-unused-vars
    TODO: sort (not yet implemented)
    * + revelance (potential words count)
    * - relevance+ (potential words and total number of words)
-   * - date (old)
    * - date (new)
+   * - date (old)
    * - alphabetical
    */
-  text (searchTerm, type = 'desc name content date alt', sort = 'relevance') {
+  text (searchTerm, includes = 'desc name content date alt', sort = 'relevance') {
     // check if query is empty string
     if (!searchTerm) {
       console.error('Empty string')
@@ -113,7 +113,7 @@ const Search = { // eslint-disable-line no-unused-vars
     // filter the type
     const properties = Object.keys(t.all[0]) // get all properties (name, type, location, desc, etc)
     const typeNo = [] // convert type names to type numbers
-    for (const i of type.split(' ')) if (properties.indexOf(i) > -1) typeNo.push(properties.indexOf(i)) // remove properties that doesn't exist in type
+    for (const i of includes.split(' ')) if (properties.indexOf(i) > -1) typeNo.push(properties.indexOf(i)) // remove properties that doesn't exist in type
 
     // Extract all values of the given attribute in each object, representing the same index as its source
     // [{a:1, b:2, c:3}, {a:4, b:5, c:6}, ...] => ['1 3', '4 6', ...]
@@ -184,13 +184,13 @@ const Search = { // eslint-disable-line no-unused-vars
    * + date (new)
    * - alphabetical
    */
-  type (inputType, sort = 'date (new)') {
-    console.log(inputType)
+  type (searchType, sort = 'date (new)') {
+    console.log(searchType)
     // check if given is empty string
-    if (!inputType) {
+    if (!searchType) {
       console.error('Empty string')
       return []
-    } else if (inputType.toLowerCase() === 'main') {
+    } else if (searchType.toLowerCase() === 'main') {
       console.log('Type cannot be main')
       return []
     }
@@ -199,7 +199,7 @@ const Search = { // eslint-disable-line no-unused-vars
     for (const i of t.all) {
       const id = t.all.indexOf(i)
       // check if entry type is equal to given type
-      if (i.type === inputType.toLowerCase()) {
+      if (i.type === searchType.toLowerCase()) {
         returN.push({
           name: t.all[id].name,
           desc: t.all[id].desc,
