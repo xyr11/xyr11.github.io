@@ -345,7 +345,7 @@
     </section>
     <footer>
       <label class="switch" title="Click to toggle theme">
-        <input type="checkbox" id="tSwitch" onclick="toggle()">
+        <input type="checkbox" id="tSwitch" onclick="themeBtn()">
         <span class="slider"><i id="slider-inside"></i></span>
       </label>
       <label for="tSwitch" id="identify" style="position: relative;top: 0.15em;vertical-align:middle;">Toggle themes</label>
@@ -356,7 +356,6 @@
     const id = id => document.getElementById(id)
     const tag = tag => document.querySelector(tag)
 
-    let cacheValues = []
     let dateUpdated
 
     id('date').value = new Date().toISOString().slice(0, new Date().toISOString().length - 14) // set date to its default value
@@ -366,7 +365,7 @@
     let valuesCache = {}
     const output = () => {
       // reduce number of times referencing to dom for better performance
-      let a = {
+      const a = {
         name: rgx(id('name').value, /\n/g, ' '), // name of page
         type: id('type').value || 'main', // page type
         location: id('location').value.replaceAll('\\', '/'), // location of page relative to root ('')
@@ -376,13 +375,14 @@
         content: id('content').value.replaceAll('\\', '\\\\') || '', // content of page
         footer: id('footer').value || 'Made with &lt;3, HTML, CSS &amp; Javascript!' // footer
       }
-      a.path = rgx(rgx(a.location, /((^|(?<=\/))[^\/\n]*$)/gm), /([^\/\n]+(?=\/))/g, '..') // "a/b.html" -> "../"
+      a.path = rgx(rgx(a.location, /((^|(?<=\/))[^/\n]*$)/gm), /([^/\n]+(?=\/))/g, '..') // "a/b.html" -> "../"
 
       // check if there are no changes in the input
       if (JSON.stringify(a) === JSON.stringify(valuesCache)) return 0
 
       const is = (val, check, text) => val === check ? text : ''
 
+      /* eslint-disable no-useless-escape */
       // html output
       let strResult = `<!DOCTYPE html>
 <html lang="en" data-loc="${a.path ? a.path : 'root'}">
@@ -415,7 +415,7 @@
   <div class="main">
     <main role="main" aria-labelledby="mainTitle">
       <h1 id="mainTitle" class="title">${a.name}</h1>
-      ${a.date ? `<p class="time" data-posted="${a.date}"${a.type === 'main' ? ' data-text="Last updated"' : ''}>${new Date(a.date + 'T00:00+08:00').toLocaleString('default', {dateStyle: 'long'})}</p>` : ''}
+      ${a.date ? `<p class="time" data-posted="${a.date}"${a.type === 'main' ? ' data-text="Last updated"' : ''}>${new Date(a.date + 'T00:00+08:00').toLocaleString('default', { dateStyle: 'long' })}</p>` : ''}
       <article class="post">
         ${a.content}
       </article>
@@ -453,7 +453,7 @@
   <script type="text/javascript" src="https://xyr11.github.io/files/version.js">\<\/script> <!-- Check version online thru this link -->
   <script type="text/javascript" src="${a.path}files/main.js">\<\/script>
 <\/body>
-<\/html>`
+<\/html>` /* eslint-enable */
       // json output
       let jsonResult = '{'
       for (const at of ['name', 'type', 'location', 'desc', 'img', 'date', 'content', 'footer']) jsonResult += `${at}: "${a[at].toString().replace(/"/g, '\\"').replace(/\n/g, '\\n')}"${at !== 'footer' ? ', ' : ''}`
@@ -469,7 +469,7 @@
         // output
         id('output').value = strResult
         id('outputJson').value = jsonResult
-        localStorage.data = JSON.stringify(a)
+        window.localStorage.data = JSON.stringify(a)
       }, userTooFast ? Math.ceil(new Date() / 1500) * 1500 - new Date() : 0)
       // caches
       valuesCache = a
@@ -485,15 +485,15 @@
       } else {
         do {
           isOk = true
-          try { input = JSON.parse(prompt('Please paste your JSON string below. It must have the following attributes: name, type, location, desc, img, date, content, footer')) } catch(e) {}
+          try { input = JSON.parse(window.prompt('Please paste your JSON string below. It must have the following attributes: name, type, location, desc, img, date, content, footer')) } catch (e) {}
           if (typeof input === 'undefined') {
-            alert('Invalid JSON string. Please try again')
+            window.alert('Invalid JSON string. Please try again')
           } else if (input !== null) {
             if (Object.keys(input).toString() === 'name,type,location,desc,img,date,content,footer') {
-              alert('Accepted! Thank you!')
+              window.alert('Accepted! Thank you!')
             } else {
               isOk = false
-              alert('JSON not accepted. The JSON must have the following attributes: name, type, location, desc, ogname, img, date, content, footer.')
+              window.alert('JSON not accepted. The JSON must have the following attributes: name, type, location, desc, ogname, img, date, content, footer.')
             }
           }
         } while ((!input || !isOk) && input !== null)
@@ -506,28 +506,29 @@
       output()
     }
 
-    if (localStorage.data) inputObj(JSON.parse(localStorage.data))
+    if (window.localStorage.data) inputObj(JSON.parse(window.localStorage.data))
 
     // Copy code
-    function copyCode(Id) {
+    function copyCode (Id) { // eslint-disable-line no-unused-vars
       if (!id(Id)) return 0
       id(Id).select()
       id(Id).setSelectionRange(0, 99999) // for mobile
       document.execCommand('copy')
-      alert('Copied to clipboard successfully!')
+      window.alert('Copied to clipboard successfully!')
     }
 
     // Reset
-    const reset = () => {
+    const reset = () => { // eslint-disable-line no-unused-vars
       for (const n of ['name', 'type', 'location', 'desc', 'img', 'date', 'content', 'footer']) if (id(n)) id(n).value = ''
       id('date').value = new Date().toISOString().slice(0, new Date().toISOString().length - 14) // set date to its default value
     }
 
     // Toggle theme
-    var tswitch = id("tSwitch") // theme switch
-    var body = document.getElementsByTagName("html")[0]
+    const tswitch = id('tSwitch') // theme switch
+    const body = tag('html')
 
-    function toggle() {
+    function themeBtn (isToggle = false) {
+      if (isToggle) tswitch.checked = !tswitch.checked
       if (tswitch.checked) {
         body.classList.add('dark')
         id('identify').innerHTML = 'Dark theme active'
@@ -536,19 +537,12 @@
         id('identify').innerHTML = 'Light theme active'
       }
     }
-    tswitch.addEventListener('keyup', (e) => { // for accessibility
-      if (e.keyCode === 13) {
-        tswitch.checked = !tswitch.checked
-        toggle()
-      }
-    })
-    toggle()
+    themeBtn()
+    tswitch.addEventListener('keyup', e => e.key === 'Enter' && themeBtn(true)) // for accessibility
 
-    window.matchMedia('(prefers-color-scheme: dark)') // automatic check
-    .addEventListener('change', e => {
-      tswitch.checked = e.matches
-      toggle()
-    })
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) themeBtn(true)
+    // automatic check
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => themeBtn(true))
   </script>
 </body>
 
