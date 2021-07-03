@@ -1,5 +1,5 @@
 
-const t = {
+const data = {
   // variables that aren't declared globally are better, so i placed them all inside this object
   all: [ /* eslint-disable */
     {name:"XYR.codes",type:"main",location:"index.html",desc:"",img:"",date:"",content:"lmao",footer:""},
@@ -62,70 +62,64 @@ const t = {
 }
 
 // alt text extractor
-for (const i in t.all) {
-  if (t.all[i].content) {
-    const altTxt = t.all[i].content.match(/((?<=\salt=(|\\)")([^\\">]*(?="|\\")))/g)
-    if (altTxt) t.all[i].alt = altTxt.join(' ')
-    else t.all[i].alt = ''
+for (const i in data.all) {
+  if (data.all[i].content) {
+    const altTxt = data.all[i].content.match(/((?<=\salt=(|\\)")([^\\">]*(?="|\\")))/g)
+    if (altTxt) data.all[i].alt = altTxt.join(' ')
+    else data.all[i].alt = ''
   }
 }
 
+/**
+ * The grand Search class that unifies the desire of a user too lazy going thru all pages of this project to find that one specific page and the 63,700-character array of data in all pages of XYR.codes, available as the XYR.codes Finder Algorithm 99®™, only available on xyr.codes/search.
+ *
+ * TL;DR: People, the Search.
+ */
 const Search = { // eslint-disable-line no-unused-vars
-  /*
-   * Search.text(searchTerm, type, sort)
-   * finds words with high "word commonness" as the searchTerm
-   *
-   TODO: includes (not yet implemented in front-end)
-   * [x] Name (article/page title)
-   * [x] Page description (meta description) [`desc`]
-   * [x] Page content [`content`]
-   * [x] Date posted/updated [`date`]
-   * [x] Image descriptions (alt text of images) [`alt`]
-   *
-   TODO: sort (not yet implemented)
-   * + revelance (potential words count)
-   * - relevance+ (potential words and total number of words)
-   * - date (new)
-   * - date (old)
-   * - alphabetical
+  /**
+   * Search text in pages inside XYR.codes
+   * @param {string} searchTerm The search term
+   * @param {string} Property Specify properties to search to [name, desc, content, alt]
+   * @param {string} Sort How to sort the result [revelance, relevance+, date (new), date (old), alphabetical]
+   * @returns {Array} Result of the search
    */
-  text (searchTerm, includes = 'desc name content date alt', sort = 'relevance') {
-    // check if query is empty string
-    if (!searchTerm) {
-      console.error('Empty string')
-      return []
-    }
-    // filter out duplicates from searchTerm and tranfer them to query
+  text (searchTerm, Property = 'name desc content alt', Sort = 'relevance') {
+    if (!searchTerm) return [] // check if query is empty string
+
+    // filter out searchTerm
     const query = []
-    searchTerm = searchTerm.split(' ')
-    for (const i in searchTerm) {
+    for (const i of searchTerm.split(' ')) {
       // check if search term is duplicate
-      if (query.indexOf(searchTerm[i]) <= -1) {
+      if (query.indexOf(i) <= -1) {
+        // check if word is "too common" from the other entries
         if (query.length) {
-          // check for word commonness in each search term with each query term
-          for (const j of query) if (t.wordCommonness(searchTerm[i], j).score <= 0.6) query.push(searchTerm[i])
+          for (const j of query) if (data.wordCommonness(i, j).score <= 0.6) query.push(i)
         } else {
-          query.push(searchTerm[i])
+          query.push(i)
         }
       }
     }
 
-    // filter the type
-    const properties = Object.keys(t.all[0]) // get all properties (name, type, location, desc, etc)
-    const typeNo = [] // convert type names to type numbers
-    for (const i of includes.split(' ')) if (properties.indexOf(i) > -1) typeNo.push(properties.indexOf(i)) // remove properties that doesn't exist in type
+    // filter the property
+    Property = Property.split(' ')
+    for (const i of Property) {
+      if (Object.keys(data.all[0]).indexOf(i) <= -1) Property.splice(Property.indexOf(i), 1) // remove properties that doesn't exist in type
+    }
+    if (!Property.length) return [] // if given properties are invalid, return prematurely
 
     // Extract all values of the given attribute in each object, representing the same index as its source
     // [{a:1, b:2, c:3}, {a:4, b:5, c:6}, ...] => ['1 3', '4 6', ...]
     const extractedArr = []
-    for (const i of t.all) {
+    for (const i of data.all) { // loop on each entry
       let push = ''
       // get values and add them together
-      for (const n of typeNo) if (n) push += Object.values(i)[n] + ' '
+      for (const n of Property) if (i[n]) push += i[n] + ' '
       // reduce length of string
       push = push.replace(/<(style|script|textarea)(.|\n)*?<\/(style|script|textarea)>/g, '') // remove all the stuff inside <style>, <script> and <textarea>
-      push = push.replace(/<[^>]*>/g, '') // remove all tags
-      push = push.replace(/\n/g, ' ').replace(/^[\s\n]+|[\s\n]+$|(?<=\s)\s/g, '') // remove newlines and extra whitespaces
+        .replace(/<[^>]*>/g, '') // remove all tags
+        .replace(/\n/g, ' ')
+        .replace(/^[\s\n]+|[\s\n]+$|(?<=\s)\s/g, '') // remove newlines and extra whitespaces
+      // add final results to array
       extractedArr.push(push)
     }
 
@@ -138,17 +132,16 @@ const Search = { // eslint-disable-line no-unused-vars
         const index = extractedArr.indexOf(i)
         if (i) {
           for (const word of i.match(/\b(\w+)\b/g)) {
-            const commonness = t.wordCommonness(word, searchWord)
+            const commonness = data.wordCommonness(word, searchWord)
             let score = commonness.score
 
-            // if search term is not a common word  and the current word is a common word, reduce score by 60%
-            if (!t.commonWords.indexOf(searchWord) > -1 && t.commonWords.indexOf(i) > -1) score *= 0.6
+            if (!data.commonWords.indexOf(searchWord) > -1 && data.commonWords.indexOf(i) > -1) score *= 0.6 // if search term is not a common word and the current word is a common word, reduce score by 60%
 
             // add to total tally
             if (score > 0.5) tally += commonness.score
-            if (score > 0.5) console.log(`Word: ${word}, score: ${score}, from "${t.all[index].name}"`) // test
+            if (score > 0.5) console.log(`Word: ${word}, score: ${score}, from "${data.all[index].name}"`) // test
           }
-          if (tally) console.log(`|| "${t.all[index].name}" tally: ${tally}, ratio: ${Math.round(tally / i.match(/\b(\w+)\b/g).length * 10000) / 10000}%`)
+          if (tally) console.log(`|| "${data.all[index].name}" tally: ${tally}, ratio: ${Math.round(tally / i.match(/\b(\w+)\b/g).length * 10000) / 10000}%`)
         }
         rankingArr[index] = tally + (rankingArr[index] ? rankingArr[index] : 0)
       }
@@ -159,14 +152,14 @@ const Search = { // eslint-disable-line no-unused-vars
     for (const i of rankingArr) {
       const id = rankingArr.indexOf(i)
       if (i > 0) {
-        let rank = t.rankings(rankingArr)[id] - 1
+        let rank = data.rankings(rankingArr)[id] - 1
         // let pos = rank
         while (returN[rank]) rank++ // if the rank already has a value, add 1 to rank
         returN[rank] = {
-          name: t.all[id].name,
-          desc: t.all[id].desc,
-          date: t.all[id].date,
-          location: t.all[id].location
+          name: data.all[id].name,
+          desc: data.all[id].desc,
+          date: data.all[id].date,
+          location: data.all[id].location
         }
       }
     }
@@ -174,15 +167,11 @@ const Search = { // eslint-disable-line no-unused-vars
     return returN.filter(e => { return e != null }) // remove empty values
   },
 
-  /*
-   * Search.type(inputType, sort)
-   * returns pages with the same type
-   * doesn't work with type='main'
+  /**
    *
-   TODO: sort (not yet implemented)
-   * - date (old)
-   * + date (new)
-   * - alphabetical
+   * @param {string} searchType The property to search to
+   * @param {string} sort How to sort the result [date (new), date (old), alphabetical]
+   * @returns {Array} Result of the search
    */
   type (searchType, sort = 'date (new)') {
     console.log(searchType)
@@ -196,15 +185,15 @@ const Search = { // eslint-disable-line no-unused-vars
     }
 
     const returN = []
-    for (const i of t.all) {
-      const id = t.all.indexOf(i)
+    for (const i of data.all) {
+      const id = data.all.indexOf(i)
       // check if entry type is equal to given type
       if (i.type === searchType.toLowerCase()) {
         returN.push({
-          name: t.all[id].name,
-          desc: t.all[id].desc,
-          date: t.all[id].date,
-          location: t.all[id].location
+          name: data.all[id].name,
+          desc: data.all[id].desc,
+          date: data.all[id].date,
+          location: data.all[id].location
         })
       }
     }
