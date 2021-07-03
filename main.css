@@ -119,8 +119,10 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: Roboto, sans-serif;
   scroll-behavior: smooth;
+}
+body * {
+  font-family: Roboto, sans-serif;
 }
 
 .icon::before {font-family: "simple-line-icons"}
@@ -160,6 +162,12 @@ code {
   top: -.1em;
   border-radius: .5em;
 }
+input[type=checkbox], input[type=radio] {
+  height: 1em;
+  width: 1em;
+  font-size: 1em;
+  filter: grayscale(1);
+}
 textarea {
   font-family: 'Cascadia Mono', Consolas, 'Courier New', monospace;
   font-size: .8em;
@@ -176,9 +184,7 @@ textarea {
   resize: vertical;
   transition: border .5s, box-shadow .3s;
 }
-textarea:hover {
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-}
+textarea:hover {box-shadow: 1px 1px 4px rgba(0,0,0,0.2)}
 textarea:focus-visible {
   outline: 0;
   border-color: var(--link);
@@ -196,11 +202,24 @@ textarea.long {
 }
 hr {
   margin: .8em 15%;
-  /* border-top: 1px solid var(--text); */
   height: 3px;
   box-shadow: 0 -1px 0 var(--text), 0 1px 0 var(--text) !important;
   border: 0;
 }
+summary {
+  margin-bottom: .3em;
+  padding-left: 2px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  outline: 0;
+  cursor: pointer;
+  transition: color .3s;
+}
+summary:hover, summary:focus-visible {
+  color: var(--link-active);
+  text-decoration: underline;
+}
+summary:focus-visible {border-color: var(--link-active)}
 
 /* header */
 header {
@@ -214,7 +233,7 @@ header h1 {
 }
 header a {color: inherit}
 header a:hover, header a:focus, header a:active {color: var(--accent)}
-header a:focus-visible {border-color: var(--accent);}
+header a:focus-visible {border-color: var(--accent)}
 header p {margin: 0}
 /* header background */
 #bg {
@@ -303,7 +322,7 @@ nav a:focus-visible {border-color: var(--accent)}
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin: 0 2em;
+  margin: 0 1.6em;
 }
 .main h1 {margin: .3em 0}
 .main h2 {font-size: 1.3em}
@@ -383,7 +402,7 @@ a.post:focus-visible {border-color: var(--link-active)}
 .more a:hover, .more a:focus {text-decoration: underline}
 
 /* Aside */
-aside {width: 22%}
+aside {width: 25%}
 aside div {margin-bottom: 1em}
 aside div:last-child {margin: 0}
 
@@ -466,9 +485,7 @@ a.hlink:hover, a.hlink:focus {
   background: #c8f4ff;
   transition: box-shadow .3s;
 }
-figure {
-  margin: 0 0 1em 0;
-}
+figure {margin: 0 0 1em 0}
 article img {box-shadow: 2px 3px 4px rgba(0,0,0,0.2)}
 figcaption {
   font-style: italic;
@@ -622,14 +639,14 @@ footer .ico img {
   }
   @media (hover: hover) {
     @keyframes ripple {
-      0% { opacity: 1; transform: scale(0) }
-      100% { opacity: 0; transform: scale(30) }
+      0% {opacity: 1; transform: scale(0)}
+      100% {opacity: 0; transform: scale(30)}
     }
   }
   @media (hover: none) {
     @keyframes ripple {
-      0% { opacity: 1; transform: scale(0.5) }
-      100% { opacity: 0; transform: scale(30) }
+      0% {opacity: 1; transform: scale(0.5)}
+      100% {opacity: 0; transform: scale(30)}
     }
   }
 }
@@ -730,8 +747,8 @@ footer .ico img {
 [id^="ntf"].long {animation: alertFade .8s 30s}
 [id^="ntf"].longer {animation: alertFade .8s 60s}
 @keyframes alertFade {
-  0% { opacity: 1 }
-  100% { opacity: 0 }
+  0% {opacity: 1}
+  100% {opacity: 0}
 }
 
 /* Back to top button */
