@@ -15,13 +15,16 @@
     <link href="favicon.ico" rel="shortcut icon" type="image/ico">
     <link href="main.css" rel="stylesheet">
     <style>
+      .search {
+        margin: .6em 0;
+      }
       .searchbar {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: flex-start;
         position: relative;
-        margin: .6em 0;
+        overflow: hidden;
       }
       #query {
         padding: .4em 1.8em .4em .4em;
@@ -62,10 +65,16 @@
       #searchBtn:focus-visible {border: 1px solid}
       @media (min-width: 450px) {
         .focus #query {padding-right: 5.5em}
+        #searchBtn {
+          animation: fancyReverse .6s;
+        }
         #searchBtn::after {
           visibility: hidden;
           opacity: 0;
           content: '';
+          font-family: inherit;
+          padding-left: .3em;
+          animation: fadeReverse .6s;
         }
         .focus #searchBtn, #searchBtn:hover {
           right: .3em;
@@ -74,20 +83,50 @@
         .focus #searchBtn::after, #searchBtn:hover::after {
           visibility: visible;
           opacity: 1;
-          font-family: inherit;
-          padding-left: .3em;
           content: 'Search';
           animation: fade .6s;
         }
       }
+
+      #advanced .fieldsets {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      #advanced summary {
+        margin-bottom: .5em;
+      }
+      .fieldsets fieldset {
+        width: calc(50% - 1em);
+        min-width: 120px;
+        flex-grow: 1;
+        margin: 0 .5em .5em .5em;
+        border: 1px solid var(--link-active);
+      }
+      .fieldsets fieldset input {
+        height: 1em;
+        width: 1em;
+        font-size: 1em;
+      }
+
       @keyframes fancy {
         0% {right: -3.1em}
+        100% {right: .3em}
+      }
+      @keyframes fancyReverse {
+        0% {right: .3em}
+        30% {right: .3em}
+        31% {right: 3.1em}
         100% {right: .3em}
       }
       @keyframes fade {
         0% {visibility: hidden; opacity: 0}
         45% {visibility: hidden; opacity: 0}
         100% {visibility: visible; opacity: 1}
+      }
+      @keyframes fadeReverse {
+        0% {visibility: visible; opacity: 1; content: 'Search'}
+        55% {visibility: hidden; opacity: 0}
+        100% {visibility: hidden; opacity: 0}
       }
     </style>
   </head>
@@ -109,10 +148,33 @@
       <main role="main" aria-labelledby="title">
         <h1 id="title" class="posts">Search</h1>
         <div id="msg"></div>
-        <div class="searchbar">
-          <input type="text" id="query" placeholder="Enter words..." aria-label="Search XYR.codes"> <button id="searchBtn" aria-label="Click to search" tabindex="0"></button>
+        <div class="search">
+          <div class="searchbar">
+            <input type="text" id="query" placeholder="Enter words..." aria-label="Search XYR.codes"> <button id="searchBtn" aria-label="Click to search" tabindex="0"></button>
+          </div>
+          <div id="categoryHeader" style="margin: 1em 0 .6em 0"></div>
+          <details id="advanced">
+            <summary>Advanced options</summary>
+            <div class="fieldsets">
+              <fieldset id="includes">
+                <legend>Search includes:</legend>
+                <div> <input type="checkbox" id="name"> <label for="name" title="article/page title">Name</label> </div>
+                <div> <input type="checkbox" id="desc"> <label for="desc" title="meta description">Page description</label> </div>
+                <div> <input type="checkbox" id="content"> <label for="content">Page content</label> </div>
+                <div> <input type="checkbox" id="date"> <label for="date">Date posted/updated</label> </div>
+                <div> <input type="checkbox" id="alt"> <label for="alt" title="alt text of images">Image descriptions</label> </div>
+              </fieldset>
+              <fieldset>
+                <legend>Sort results by:</legend>
+                <div> <input type="radio" id="relevance" name="sort"> <label for="relevance" title="Sorted with the highest 'word and potential word' count">Relevance</label> </div>
+                <div> <input type="radio" id="relevanceplus" name="sort"> <label for="relevanceplus" title="'Word and potential word' count but taking into account the total number of words">Relevance+</label> </div>
+                <div> <input type="radio" id="date-new" name="sort"> <label for="date-new">Date (newest)</label> </div>
+                <div> <input type="radio" id="date-old" name="sort"> <label for="date-old">Date (oldest)</label> </div>
+                <div> <input type="radio" id="alphabetical" name="sort"> <label for="alphabetical">Alphabetical</label> </div>
+              </fieldset>
+            </div>
+          </details>
         </div>
-        <div id="categoryHeader" style="margin: 1em 0 .6em 0"></div>
         <div id="output" class="horiz" aria-label="Search results"></div>
       </main>
       <aside></aside>
@@ -145,7 +207,7 @@
         </div>
       </div>
     </footer>
-    <script type="text/javascript" src="https://xyr11.github.io/files/version.js"></script> <!-- Check version online thru this link -->
+    <!-- <script type="text/javascript" src="https://xyr11.github.io/files/version.js"></script> --> <!-- Check version online thru this link -->
     <script src="files/search.js"></script>
     <script type="text/javascript" src="files/main.js"></script>
     <!-- Magic happens here -->
@@ -167,23 +229,75 @@
       query.addEventListener('keydown', e => (e.key === 'Enter') && searchBtn.click())
       searchBtn.addEventListener('keydown', e => (e.key === 'Enter') && searchBtn.click())
 
+      // advanced options
+      // includes
+      const includesValues = ['name', 'desc', 'content', 'date', 'alt']
+      // sort
+      const sortValues = ['relevance', 'relevanceplus', 'date-new', 'date-old', 'alphabetical']
+
       // check search params
-      let rawOutput
-      const params = new URLSearchParams(new URL(document.URL).search)
-      if (params) {
-        let q = params.get('q') || params.get('query')
-        const t = params.get('t') || params.get('type')
-        if (q) { // search for text inside pages
-          rawOutput = Search.text(q)
-          id('query').value = q
-        } else if (t) { // search for types of pages
-          rawOutput = Search.type(t)
-          id('title').style.display = 'none'
-          id('categoryHeader').innerHTML = `<h1>Category: ${t}</h1>`
-        } else {
-          id('msg').innerHTML = 'Search for stuff within XYR.codes by entering it in the search bar below and we\'ll give back pages with that stuff. Word order is not checked.'
+      function searchParam (param = new URLSearchParams(new URL(document.URL).search)) {
+        // check query and type
+        // only one of them can be searched separately. query will take precendence over type if they are both used together
+        let query = param.get('q') || param.get('query')
+        let type = param.get('t') || param.get('type')
+        // if there aren't any values on either, return null
+        if (!query && !type) return { type: null }
+        // set input display to whatever param given
+        if (query) id('query').value = query
+        // if type, hide the 'search includes' advanced options
+        if (!query) id('includes').style.display = 'none'
+
+        // get includes
+        // note that 'includes' only affects query search and not type search
+        let includes = param.get('i') || param.get('includes') || 'name,desc,content,date,alt'
+        // filter includes
+        if (includes) {
+          includes = includes.split(',')
+          for (const i of includes) {
+            // if not a valid value, remove that value
+            if (includesValues.indexOf(i) <= -1) includes.splice(includes.indexOf(i), 1)
+            // else set the checkbox to true
+            else id(i).checked = true
+          }
+        }
+
+        // get sort
+        let sort = param.get('s') || param.get('sort') || 'relevance'
+        if (sortValues.indexOf(sort) <= -1) sort = 'relevance'
+        id(sort).checked = true // display
+
+        return {
+          type: query ? 'query' : type ? 'type' : null,
+          search: query ? query : type,
+          includes: query ? includes.join(' ') : null,
+          sort
         }
       }
+
+      let result = searchParam()
+      let rawOutput
+      if (result.type === 'query') {
+        // if query
+        rawOutput = Search.text(result.search, result.includes, result.sort)
+      } else if (result.type === 'type') {
+        // if type
+        id('title').style.display = 'none'
+        id('categoryHeader').innerHTML = `<h1>Category: ${result.search}</h1>`
+        rawOutput = Search.type(result.search, result.sort)
+      } else {
+        // search home
+        id('msg').innerHTML = 'Search for stuff within XYR.codes by entering it in the search bar below and we\'ll give back pages with that stuff. Word order is not checked.'
+      }
+
+      // advanced options
+      const advanced = tag('.fieldsets')
+
+      // sort
+      // add event listener
+      advanced.addEventListener('input', () => {
+        console.log('test')
+      })
 
       // display results
       const output = id('output')
