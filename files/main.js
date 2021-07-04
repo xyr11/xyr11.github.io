@@ -95,7 +95,7 @@ if (tag('aside')) {
   <div class="updates" aria-labelledby="updates">
   <h1 id="updates">Updates</h1>
   <span>
-  <a href="${path}programming/iskhubslow.html" class="post">
+  <a href="${path}post/programming/iskhubslow.html" class="post">
   <h2>Introducing @IsKHubSlow</h2>
   <p>A bot that checks if KHub is slow!</p>
   <p class="new icon"> New</p>
@@ -115,10 +115,9 @@ if (tag('aside')) {
   </div>
   <div class="feature" aria-labelledby="featured">
   <h1 id="featured">Featured Article</h1>
-  <a href="${path}programming/diy/automate/creating-sites.html" class="post">
+  <a href="${path}post/programming/diy/creating-sites.html" class="post">
   <h2>DIY.automate(): Making a site that makes sites</h2>
   <p>A site that explains a site that makes sites</p>
-  <p class="annual icon"> Annual</p>
   </a>
   </div>`
 }
