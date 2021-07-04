@@ -68,7 +68,8 @@ const data = {
     // arrays of values to be sorted
     const values = []
     for (const i of array) {
-      values.push(i[property] ?? 0)
+      if (param !== 'letters') values.push(i[property] ?? 0)
+      else if (param === 'letters') values.push(i[property].replace(/^\s+|\s+$/g, '') ?? '')
     }
 
     // arrays of indexes to be returned
@@ -82,24 +83,22 @@ const data = {
     for (const i in values) { // eslint-disable-line no-unused-vars
       for (let j = 0; j < values.length - 1; j++) {
         const tempVal = values[j]
-        const tempIndx = indexes[j]
         if (
           (param === 'normal' && values[j] < values[j + 1]) ||
           (param === 'reverse' && values[j] > values[j + 1])
         ) {
           values[j] = values[j + 1]
           values[j + 1] = tempVal
-          indexes[j] = indexes[j + 1]
-          indexes[j + 1] = tempIndx
-        } else if (param === 'letters') {
-          console.warn('Help I don\'t know how to do this')
+        } else if (values[j] === values[j + 1] || param === 'letters') { // if param is letters or 2 values are equal, sort them alphabetically
+          if (array[j].title.toLowerCase() > array[j + 1].title.toLowerCase()) {
+            values[j] = values[j + 1]
+            values[j + 1] = tempVal
+          }
         }
       }
     }
 
-    for (const i of indexes) {
-      console.log('Article:', data.all[i].name, '| Value:', values[indexes.indexOf(i)])
-    }
+    for (const i of indexes) console.log(`"${data.all[i].name}" | value: ${values[indexes.indexOf(i)]}`)
     return indexes
   }
 }
