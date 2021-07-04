@@ -372,7 +372,7 @@
         desc: id('desc').value, // meta description
         img: id('img').value || 'i/emb.png', // embed image (og:image)
         date: id('date').value, // date
-        content: id('content').value.replaceAll('\\', '\\\\') || '', // content of page
+        content: id('content').value || '', // content of page
         footer: id('footer').value || 'Made with &lt;3, HTML, CSS &amp; Javascript!' // footer
       }
       a.path = rgx(rgx(a.location, /((^|(?<=\/))[^/\n]*$)/gm), /([^/\n]+(?=\/))/g, '..') // "a/b.html" -> "../"
@@ -414,8 +414,7 @@
   </nav>
   <div class="main">
     <main role="main" aria-labelledby="mainTitle">
-      <h1 id="mainTitle" class="title">${a.name}</h1>
-      ${a.date ? `<p class="time" data-posted="${a.date}"${a.type === 'main' ? ' data-text="Last updated"' : ''}>${new Date(a.date + 'T00:00+08:00').toLocaleString('default', { dateStyle: 'long' })}</p>` : ''}
+      <h1 id="mainTitle" class="title">${a.name}</h1>${a.date ? `\n      <p class="time" data-posted="${a.date}"${a.type === 'main' ? ' data-text="Last updated"' : ''}>${new Date(a.date + 'T00:00+08:00').toLocaleString('default', { dateStyle: 'long' })}</p>` : ''}
       <article class="post">
         ${a.content}
       </article>
