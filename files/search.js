@@ -28,7 +28,7 @@ const data = {
    * @param {Array} arr The array to sort
    * @returns Sorted array
    */
-  rankings: arr => {
+  rankings (arr) {
     const sorted = arr.slice().sort(function (a, b) { return b - a })
     return arr.slice().map(function (v) { return sorted.indexOf(v) + 1 })
   },
@@ -53,6 +53,54 @@ const data = {
       match,
       noMatch
     }
+  },
+
+  /**
+   * A sorter for an array full of objects.
+   * @param {Array} array Array full of objects
+   * @param {string} property The property of the object you want to base your sort to
+   * @param {string} param Parameters. 'normal' will sort from greatest to smallest, 'reverse' for the reverse, 'letters' for an alphabetical sort.
+   * @returns Array of indexes
+   */
+  sortObjArr (array, property, param = 'normal') {
+    if (array.length <= 1) return [] // check if array has less than one values. minimum needed to sort is 2 values
+
+    // arrays of values to be sorted
+    const values = []
+    for (const i of array) {
+      values.push(i[property] ?? 0)
+    }
+
+    // arrays of indexes to be returned
+    const indexes = []
+    for (const i of array) {
+      if (i.index) indexes.push(i.index)
+      else return [] // if the array has no index, return prematurely
+    }
+
+    // sort from greatest to smallest
+    for (const i in values) { // eslint-disable-line no-unused-vars
+      for (let j = 0; j < values.length - 1; j++) {
+        const tempVal = values[j]
+        const tempIndx = indexes[j]
+        if (
+          (param === 'normal' && values[j] < values[j + 1]) ||
+          (param === 'reverse' && values[j] > values[j + 1])
+        ) {
+          values[j] = values[j + 1]
+          values[j + 1] = tempVal
+          indexes[j] = indexes[j + 1]
+          indexes[j + 1] = tempIndx
+        } else if (param === 'letters') {
+          console.warn('Help I don\'t know how to do this')
+        }
+      }
+    }
+
+    for (const i of indexes) {
+      console.log('Article:', data.all[i].name, '| Value:', values[indexes.indexOf(i)])
+    }
+    return indexes
   }
 }
 
@@ -108,12 +156,12 @@ const Search = { // eslint-disable-line no-unused-vars
     if (!Property.length) return [] // if given properties are invalid, return prematurely
 
     // filter out Sort
-    const sortValues = ['relevance', 'relevanceplus', 'date-new', 'date-old', 'a-z']
-    if (sortValues.indexOf(Sort) <= -1) return [] // if sort param is invalid, return prematurely
+    const sortVals = ['relevance', 'relevanceplus', 'date-new', 'date-old', 'a-z']
+    if (sortVals.indexOf(Sort) <= -1) return [] // if sort param is invalid, return prematurely
 
     // Extract all values of the given attribute in each object, representing the same index as its source
     // [{a:1, b:2, c:3}, {a:4, b:5, c:6}, ...] => ['1 3', '4 6', ...]
-    const extractedArr = []
+    const extracted = []
     for (const i of data.all) { // loop on each entry
       let push = ''
       // get values and add them together
@@ -125,51 +173,60 @@ const Search = { // eslint-disable-line no-unused-vars
         .replace(/(\n)|(\\n)/g, ' ') // remove newlines
         .replace(/(?<=[\s])[\s]+/g, '') // remove extra whitespaces
       // add final results to array
-      extractedArr.push(push)
+      extracted.push(push)
     }
 
-    // Check the number of occurance in each value
-    const rankingArr = []
-    for (const searchWord of query) {
-      for (const i of extractedArr) {
-        let tally = 0
-        const index = extractedArr.indexOf(i)
-        if (i) {
-          for (const word of i.match(/[^\s.?!,"`:/()[\]]+/g)) {
-            const commonness = data.wordCommonness(word, searchWord)
+    // The Grand Loop
+    const results = []
+    for (const entry of extracted) {
+      const index = extracted.indexOf(entry)
+      let tally = 0
+      const entryWords = entry.match(/[^\s.?!,"`:/()[\]]+/g) // all words in entry
+      // loop on each word on query
+      for (const refWord of query) {
+        // check if entry exists
+        if (entry) {
+          // loop on each word of the entry
+          for (const word of entryWords) {
+            const commonness = data.wordCommonness(word, refWord)
             let score = commonness.score
+            if (!data.commonWords.indexOf(refWord) > -1 && data.commonWords.indexOf(entry) > -1) score *= 0.6 // if search term is not a common word and the current word is a common word, reduce score by 60%
 
-            if (!data.commonWords.indexOf(searchWord) > -1 && data.commonWords.indexOf(i) > -1) score *= 0.6 // if search term is not a common word and the current word is a common word, reduce score by 60%
+            if (score >= 0.5) tally += score // add to total tally
 
-            // add to total tally
-            if (score > 0.5) tally += score
+            // if (score >= 0.5) console.log(`Word: ${word}, score: ${score}, from "${data.all[index].name}"`) // test
           }
-          if (tally) console.log(`|| "${data.all[index].name}" tally: ${tally.toFixed(5)}, ratio: ${Math.floor(tally / i.match(/[^\s.?!,"`:/()[\]]+/g).length * 10000) / 10000}%`)
         }
-        rankingArr[index] = tally + (rankingArr[index] ? rankingArr[index] : 0)
-        console.log(data.all.score)
+      }
+
+      if (tally > 0) {
+        results.push({
+          index,
+          tally,
+          ratio: +(tally / entryWords.length).toFixed(8),
+          date: new Date(data.all[index].date).getTime() || 32517475199690,
+          title: data.all[index].name.replace(/([^\w\s])+/g, '').slice(0, 5)
+        })
       }
     }
-    console.log(rankingArr)
 
-    // Sort from largest to smallest according to ranking
+    // Sort the results
+    const sortProp = ['tally', 'ratio', 'date', 'date', 'title']
+    let rank
+    if (Sort === 'date-old') rank = data.sortObjArr(results, sortProp[sortVals.indexOf(Sort)], 'reverse')
+    else if (Sort === 'a-z') rank = data.sortObjArr(results, sortProp[sortVals.indexOf(Sort)], 'letters')
+    else rank = data.sortObjArr(results, sortProp[sortVals.indexOf(Sort)])
     const returN = []
-    for (const i of rankingArr) {
-      const id = rankingArr.indexOf(i)
-      if (i > 0) {
-        let rank = data.rankings(rankingArr)[id] - 1
-        // let pos = rank
-        while (returN[rank]) rank++ // if the rank already has a value, add 1 to rank
-        returN[rank] = {
-          name: data.all[id].name,
-          desc: data.all[id].desc,
-          date: data.all[id].date,
-          location: data.all[id].location
-        }
-      }
-    }
 
-    return returN.filter(e => { return e != null }) // remove empty values
+    for (const i of rank) {
+      returN.push({
+        name: data.all[i].name,
+        desc: data.all[i].desc,
+        date: data.all[i].date,
+        location: data.all[i].location
+      })
+    }
+    return returN
   },
 
   /**
