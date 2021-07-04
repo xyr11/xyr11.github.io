@@ -129,7 +129,7 @@ const Search = { // eslint-disable-line no-unused-vars
     // filter out searchTerm
     if (!searchTerm) return [] // if query is an empty string, return prematurely
     const query = []
-    for (const i of searchTerm.split(' ')) {
+    for (const i of searchTerm.match(/[^\s.?!,"`:/()[\]]+/gm)) {
       // check if search term is duplicate
       if (query.indexOf(i) <= -1) {
         // check if word is "too common" from the other entries
@@ -207,7 +207,7 @@ const Search = { // eslint-disable-line no-unused-vars
           tally,
           ratio: +(tally / entryWords.length).toFixed(8),
           date: new Date(data.all[index].date).getTime() || 32517475199690,
-          title: data.all[index].name.replace(/([^\w\s])+/g, '').slice(0, 5)
+          title: data.all[index].name.replace(/([^\w\s])+/g, '').slice(0, 31)
         })
       }
     }
@@ -238,7 +238,6 @@ const Search = { // eslint-disable-line no-unused-vars
    * @returns {Array} Result of the search
    */
   type (searchType, sort = 'date-new') {
-    console.log(searchType)
     // check if given is empty string
     if (!searchType) return [] // empty string
     else if (searchType.toLowerCase() === 'main') return [] // type cannot be main
@@ -254,7 +253,6 @@ const Search = { // eslint-disable-line no-unused-vars
         })
       }
     }
-    console.log(results)
 
     let rank
     if (sort === 'date-new') rank = data.sortObjArr(results, 'date')
