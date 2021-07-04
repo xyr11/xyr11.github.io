@@ -95,15 +95,15 @@ if (tag('aside')) {
   <div class="updates" aria-labelledby="updates">
   <h1 id="updates">Updates</h1>
   <span>
-  <a href="${path}post/programming/iskhubslow.html" class="post">
-  <h2>Introducing @IsKHubSlow</h2>
-  <p>A bot that checks if KHub is slow!</p>
-  <p class="new icon"> New</p>
+  <a href="${path}post/programming/ikhub.html" class="post">
+  <h2>IKHub v1.2</h2>
+  <p>An improved KHub experience!</p>
+  <p class="new icon"> Recently ported from blogs.xyr.codes</p>
   </a>
   <a href="https://github.com/xyr11/" class="post">
   <h2>Check my stuff at GitHub!</h2>
   <p>github.com/xyr11</p>
-  <p>that's where I'll mostly spend my summer on, so yeah</p>
+  <p>that's where I'll mostly spend my time on, so yeah</p>
   <p class="promoted icon"> Promoted</p>
   </a>
   <a href="https://xyr11.github.io/simple-html-previewer/" class="post">
@@ -116,8 +116,8 @@ if (tag('aside')) {
   <div class="feature" aria-labelledby="featured">
   <h1 id="featured">Featured Article</h1>
   <a href="${path}post/programming/diy/creating-sites.html" class="post">
-  <h2>DIY.automate(): Making a site that makes sites</h2>
-  <p>A site that explains a site that makes sites</p>
+  <h2>Making a site that makes sites</h2>
+  <p>A site that explains a site that makes sites, on DIY.automate()</p>
   </a>
   </div>`
 }
