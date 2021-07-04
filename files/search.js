@@ -165,7 +165,10 @@ const Search = { // eslint-disable-line no-unused-vars
     for (const i of data.all) { // loop on each entry
       let push = ''
       // get values and add them together
-      for (const n of Property) if (i[n]) push += i[n] + ' '
+      for (const n of Property) {
+        if (i[n]) push += i[n] + ' '
+        if (n === 'name') push += i[n] + ' ' // duplicate entry inside name
+      }
       // filter extracted
       push = push.replace(/<(style|script|textarea)(.|\n)*?<\/(style|script|textarea)>/g, '') // remove all the stuff inside <style>, <script> and <textarea>
         .replace(/\\"/g, '"') // replace all escaped quotes
@@ -216,8 +219,8 @@ const Search = { // eslint-disable-line no-unused-vars
     if (Sort === 'date-old') rank = data.sortObjArr(results, sortProp[sortVals.indexOf(Sort)], 'reverse')
     else if (Sort === 'a-z') rank = data.sortObjArr(results, sortProp[sortVals.indexOf(Sort)], 'letters')
     else rank = data.sortObjArr(results, sortProp[sortVals.indexOf(Sort)])
-    const returN = []
 
+    const returN = []
     for (const i of rank) {
       returN.push({
         name: data.all[i].name,
@@ -232,32 +235,41 @@ const Search = { // eslint-disable-line no-unused-vars
   /**
    *
    * @param {string} searchType The property to search to
-   * @param {string} sort How to sort the result [date (new), date (old), alphabetical]
+   * @param {string} sort How to sort the result [date-new, date-old, a-z]
    * @returns {Array} Result of the search
    */
-  type (searchType, sort = 'date (new)') {
+  type (searchType, sort = 'date-new') {
     console.log(searchType)
     // check if given is empty string
-    if (!searchType) {
-      console.error('Empty string')
-      return []
-    } else if (searchType.toLowerCase() === 'main') {
-      console.log('Type cannot be main')
-      return []
-    }
+    if (!searchType) return [] // empty string
+    else if (searchType.toLowerCase() === 'main') return [] // type cannot be main
 
-    const returN = []
+    const results = []
     for (const i of data.all) {
-      const id = data.all.indexOf(i)
-      // check if entry type is equal to given type
       if (i.type === searchType.toLowerCase()) {
-        returN.push({
-          name: data.all[id].name,
-          desc: data.all[id].desc,
-          date: data.all[id].date,
-          location: data.all[id].location
+        const index = data.all.indexOf(i)
+        results.push({
+          index,
+          date: new Date(data.all[index].date).getTime() || 32517475199690,
+          title: data.all[index].name.replace(/([^\w\s.'()])+/g, '').slice(0, 5)
         })
       }
+    }
+    console.log(results)
+
+    let rank
+    if (sort === 'date-new') rank = data.sortObjArr(results, 'date')
+    else if (sort === 'date-old') rank = data.sortObjArr(results, 'date', 'reverse')
+    else if (sort === 'a-z') rank = data.sortObjArr(results, 'title', 'letters')
+
+    const returN = []
+    for (const i of rank) {
+      returN.push({
+        name: data.all[i].name,
+        desc: data.all[i].desc,
+        date: data.all[i].date,
+        location: data.all[i].location
+      })
     }
     return returN
   }

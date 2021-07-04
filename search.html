@@ -22,7 +22,7 @@
         position: relative;
         overflow: hidden;
       }
-      #query {
+      #text {
         padding: .4em 1.8em .4em .4em;
         font-size: inherit;
         background-color: var(--article-bg);
@@ -36,7 +36,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-      #query:focus {border-color: var(--link-active)}
+      #text:focus {border-color: var(--link-active)}
       #searchBtn {
         position: absolute;
         display: flex;
@@ -63,7 +63,7 @@
       #searchBtn:hover, #searchBtn:focus {color: var(--link-active)}
       #searchBtn:focus-visible {border: 1px solid}
       @media (min-width: 450px) and (hover: hover) {
-        .focus #query {padding-right: 5.5em}
+        .focus #text {padding-right: 5.5em}
         #searchBtn {
           animation: fancyReverse .6s;
         }
@@ -138,27 +138,27 @@
     </nav>
     <div class="main">
       <main role="main" aria-labelledby="title">
-        <h1 id="title" class="posts">Search</h1>
+        <h1 id="title" class="posts hide-stype">Search</h1>
         <div id="msg"></div>
         <div class="search">
           <div class="searchbar">
-            <input type="text" id="query" placeholder="Enter words..." aria-label="Search XYR.codes" autocomplete="off"> <button id="searchBtn" aria-label="Click to search" tabindex="0"></button>
+            <input type="text" id="text" placeholder="Search stuff..." aria-label="Search XYR.codes" autocomplete="off"> <button id="searchBtn" aria-label="Click to search" tabindex="0"></button>
           </div>
-          <h1 id="typeHeader" style="display: block; margin: .6em 0 0"></h1>
+          <h1 id="typeHeader" class="hide-stext" style="display: block; margin: .6em 0 0"></h1>
           <details id="advanced">
             <summary>Advanced options</summary>
             <div class="fieldsets">
-              <fieldset id="includes">
+              <fieldset id="includes" class="hide-stype">
                 <legend>Search includes:</legend>
                 <div> <input type="checkbox" id="name"> <label for="name" title="article/page title">Page title</label> </div>
                 <div> <input type="checkbox" id="desc"> <label for="desc" title="meta description">Page description</label> </div>
                 <div> <input type="checkbox" id="content"> <label for="content">Page content</label> </div>
                 <div> <input type="checkbox" id="alt"> <label for="alt" title="alt text of images">Image descriptions</label> </div>
               </fieldset>
-              <fieldset>
+              <fieldset id="sort">
                 <legend>Sort results by:</legend>
-                <div> <input type="radio" id="relevance" name="sort" checked="true"> <label for="relevance" title="Sorted with the highest 'word and potential word' count">Relevance</label> </div>
-                <div> <input type="radio" id="relevanceplus" name="sort"> <label for="relevanceplus" title="'Word and potential word' count but taking into account the total number of words">Relevance+</label> </div>
+                <div class="hide-stype"> <input type="radio" id="relevance" name="sort" checked="true"> <label for="relevance" title="Sorted with the highest 'word and potential word' count">Relevance</label> </div>
+                <div class="hide-stype"> <input type="radio" id="relevanceplus" name="sort"> <label for="relevanceplus" title="'Word and potential word' count but taking into account the total number of words">Relevance+</label> </div>
                 <div> <input type="radio" id="date-new" name="sort"> <label for="date-new">Date (newest)</label> </div>
                 <div> <input type="radio" id="date-old" name="sort"> <label for="date-old">Date (oldest)</label> </div>
                 <div> <input type="radio" id="a-z" name="sort"> <label for="a-z">A-Z (Title)</label> </div>
@@ -209,109 +209,110 @@
       // search bar
       const searchBar = document.querySelector('.searchbar').classList
       const searchBtn = id('searchBtn')
-      const query = id('query')
+      const text = id('text')
 
       // page design
-      query.addEventListener('focus', () => searchBar.add('focus'))
-      query.addEventListener('blur', () => searchBar.remove('focus'))
+      text.addEventListener('focus', () => searchBar.add('focus'))
+      text.addEventListener('blur', () => searchBar.remove('focus'))
 
       // advanced options
-      // includes
-      const includesValues = ['name', 'desc', 'content', 'alt']
+      // properties
+      const includeVals = ['name', 'desc', 'content', 'alt']
       // sort
-      const sortValues = ['relevance', 'relevanceplus', 'date-new', 'date-old', 'a-z']
+      const sortVals = ['relevance', 'relevanceplus', 'date-new', 'date-old', 'a-z']
 
       // remove values from back-forward cache (BFCache) when user is using the 'Click to go back' thing
-      for (const i of includesValues) id(i).autocomplete = 'off'
-      for (const i of sortValues) id(i).autocomplete = 'off'
+      for (const i of includeVals) id(i).autocomplete = 'off'
+      for (const i of sortVals) id(i).autocomplete = 'off'
 
       // check search params
       function getParam (param = new URLSearchParams(new URL(document.URL).search)) {
-        // check query and type
-        // only one can be searched separately, query will take precendence if both exists
-        const query = param.get('q') || param.get('query')
+        // check text and type
+        // only one can be searched separately, text will take precendence if both exists
+        const text = param.get('q') || param.get('query') || param.get('text')
         const type = param.get('t') || param.get('type')
-        if (!query && !type) return { type: null } // return null if aren't any values
+        if (!text && !type) return { type: null } // return null if aren't any values
 
-        // get includes
-        let includes = param.get('i') || param.get('includes') || 'name,desc,content,alt'
-        // filter includes
-        if (includes) {
-          includes = includes.split(',')
-          for (const i of includes) {
-            if (includesValues.indexOf(i) <= -1) includes.splice(includes.indexOf(i), 1) // if not a valid value, remove that value
-            else if (query) id(i).checked = true // else set the checkbox to true
+        // get property
+        let prop = param.get('p') || param.get('property') || 'name,desc,content,alt'
+        // filter property
+        if (prop) {
+          prop = prop.split(',')
+          for (const i of prop) {
+            if (includeVals.indexOf(i) <= -1) prop.splice(prop.indexOf(i), 1) // if not a valid value, remove that value
+            else if (text) id(i).checked = true // else set the checkbox to true
           }
         }
 
         // get sort
         let sort = param.get('s') || param.get('sort') || 'relevance'
-        if (sortValues.indexOf(sort) <= -1) sort = 'relevance'
+        if (sortVals.indexOf(sort) <= -1) sort = 'relevance'
+        if (!text) if (['relevance', 'relevanceplus'].indexOf(sort) > -1) sort = 'date-new'
         id(sort).checked = true // display
 
         return {
-          type: query ? 'query' : type ? 'type' : null,
-          search: query ?? type,
-          includes: query ? includes.join(' ') : null, // includes only exists in query search and not type search
+          type: text ? 'text' : type ? 'type' : null,
+          t: text ? 1 : type ? 0 : null,
+          search: (text ?? type).replace(/^\s|\s{2}|\s$/g, ''),
+          prop: text ? prop.join(' ') : null, // property only exists in text search and not type search
           sort
         }
       }
 
-      const results = getParam()
+      const param = getParam()
       let rawOutput
-      if (results.type === 'query') {
-        id('query').value = results.search
-        id('typeHeader').style.display = 'none' // hide typeHeader
-        rawOutput = Search.text(results.search, results.includes, results.sort)
-      } else if (results.type === 'type') {
-        id('includes').style.display = 'none' // hide 'search includes'
-        id('title').style.display = 'none'
-        id('typeHeader').innerHTML = `Type: ${results.search}`
-        rawOutput = Search.type(results.search, results.sort)
+      if (param.t === 1 || param.t === 0) {
+        document.title = `param.search ${param.t ? '- Search' : '|'} XYR.codes` // change title
+
+        // hide stuff
+        for (const i of document.getElementsByClassName(`hide-s${param.type}`)) i.style.display = 'none'
+
+        // change stuff
+        if (param.t) id('text').value = param.search
+        else {
+          id('typeHeader').innerHTML = `Type: ${param.search}`
+          // add event listener
+          id('sort').addEventListener('input', e => { if (param.sort !== e.target.id) window.location.href = `search.html?t=${param.search}&s=${e.target.id}` })
+        }
+
+        if (param.prop !== 'name desc content alt' || (param.t && param.sort !== 'relevance') || (!param.t && param.sort !== 'date-new')
+        ) id('advanced').open = 'true' // if params arent the default values, open advanced options
+
+        rawOutput = param.t ? Search.text(param.search, param.prop, param.sort) : Search.type(param.search, param.sort)
       } else {
         // if no params are given
-        for (const i of includesValues) id(i).checked = 'true' // default values
-        id('typeHeader').style.display = 'none' // hide typeHeader if not type
-        // search home
+        for (const i of includeVals) id(i).checked = 'true'
+        id('typeHeader').style.display = 'none'
         id('msg').innerHTML = 'Search for stuff within XYR.codes by entering it in the search bar below and we\'ll give back pages with that stuff. Word order is not checked.'
       }
 
-      // advanced options
-
       // create params
       function createParams () {
-        if (!id('query').value) return null
+        if (!id('text').value) return null
 
         // get advanced options
-        // 'search includes'
-        const iChecked = []
-        for (const i of includesValues) if (id(i).checked) iChecked.push(i) // get checked values
-        const includes = iChecked.length !== 4 ? iChecked.join(',') : '' // if all 4 options are selected, no need to add to params
-        if (!iChecked.length) { // nothing is checked
-          newNotif('The "Search includes" part must have <b>at least one</b> checked option.', 'medium')
+        let property = []
+        for (const i of includeVals) if (id(i).checked) property.push(i) // get checked properties
+        property = property.join(',')
+        if (param.t && !property) { // nothing is checked
+          newNotif('The "Search includes" part must have <b>at least one</b> checked option.')
           return null
         }
 
-        // 'sort results'
+        // sort
         let sort = ''
-        for (const i of sortValues) if (id(i).checked && i !== 'relevance') sort = i // get checked value if its not the default value
+        for (const i of sortVals) if (id(i).checked && i !== 'relevance') sort = i // get checked value if its not the default value
+        if (param.t === 0) sort = '' // for type search
 
-        // haven't implemented switching between query and type
-        // if (results.type === 'query') {
-          return `search.html?q=${id('query').value}` +
-            (includes && `&i=${includes}`) +
-            (sort && `&s=${sort}`)
-        // } else {
-        //   return `q=${id('query').value}` +
-        //     (includes ?? `i=${includes}`) +
-        //     (includes ?? `i=${includes}`)
-        // }
+        return `search.html?q=${id('text').value}` +
+          (property !== 'name,desc,content,alt' ? `&p=${property}` : '') +
+          (sort && `&s=${sort}`)
       }
 
       // if clicked searchBtn
       searchBtn.addEventListener('click', () => { if (createParams()) window.location.href = createParams() })
       // if pressed enter
-      query.addEventListener('keydown', e => (e.key === 'Enter') && searchBtn.click())
+      text.addEventListener('keydown', e => (e.key === 'Enter') && searchBtn.click())
       searchBtn.addEventListener('keydown', e => (e.key === 'Enter') && searchBtn.click())
 
       // display results
