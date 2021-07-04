@@ -280,6 +280,7 @@
         rawOutput = param.t ? Search.text(param.search, param.prop, param.sort) : Search.type(param.search, param.sort)
       } else {
         // if no params are given
+        text.focus()
         for (const i of includeVals) id(i).checked = 'true'
         id('typeHeader').style.display = 'none'
         id('msg').innerHTML = 'Search for stuff within XYR.codes by entering it in the search bar below and we\'ll give back pages with that stuff. Word order is not checked.'
