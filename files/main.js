@@ -1,3 +1,5 @@
+/* global version */
+
 // absolutely necessary hidden console message i swear
 console.log('%c👀 Hello there :)', 'font-size: 2em', '\nJavascript errors will show here')
 
