@@ -80,20 +80,28 @@ const data = {
       else return [] // if the array has no index, return prematurely
     }
 
+    console.log(values)
+
     // sort from greatest to smallest
     for (const i in values) { // eslint-disable-line no-unused-vars
       for (let j = 0; j < values.length - 1; j++) {
         const tempVal = values[j]
+        const tempIndx = indexes[j]
+        console.log(values[j], values[j + 1], values[j] < values[j + 1], `#${i}`)
         if (
           (param === 'normal' && values[j] < values[j + 1]) ||
           (param === 'reverse' && values[j] > values[j + 1])
         ) {
           values[j] = values[j + 1]
           values[j + 1] = tempVal
+          indexes[j] = indexes[j + 1]
+          indexes[j + 1] = tempIndx
         } else if (values[j] === values[j + 1] || param === 'letters') { // if param is letters or 2 values are equal, sort them alphabetically
           if (array[j].title.toLowerCase() > array[j + 1].title.toLowerCase()) {
             values[j] = values[j + 1]
             values[j + 1] = tempVal
+            indexes[j] = indexes[j + 1]
+            indexes[j + 1] = tempIndx
           }
         }
       }
@@ -194,14 +202,10 @@ const Search = { // eslint-disable-line no-unused-vars
             const commonness = data.wordCommonness(word, refWord)
             let score = commonness.score
             if (!data.commonWords.indexOf(refWord) > -1 && data.commonWords.indexOf(entry) > -1) score *= 0.6 // if search term is not a common word and the current word is a common word, reduce score by 60%
-
             if (score >= 0.5) tally += score // add to total tally
-
-            // if (score >= 0.5) console.log(`Word: ${word}, score: ${score}, from "${data.all[index].name}"`) // test
           }
         }
       }
-
       if (tally > 0) {
         results.push({
           index,
@@ -233,8 +237,8 @@ const Search = { // eslint-disable-line no-unused-vars
   },
 
   /**
-   *
-   * @param {string} searchType The property to search to
+   * Return pages of the given type
+   * @param {string} searchType The page type to search to
    * @param {string} sort How to sort the result [date-new, date-old, a-z]
    * @returns {Array} Result of the search
    */
@@ -255,6 +259,7 @@ const Search = { // eslint-disable-line no-unused-vars
       }
     }
 
+    // Sort the results
     let rank
     if (sort === 'date-new') rank = data.sortObjArr(results, 'date')
     else if (sort === 'date-old') rank = data.sortObjArr(results, 'date', 'reverse')
