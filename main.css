@@ -525,13 +525,15 @@ img.border  {
   align-items: center;
 }
 iframe {
+  display: block;
   width: 100%;
-  margin-bottom: .4em;
-  border: 1px solid var(--link-active);
-  border-radius: 4px;
   height: 25em;
   max-width: 800px;
   max-height: 75vh;
+  margin: auto;
+  margin-bottom: .4em;
+  border: 1px solid var(--link-active);
+  border-radius: 4px;
 }
 
 /* table */
