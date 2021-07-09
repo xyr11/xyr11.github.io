@@ -11,13 +11,6 @@ const tag = tag => document.querySelector(tag)
 const html = tag('html')
 const body = tag('body')
 
-// check if current tab
-// let isCurrentTab
-// document.addEventListener('visibilitychange', event => {
-//   if (document.visibilityState === 'visible') isCurrentTab = true
-//   else isCurrentTab = false
-// })
-
 // notifications
 body.innerHTML += '<div id="notifs"></div>'
 const newNotif = (text, length = 'short') => {
@@ -40,9 +33,6 @@ const newNotif = (text, length = 'short') => {
     if (alDiv !== null) alDiv.parentNode.removeChild(alDiv)
   }, time[validLength.indexOf(length)])
 }
-
-// output errors as a notif
-window.addEventListener('error', e => newNotif(`${e.message} at line ${e.lineno} of ${e.filename && new URL(e.filename).pathname}`, 'medium'))
 
 // transform search button
 const changeSearchBtn = () => {
