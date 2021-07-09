@@ -36,10 +36,10 @@
         <p>The requested URL was not found on the server.</p>
         <p>What you can do:</p>
         <ul>
-          <li>Double-check the URL of the page you want to visit</li>
-          <li>Try visiting the page later</li>
+          <li>Double-check the URL</li>
+          <li>Visit the page later</li>
+          <li><a id="searchLink" href="/search.html">Try searching it</a></li>
           <li><a href="/index.html">Go back to the Home page</a></li>
-          <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Check this link for extra help</a></li>
         </ul>
       </article>
     </main>
@@ -74,5 +74,9 @@
     </div>
   </footer>
   <script type="text/javascript" src="/files/main.js"></script>
+  <script>
+    const Url = new URL(window.location).pathname
+    if (Url !== '/404.html' && Url !== '/404') document.getElementById('searchLink').href += `?q=${Url.replace(/[.][^?]*[?]*/g, '+')}` // add search link
+  </script>
 </body>
 </html>
