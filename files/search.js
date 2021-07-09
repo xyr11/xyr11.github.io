@@ -90,7 +90,6 @@ const data = {
       for (let j = 0; j < values.length - 1; j++) {
         const tempVal = values[j]
         const tempIndx = indexes[j]
-        console.log(values[j], values[j + 1], values[j] < values[j + 1], `#${i}`)
         if (
           (param === 'normal' && values[j] < values[j + 1]) ||
           (param === 'reverse' && values[j] > values[j + 1])
@@ -141,7 +140,7 @@ const Search = { // eslint-disable-line no-unused-vars
     // filter out searchTerm
     if (!searchTerm) return [] // if query is an empty string, return prematurely
     const query = []
-    for (const i of searchTerm.match(/[^\s.?!,"`:/()[\]]+/gm)) {
+    for (const i of searchTerm.match(/[^\s.?!,"`:/()[\]=]+/g)) {
       // check if search term is duplicate
       if (query.indexOf(i) <= -1) {
         // check if word is "too common" from the other entries
@@ -195,7 +194,7 @@ const Search = { // eslint-disable-line no-unused-vars
     for (const entry of extracted) {
       const index = extracted.indexOf(entry)
       let tally = 0
-      const entryWords = entry.match(/[^\s.?!,"`:/()[\]]+/g) // all words in entry
+      const entryWords = entry.match(/[^\s.?!,"`:/()[\]=]+/g) // all words in entry
       // loop on each word on query
       for (const refWord of query) {
         // check if entry exists
