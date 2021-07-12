@@ -10,6 +10,9 @@
 /programming	/search.html?q=programming
 /rqs-trcker		/post/programming/reqs-tracker.html
 /versions			/versions/index.html
+/programming/*  /post/programming/:splat
+/journals/*     /post/journals/:splat
+/photography/*  /post/photography/:splat
 /cdbpage			https://blog.xyr.codes/2020/08/cdbpage.html
 /khubslow			https://iskhubslow.xyr11.repl.co/
 /numaboutnow	https://blog.xyr.codes/2021/01/numbers-about-now.html
