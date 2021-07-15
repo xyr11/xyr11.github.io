@@ -261,7 +261,7 @@
       const param = getParam()
       let rawOutput
       if (param.t === 1 || param.t === 0) {
-        document.title = `param.search ${param.t ? '- Search' : '|'} XYR.codes` // change title
+        document.title = `${param.search} ${param.t ? '- Search' : '|'} XYR.codes` // change title
 
         // hide stuff
         for (const i of document.getElementsByClassName(`hide-s${param.type}`)) i.style.display = 'none'
